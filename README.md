@@ -17,7 +17,7 @@ Para clonar o repositório, você pode escolher entre os seguintes métodos:
     ```bash
     git clone git@github.com:CleytonSM/ijb_api.git
     ```
-
+---
 ### FlywayDB: Simplificando as Migrações de Banco de Dados
 
 FlywayDB é uma ferramenta de migração de banco de dados que gerencia a versão do schema de maneira automática. Com o Flyway, você não precisa se preocupar em rodar scripts manualmente para criar ou modificar tabelas no banco de dados. Ele aplica automaticamente todas as mudanças (chamadas de "migrações") ao inicializar a aplicação, garantindo que o banco de dados esteja sempre sincronizado com o código.
@@ -36,14 +36,13 @@ Se houver alguma alteração ou problema com os scripts de migração, **todos o
 
 Portanto, ao contribuir com o repositório, **não se preocupe em rodar scripts SQL manualmente**, mas preste atenção às práticas recomendadas acima para evitar problemas.
 
-Se houver dúvidas, estou à disposição para ajudar!
-
-
+---
 
 ### ⚙️ Configurando Variáveis de Ambiente
 
 Certifique-se de configurar as variáveis de ambiente necessárias para o funcionamento da aplicação. Os detalhes específicos das variáveis devem ser fornecidos pela equipe de desenvolvimento ou documentados em um arquivo separado.
 
+---
 ### 🎨 Design Pattern 
 
 Este projeto utiliza o padrão de design **MVC (Model-View-Controller)**. Abaixo está uma visão geral dos principais diretórios e suas responsabilidades:
