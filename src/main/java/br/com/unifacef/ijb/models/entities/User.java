@@ -13,7 +13,7 @@ public class User {
     private Integer id;
     @Column(name = "email", unique = true, length = 60)
     private String email;
-    @Column(name = "senha", unique = true, length = 40)
+    @Column(name = "senha", length = 40)
     private String password;
     @OneToOne
     private Authority authority;

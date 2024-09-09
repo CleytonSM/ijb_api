@@ -2,12 +2,13 @@ package br.com.unifacef.ijb.models.dtos;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
-public class UserDTO {
-    private Integer id;
+@NoArgsConstructor
+public class UserCreateDTO {
     private String email;
     private String password;
-    private AuthorityDTO authority;
+    private AuthorityCreateDTO authority;
 }
