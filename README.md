@@ -17,6 +17,15 @@ Para clonar o repositório, você pode escolher entre os seguintes métodos:
     ```bash
     git clone git@github.com:CleytonSM/ijb_api.git
     ```
+
+### ☕ Versão do JDK
+
+- **17**
+
+### ⚙️ Configurando Variáveis de Ambiente
+
+Certifique-se de configurar as variáveis de ambiente necessárias para o funcionamento da aplicação. Os detalhes específicos das variáveis devem ser fornecidos pela equipe de desenvolvimento ou documentados em um arquivo separado.
+
 ---
 ### FlywayDB: Simplificando as Migrações de Banco de Dados
 
@@ -35,12 +44,6 @@ FlywayDB é uma ferramenta de migração de banco de dados que gerencia a versã
 Se houver alguma alteração ou problema com os scripts de migração, **todos os desenvolvedores serão avisados** para garantir que o repositório permaneça funcional e em conformidade com as versões corretas do banco de dados.
 
 Portanto, ao contribuir com o repositório, **não se preocupe em rodar scripts SQL manualmente**, mas preste atenção às práticas recomendadas acima para evitar problemas.
-
----
-
-### ⚙️ Configurando Variáveis de Ambiente
-
-Certifique-se de configurar as variáveis de ambiente necessárias para o funcionamento da aplicação. Os detalhes específicos das variáveis devem ser fornecidos pela equipe de desenvolvimento ou documentados em um arquivo separado.
 
 ---
 ### 🎨 Design Pattern 
