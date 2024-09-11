@@ -30,7 +30,8 @@ public class SecurityConfig {
                 }))
 //                .authorizeHttpRequests(request -> request
 //                        .requestMatchers())
-        ;
+                .formLogin(login -> login.disable())
+                .httpBasic(httpBasic -> httpBasic.disable());
 
         return http.build();
     }
