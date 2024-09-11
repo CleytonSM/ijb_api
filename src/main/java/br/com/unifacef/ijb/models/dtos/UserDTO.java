@@ -6,8 +6,5 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class UserDTO {
-    private Integer id;
     private String email;
-    private String password;
-    private AuthorityDTO authority;
 }
