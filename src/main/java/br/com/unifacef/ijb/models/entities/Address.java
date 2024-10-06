@@ -20,7 +20,7 @@ public class Address {
     @GeneratedValue(generator = "native", strategy = GenerationType.AUTO)
     @Column(name = "id_endereco")
     private Integer id;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne()
     @JoinColumn(name = "id_usuario")
     private User user;
     @Column(name = "rua")

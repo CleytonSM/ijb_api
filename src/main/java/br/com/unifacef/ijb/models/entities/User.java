@@ -30,6 +30,8 @@ public class User {
     private String email;
     @Column(name = "senha", length = 30)
     private String password;
+    @Column(name = "dt_atualizacao")
+    private LocalDateTime updatedAt;
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_auth")
     private Authority authority;
