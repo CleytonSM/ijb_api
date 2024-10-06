@@ -28,7 +28,7 @@ public class User {
     private LocalDateTime createdAt;
     @Column(name = "email", unique = true, length = 60)
     private String email;
-    @Column(name = "senha", length = 30)
+    @Column(name = "senha", length = 40)
     private String password;
     @Column(name = "dt_atualizacao")
     private LocalDateTime updatedAt;

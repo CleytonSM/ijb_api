@@ -17,7 +17,7 @@ Para clonar o repositório, você pode escolher entre os seguintes métodos:
     ```bash
     git clone git@github.com:CleytonSM/ijb_api.git
     ```
-
+---
 ### FlywayDB: Simplificando as Migrações de Banco de Dados
 
 FlywayDB é uma ferramenta de migração de banco de dados que gerencia a versão do schema de maneira automática. Com o Flyway, você não precisa se preocupar em rodar scripts manualmente para criar ou modificar tabelas no banco de dados. Ele aplica automaticamente todas as mudanças (chamadas de "migrações") ao inicializar a aplicação, garantindo que o banco de dados esteja sempre sincronizado com o código.
@@ -36,41 +36,41 @@ Se houver alguma alteração ou problema com os scripts de migração, **todos o
 
 Portanto, ao contribuir com o repositório, **não se preocupe em rodar scripts SQL manualmente**, mas preste atenção às práticas recomendadas acima para evitar problemas.
 
-Se houver dúvidas, estou à disposição para ajudar!
-
-
+---
 
 ### ⚙️ Configurando Variáveis de Ambiente
 
 Certifique-se de configurar as variáveis de ambiente necessárias para o funcionamento da aplicação. Os detalhes específicos das variáveis devem ser fornecidos pela equipe de desenvolvimento ou documentados em um arquivo separado.
 
+---
 ### 🎨 Design Pattern 
 
 Este projeto utiliza o padrão de design **MVC (Model-View-Controller)**. Abaixo está uma visão geral dos principais diretórios e suas responsabilidades:
 
 - **Model**
   
-  O diretório `model` contém as definições dos modelos, incluindo entidades e DTOs (Data Transfer Objects). Este diretório é subdividido em pastas para entidades e DTOs, conforme necessário.
+  O diretório `models` contém as definições dos modelos, incluindo entidades e DTOs (Data Transfer Objects). Este diretório é subdividido em pastas para entidades e DTOs, conforme necessário.
 
 - **Repository**
   
-  O diretório `repository` é responsável pela comunicação entre a aplicação e o banco de dados. Nele, você encontrará métodos básicos de CRUD, como `save`, `findById` e `delete`.
+  O diretório `repositories` é responsável pela comunicação entre a aplicação e o banco de dados. Nele, você encontrará métodos básicos de CRUD, como `save`, `findById` e `delete`.
 
 - **Service**
   
-  O diretório `service` abriga as classes que realizam a lógica de negócios e operações intermediárias para as classes controladoras.
+  O diretório `services` abriga as classes que realizam a lógica de negócios e operações intermediárias para as classes controladoras.
 
 - **Controller**
   
-  O diretório `controller` contém as classes que gerenciam as requisições da aplicação e orquestram a resposta adequada.
+  O diretório `controllers` contém as classes que gerenciam as requisições da aplicação e orquestram a resposta adequada.
 
 - **Config**
   
-  O diretório `config` é dedicado às configurações básicas da aplicação, incluindo conectividade e roteamento.
+  O diretório `configs` é dedicado às configurações básicas da aplicação, incluindo conectividade e roteamento.
 
 - **Filter**
   
-  O diretório `filter` inclui as classes responsáveis por filtrar as requisições antes que elas cheguem aos controladores, adicionando uma camada extra de validação.
+  O diretório `filters` inclui as classes responsáveis por filtrar as requisições antes que elas cheguem aos controladores, adicionando uma camada extra de validação.
 
 - **Helper**
-  O diretório `helper` armazena classes utilitárias que fornecem funcionalidades auxiliares que podem ser reutilizadas em diferentes partes da aplicação.
+  
+  O diretório `helpers` armazena classes utilitárias que fornecem funcionalidades auxiliares que podem ser reutilizadas em diferentes partes da aplicação.
