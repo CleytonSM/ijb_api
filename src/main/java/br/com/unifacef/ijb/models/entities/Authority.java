@@ -4,6 +4,8 @@ import br.com.unifacef.ijb.models.enums.Role;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 @Table(name = "tb_funcao")
 @Entity
@@ -15,8 +17,8 @@ public class Authority {
     @Column(name = "nm_funcao", unique = true, length = 60)
     @Enumerated(value = EnumType.STRING)
     private Role role;
-    @OneToOne(mappedBy = "authority")
-    private User user;
+    @OneToMany(mappedBy = "authority")
+    private List<User> user;
 
     public Authority(Role role) {
         this.role = role;
