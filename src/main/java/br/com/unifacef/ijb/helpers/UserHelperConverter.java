@@ -11,7 +11,7 @@ public class UserHelperConverter {
     }
 
     public static User convertUserCreateDTOToUser(UserCreateDTO userCreateDTO) {
-        return new User(userCreateDTO.getEmail(), userCreateDTO.getPassword(),
+        return new User(userCreateDTO.getPassword(),
                 AuthorityHelperConverter.convertAuthorityCreateDTOToAuthority(userCreateDTO.getAuthority()));
     }
 }
