@@ -28,7 +28,7 @@ public class Events {
     private LocalDateTime eventDate;
     @Column(name = "local_evento", length = 100)
     private String eventLocation;
-    @Column(name = "descrição_evento")
+    @Column(name = "descrição_evento", length = 100)
     private String eventDescription;
 
 }
