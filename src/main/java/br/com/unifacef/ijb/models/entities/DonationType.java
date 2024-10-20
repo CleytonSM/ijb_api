@@ -1,7 +1,9 @@
 package br.com.unifacef.ijb.models.entities;
 
 import jakarta.persistence.*;
+import lombok.Data;
 
+@Data
 @Entity
 @Table(name = "tb_tipos_doacoes")
 public class DonationType {
