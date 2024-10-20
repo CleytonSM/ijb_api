@@ -10,10 +10,11 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "tb_beneficiario")
+@Table(name = "tb_beneficiarios")
 @Data
 public class Beneficiary {
     @Id
@@ -23,14 +24,18 @@ public class Beneficiary {
     @ManyToOne()
     @JoinColumn(name = "id_usuario")
     private User user;
-    @Column(name = "dt_atualizacao")
-    private LocalDateTime updatedAt;
-    @Column(name = "indicacao")
-    private String indication;
-    @Column(name = "tipo_residencia")
-    private String residenceType;
-    @Column(name = "possui_terreno")
-    private Boolean hasTerrain;
-    @Column(name = "dt_registro")
-    private LocalDateTime createdAt;
+    @Column(name = "nm_representante", length = 60, nullable = false)
+    private String name;
+    @Column(name = "status")
+    private String status; // TODO VERIFICAR ENUM DISSO
+    @Column(name = "como_conheceu", length = 200)
+    private String meetDescription;
+    @Column(name = "indicador", length = 60)
+    private String indicatorName;
+    @Column(name = "renda_mensal")
+    private BigDecimal monthlyIncome;
+    @Column(name = "dt_indicacao")
+    private LocalDateTime indicationDate;
+    @Column(name = "status_moradia")
+    private String houseStatus; // TODO VERIFICAR ENUM DISSO
 }
