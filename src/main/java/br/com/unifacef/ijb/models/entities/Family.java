@@ -3,6 +3,7 @@ package br.com.unifacef.ijb.models.entities;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Data
@@ -21,4 +22,10 @@ public class Family {
     private String kinship;
     @Column(name = "escolaridade", length = 40)
     private String scholarity;
+    @Column(name = "valor_renda")
+    private BigDecimal income;
+    @Column(name = "origem_renda", length = 40)
+    private String incomeDescription;
+    @Column(name = "problemas_fisicos-mentais", length = 100)
+    private String physicalMentalProblems;
 }
