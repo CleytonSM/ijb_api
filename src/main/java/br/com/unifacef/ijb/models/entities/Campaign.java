@@ -1,15 +1,10 @@
 package br.com.unifacef.ijb.models.entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
 
+import java.awt.*;
+import java.net.DatagramSocketImpl;
 import java.time.LocalDateTime;
 
 @Entity
@@ -23,10 +18,18 @@ public class Campaign {
     @ManyToOne
     @JoinColumn(name = "id_noticia")
     private News news;
-    @Column(name = "dt_inicio")
-    private LocalDateTime startedAt;
-    @Column(name = "dt_final")
-    private LocalDateTime endedAt;
-    @Column(name = "objetivo")
+    @Column(name = "nome_campanha", length = 30)
+    private String campaignName;
+    @Column(name = "data_publicacao")
+    private LocalDateTime postDate;
+    @Column(name = "objetivo", length = 150)
     private String objective;
+    @Column(name = "dt_inicial")
+    private LocalDateTime startedAt;
+    @Column(name = "dt_limite")
+    private LocalDateTime endedAt;
+    @Column(name = "imagemURL")
+    @Lob
+    private byte[] imageUrl;    // TODO verificar blob
+
 }

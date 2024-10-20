@@ -23,10 +23,5 @@ public class News {
     @ManyToOne
     @JoinColumn(name = "id_publicacao")
     private Post post;
-    @Column(name = "titulo")
-    private String title;
-    @Column(name = "dt_noticia")
-    private LocalDateTime newsDate;
-    @Column(name = "conteudo")
-    private String content;
+
 }
