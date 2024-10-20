@@ -6,7 +6,7 @@ import lombok.Data;
 @Data
 @Entity
 @Table(name = "tb_situacoes_movimentacoes")
-public class MovimentationSituation {
+public class MovementsSituation {
     @Id
     @GeneratedValue(generator = "native", strategy = GenerationType.AUTO)
     @Column(name = "id_situacao")
