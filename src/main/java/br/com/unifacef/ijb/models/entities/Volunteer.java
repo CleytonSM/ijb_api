@@ -1,10 +1,12 @@
 package br.com.unifacef.ijb.models.entities;
 
 import jakarta.persistence.*;
+import lombok.Data;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
+@Data
 @Entity
 @Table(name = "tb_voluntarios")
 public class Volunteer {
