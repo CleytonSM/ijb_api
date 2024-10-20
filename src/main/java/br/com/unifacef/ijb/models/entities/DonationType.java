@@ -12,5 +12,5 @@ public class DonationType {
     @Column(name = "id_tipo_doacao")
     private Integer Id;
     @Column(name = "nm_tipo_doacao", length = 30)
-    private String Type_Donation_Name;
+    private String typeDonationName;
 }

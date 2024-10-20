@@ -15,6 +15,6 @@ public class Exchanges {
     @JoinColumn(name = "id_prod_outlet")
     private OutletProducts outletProducts;
     @Column(name = "ds_troca", length = 100)
-    private String ExchangesDescription;
+    private String exchangesDescription;
 
 }

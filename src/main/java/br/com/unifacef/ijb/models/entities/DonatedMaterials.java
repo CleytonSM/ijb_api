@@ -18,7 +18,7 @@ public class DonatedMaterials {
     @JoinColumn(name = "id_doacao")
     private Donations donations;
     @Column(name = "nm_material", length = 60)
-    private String MaterialName;
+    private String materialName;
     @Column(name = "qnt_material")
-    private String MaterialQuantity;
+    private String materialQuantity;
 }

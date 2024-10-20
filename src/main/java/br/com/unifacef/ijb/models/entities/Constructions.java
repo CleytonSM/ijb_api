@@ -19,7 +19,7 @@ public class Constructions {
         @Column(name = "dt_termino")
         private LocalDateTime endDate;
         @Column(name = "situacao_construcao")
-        private String construction_state;
+        private String constructionStatus;
 
 
 
