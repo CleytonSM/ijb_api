@@ -18,12 +18,8 @@ import java.math.BigDecimal;
 public class Supporter {
     @Id
     @GeneratedValue(generator = "native", strategy = GenerationType.AUTO)
+    @Column(name = "id_apoiador")
     private Integer id;
-    @ManyToOne
-    @JoinColumn(name = "id_usuario")
-    private User user;
-    @Column(name = "valor_doado")
-    private BigDecimal donatedValue;
-    @Column(name = "cpf_cnpj")
-    private String cpfCnpj;
+    @Column(name = "cnpj", length = 14)
+    private String cnpj;
 }
