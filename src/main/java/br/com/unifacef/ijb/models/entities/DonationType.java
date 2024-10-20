@@ -11,6 +11,6 @@ public class DonationType {
     @GeneratedValue(generator = "native", strategy = GenerationType.AUTO)
     @Column(name = "id_tipo_doacao")
     private Integer Id;
-    @Column(name = "nm_tipo_doacao")
+    @Column(name = "nm_tipo_doacao", length = 30)
     private String Type_Donation_Name;
 }

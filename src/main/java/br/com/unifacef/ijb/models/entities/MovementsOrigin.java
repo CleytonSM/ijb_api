@@ -11,6 +11,6 @@ public class MovementsOrigin {
     @GeneratedValue(generator = "native", strategy = GenerationType.AUTO)
     @Column(name = "id_origem")
     private Integer id;
-    @Column(name = "nm_origem")
+    @Column(name = "nm_origem", length = 25)
     private String OriginName;
 }
