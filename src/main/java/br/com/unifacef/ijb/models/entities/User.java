@@ -25,6 +25,8 @@ public class User {
     private LocalDateTime birthdayDate;
     @Column(name = "cpf", length = 11)
     private String cpf;
+    @Column(name = "rg", length = 9)
+    private String rg;
     @Column(name = "senha", length = 30)
     private String password;
     @Column(name = "dt_registro")
