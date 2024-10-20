@@ -49,27 +49,27 @@ Este projeto utiliza o padrão de design **MVC (Model-View-Controller)**. Abaixo
 
 - **Model**
   
-  O diretório `model` contém as definições dos modelos, incluindo entidades e DTOs (Data Transfer Objects). Este diretório é subdividido em pastas para entidades e DTOs, conforme necessário.
+  O diretório `models` contém as definições dos modelos, incluindo entidades e DTOs (Data Transfer Objects). Este diretório é subdividido em pastas para entidades e DTOs, conforme necessário.
 
 - **Repository**
   
-  O diretório `repository` é responsável pela comunicação entre a aplicação e o banco de dados. Nele, você encontrará métodos básicos de CRUD, como `save`, `findById` e `delete`.
+  O diretório `repositories` é responsável pela comunicação entre a aplicação e o banco de dados. Nele, você encontrará métodos básicos de CRUD, como `save`, `findById` e `delete`.
 
 - **Service**
   
-  O diretório `service` abriga as classes que realizam a lógica de negócios e operações intermediárias para as classes controladoras.
+  O diretório `services` abriga as classes que realizam a lógica de negócios e operações intermediárias para as classes controladoras.
 
 - **Controller**
   
-  O diretório `controller` contém as classes que gerenciam as requisições da aplicação e orquestram a resposta adequada.
+  O diretório `controllers` contém as classes que gerenciam as requisições da aplicação e orquestram a resposta adequada.
 
 - **Config**
   
-  O diretório `config` é dedicado às configurações básicas da aplicação, incluindo conectividade e roteamento.
+  O diretório `configs` é dedicado às configurações básicas da aplicação, incluindo conectividade e roteamento.
 
 - **Filter**
   
-  O diretório `filter` inclui as classes responsáveis por filtrar as requisições antes que elas cheguem aos controladores, adicionando uma camada extra de validação.
+  O diretório `filters` inclui as classes responsáveis por filtrar as requisições antes que elas cheguem aos controladores, adicionando uma camada extra de validação.
 
 - **Helper**
-  O diretório `helper` armazena classes utilitárias que fornecem funcionalidades auxiliares que podem ser reutilizadas em diferentes partes da aplicação.
+  O diretório `helpers` armazena classes utilitárias que fornecem funcionalidades auxiliares que podem ser reutilizadas em diferentes partes da aplicação.

@@ -1,9 +1,9 @@
-package br.com.unifacef.ijb.helper;
+package br.com.unifacef.ijb.helpers;
 
 import br.com.unifacef.ijb.models.dtos.AuthorityDTO;
 import br.com.unifacef.ijb.models.entities.Authority;
 
-public class AuthorityConverter {
+public class AuthorityHelperConverter {
 
     public static AuthorityDTO convertAuthorityToAuthorityDTO(Authority authority) {
         return new AuthorityDTO(authority.getId(), authority.getRole());
