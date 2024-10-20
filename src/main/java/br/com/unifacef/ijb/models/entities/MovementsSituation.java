@@ -12,5 +12,5 @@ public class MovementsSituation {
     @Column(name = "id_situacao")
     private Integer id;
     @Column(name = "nm_situacao")
-    private String SituationName;
+    private String situationName;
 }

@@ -3,6 +3,8 @@ package br.com.unifacef.ijb.models.entities;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.math.BigDecimal;
+
 @Data
 @Entity
 @Table(name = "tb_abatimentos")
@@ -17,5 +19,5 @@ public class Rebate {
     @Column(name = "ds_abatimento", length = 100)
     private String description;
     @Column(name = "valor_abatimento")
-    private Float RebateValue;
+    private BigDecimal rebateValue;
 }

@@ -12,5 +12,5 @@ public class MovementsOrigin {
     @Column(name = "id_origem")
     private Integer id;
     @Column(name = "nm_origem", length = 25)
-    private String OriginName;
+    private String originName;
 }

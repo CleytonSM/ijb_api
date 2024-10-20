@@ -16,5 +16,5 @@ public class Sales {
     @Column(name = "valor_venda")
     private Float SaleValue;
     @Column(name = "ds_venda", length = 100)
-    private String SaleDescription;
+    private String saleDescription;
 }

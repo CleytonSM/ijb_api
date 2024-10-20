@@ -22,5 +22,5 @@ public class MovementsType {
     @JoinColumn(name = "id_doacao")
     private Donations donation;
     @Column(name = "nm_tipo_movimentacao", length = 25)
-    private String MovimentationTypeName;
+    private String movementTypeName;
 }
