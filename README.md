@@ -17,6 +17,21 @@ Para clonar o repositório, você pode escolher entre os seguintes métodos:
     ```bash
     git clone git@github.com:CleytonSM/ijb_api.git
     ```
+    
+### 🆕 Criando Nova Branch
+
+```bash
+git checkout -b nome_do_seu_módulo
+```
+### 🤯 Evitando Erros de Pull
+Vocês podem utilizar essa configuração para sempre deixar a branch de vocês sempre atualizada com a branch development do projeto.
+```bash
+git config --global pull.rebase true
+```
+Quando não forem mais mexer no projeto, vocês podem desabilitar dessa forma
+```bash
+git config --global pull.rebase false
+```
 ---
 ### FlywayDB: Simplificando as Migrações de Banco de Dados
 
