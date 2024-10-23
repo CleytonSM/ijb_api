@@ -1,6 +1,14 @@
 package br.com.unifacef.ijb.models.entities;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 import lombok.Data;
 
 import java.math.BigDecimal;
@@ -15,7 +23,7 @@ public class Rebate {
     private Integer id;
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_troca")
-    private Exchanges exchanges;
+    private Exchange exchange;
     @Column(name = "ds_abatimento", length = 100)
     private String description;
     @Column(name = "valor_abatimento")

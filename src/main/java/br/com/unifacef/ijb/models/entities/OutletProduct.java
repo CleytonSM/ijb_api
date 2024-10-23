@@ -12,15 +12,20 @@ import jakarta.persistence.Table;
 import lombok.Data;
 
 @Data
-@Table(name = "tb_participantes")
 @Entity
-public class Participant {
+@Table(name = "tb_produtos_outlet")
+public class OutletProduct {
     @Id
     @GeneratedValue(generator = "native", strategy = GenerationType.AUTO)
-    @Column(name = "id_participante")
+    @Column(name = "id_prod_outlet")
     private Integer id;
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "id_usuario")
-    private User user;
-
+    @JoinColumn(name = "id_doacao")
+    private Donation donation;
+    @Column(name = "nm_prod_outlet", length = 60)
+    private String outletProductName;
+    @Column(name = "ds_prod_outlet", length = 100)
+    private String outletProductDescription;
+    @Column(name = "status", length = 20)
+    private String status;
 }

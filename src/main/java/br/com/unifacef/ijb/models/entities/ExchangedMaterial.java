@@ -11,16 +11,18 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
 
+import java.util.List;
+
 @Data
-@Table(name = "tb_participantes")
+@Table(name = "tb_materiais_trocados")
 @Entity
-public class Participant {
+public class ExchangedMaterial {
     @Id
     @GeneratedValue(generator = "native", strategy = GenerationType.AUTO)
-    @Column(name = "id_participante")
-    private Integer id;
+    @Column(name = "id_material")
+    private List<Material> materials;
+    @Id
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "id_usuario")
-    private User user;
-
+    @JoinColumn(name = "id_troca")
+    private List<Exchange> exchange;
 }

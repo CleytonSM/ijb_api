@@ -1,14 +1,17 @@
 package br.com.unifacef.ijb.models.entities;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.Data;
-
-import java.time.LocalDateTime;
 
 @Data
 @Table(name = "tb_materiais_comprados")
 @Entity
-public class PurchadeMaterials {
+public class PurchasedMaterial {
     @Id
     @GeneratedValue(generator = "native", strategy = GenerationType.AUTO)
     @Column(name = "id_material_doado")
