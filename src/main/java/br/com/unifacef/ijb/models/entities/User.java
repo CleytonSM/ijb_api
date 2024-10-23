@@ -7,6 +7,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
@@ -24,6 +25,11 @@ public class User {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_funcao")
     private Authority authority;
+    @Column(name = "email", length = 100)
+    private String email;
+    @Column(name = "foto_perfil")
+    @Lob
+    private byte[] profilePic;
     @Column(name = "nome", length = 20)
     private String name;
     @Column(name = "sobrenome", length = 40)
