@@ -34,8 +34,8 @@ public class Campaign {
     private LocalDateTime startedAt;
     @Column(name = "dt_limite")
     private LocalDateTime endedAt;
-    @Column(name = "imagemURL")
+    @Column(name = "img_campanha")
     @Lob
-    private byte[] imageUrl;    // TODO verificar blob
+    private byte[] image;
 
 }
