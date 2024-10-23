@@ -1,8 +1,6 @@
 name: IJB image CI
 
 on:
-  push:
-    branches: [ "main", "development" ]
   pull_request:
     branches: [ "main"]
 
