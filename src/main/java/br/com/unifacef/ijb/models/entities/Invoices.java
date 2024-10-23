@@ -1,8 +1,14 @@
 package br.com.unifacef.ijb.models.entities;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.Data;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Data
@@ -18,7 +24,7 @@ public class Invoices {
     @Column(name = "cnpj_fornecedor", length = 14)
     private String cnpjSupplier;
     @Column(name = "valor")
-    private Float value;
+    private BigDecimal value;
     @Column(name = "dt_vencimento")
     private LocalDateTime dueDate;
 }

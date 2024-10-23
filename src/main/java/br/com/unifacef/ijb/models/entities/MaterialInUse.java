@@ -2,6 +2,7 @@ package br.com.unifacef.ijb.models.entities;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -10,16 +11,18 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
 
-import java.math.BigDecimal;
-
-@Entity
-@Table(name = "tb_apoiador")
 @Data
-public class Supporter {
+@Table(name = "tb_materiais_em_uso")
+@Entity
+public class MaterialInUse {
     @Id
     @GeneratedValue(generator = "native", strategy = GenerationType.AUTO)
-    @Column(name = "id_apoiador")
+    @Column(name = "id_material_em_uso")
     private Integer id;
-    @Column(name = "cnpj", length = 14)
-    private String cnpj;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "id_material")
+    private Material material;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "id_construcao")
+    private Construction construction;
 }
