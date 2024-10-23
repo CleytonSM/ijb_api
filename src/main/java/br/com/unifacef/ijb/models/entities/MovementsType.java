@@ -1,7 +1,15 @@
 package br.com.unifacef.ijb.models.entities;
 
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 import lombok.Data;
 
 @Data
@@ -14,13 +22,13 @@ public class MovementsType {
     private Integer id;
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_venda")
-    private Sales sales;
+    private Sale sale;
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_abatimento")
     private Rebate rebate;
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_doacao")
-    private Donations donation;
+    private Donation donation;
     @Column(name = "nm_tipo_movimentacao", length = 25)
     private String movementTypeName;
 }
