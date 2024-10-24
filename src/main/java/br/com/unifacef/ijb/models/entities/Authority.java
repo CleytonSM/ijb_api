@@ -25,8 +25,9 @@ public class Authority {
     @Column(name = "nm_funcao", unique = true, length = 60)
     @Enumerated(value = EnumType.STRING)
     private Role role;
+    @Column(name = "ds_funcao", length = 60)
     @OneToMany(mappedBy = "authority")
-    private List<User> user;
+    private List<UserInfo> useriInfo;
 
     public Authority(Role role) {
         this.role = role;
