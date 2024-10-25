@@ -5,6 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
 
@@ -25,7 +26,6 @@ public class User {
     @Column(name = "senha", length = 30)
     private String password;
 
-    public User(String password) {
-        this.password = password;
-    }
+    @OneToOne(mappedBy = "user")
+    private UserInfo userInfo;
 }

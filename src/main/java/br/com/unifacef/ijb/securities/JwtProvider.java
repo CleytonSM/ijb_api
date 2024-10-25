@@ -4,7 +4,10 @@ import br.com.unifacef.ijb.configs.UserAuthenticationProvider;
 import br.com.unifacef.ijb.exceptions.InvalidJwtTokenException;
 import br.com.unifacef.ijb.helpers.OptionalHelper;
 import br.com.unifacef.ijb.helpers.SecretKeyHelper;
+import br.com.unifacef.ijb.models.entities.Authority;
 import br.com.unifacef.ijb.models.entities.User;
+import br.com.unifacef.ijb.models.entities.UserInfo;
+import br.com.unifacef.ijb.models.enums.Role;
 import br.com.unifacef.ijb.repositories.UserRepository;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
@@ -17,6 +20,7 @@ import org.springframework.stereotype.Component;
 
 import javax.crypto.SecretKey;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 
 @Component
@@ -45,8 +49,16 @@ public class JwtProvider {
 
     private Map<String, String> claimsSetup(Authentication authentication) {
         User user = (User) authentication.getPrincipal();
+        UserInfo userInfo = user.getUserInfo();
+        Authority authority = userInfo.getAuthority();
+        Role role = authority.getRole();
 
-        return null;
+        Map<String, String> claims = new HashMap<>();
+
+        claims.put("email", user.getEmail());
+        claims.put("role", role.getType());
+
+        return claims;
     }
 
     public boolean validateToken(String token) {
@@ -72,9 +84,10 @@ public class JwtProvider {
 
     public Authentication getAuthentication(String token) {
         User user = OptionalHelper.getOptionalEntity(userRepository.findByEmail(getUserEmailFromToken(token)));
+        UserInfo userInfo = user.getUserInfo();
 
         return new UsernamePasswordAuthenticationToken(user, "",
-                userAuthenticationProvider.grantedAuthorities(user.getAuthority()));
+                userAuthenticationProvider.grantedAuthorities(userInfo.getAuthority()));
     }
 
     private String getUserEmailFromToken(String token) {
