@@ -10,7 +10,6 @@ import jakarta.persistence.Table;
 import lombok.Data;
 
 
-
 @Data
 @Table(name = "tb_usuarios")
 @Entity
