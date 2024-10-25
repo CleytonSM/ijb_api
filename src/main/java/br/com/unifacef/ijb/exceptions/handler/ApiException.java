@@ -1,6 +1,7 @@
 package br.com.unifacef.ijb.exceptions.handler;
 
 import br.com.unifacef.ijb.exceptions.EntityAlreadyExistsException;
+import br.com.unifacef.ijb.exceptions.InvalidJwtTokenException;
 import br.com.unifacef.ijb.exceptions.WrongCredentialsException;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.HttpStatus;
@@ -20,12 +21,17 @@ public class ApiException {
     }
 
     @ExceptionHandler({EntityNotFoundException.class})
-    public ResponseEntity<Map<String,String>> entityNotFoundException(EntityNotFoundException e) {
+    public ResponseEntity<Map<String, String>> entityNotFoundException(EntityNotFoundException e) {
         return new ResponseEntity<>(responseBuilder(e), HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler({WrongCredentialsException.class})
-    public ResponseEntity<Map<String,String>> wrongCredentialsException(WrongCredentialsException e) {
+    public ResponseEntity<Map<String, String>> wrongCredentialsException(WrongCredentialsException e) {
+        return new ResponseEntity<>(responseBuilder(e), HttpStatus.UNAUTHORIZED);
+    }
+
+    @ExceptionHandler({InvalidJwtTokenException.class})
+    public ResponseEntity<Map<String, String>> invalidJwtTokenException(InvalidJwtTokenException e) {
         return new ResponseEntity<>(responseBuilder(e), HttpStatus.UNAUTHORIZED);
     }
 
