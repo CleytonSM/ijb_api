@@ -8,6 +8,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
 
@@ -19,7 +20,7 @@ public class Exchange {
     @GeneratedValue(generator = "native", strategy = GenerationType.AUTO)
     @Column(name = "id_troca")
     private Integer id;
-    @ManyToOne(fetch = FetchType.EAGER)
+    @OneToOne
     @JoinColumn(name = "id_prod_outlet")
     private OutletProduct outletProduct;
     @Column(name = "ds_troca", length = 100)

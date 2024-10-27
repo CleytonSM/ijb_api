@@ -38,4 +38,10 @@ public class OutletProductMapper {
         outletProduct.setOutletProductName(outletProductUpdate.getOutletProductName());
         outletProduct.setOutletProductDescription(outletProduct.getOutletProductDescription());
     }
+
+    public static OutletProduct convertOutletProductDTOIntoOutletProduct(OutletProductDTO outletProduct) {
+        return new OutletProduct(DonationMapper.convertDonationDTOIntoDonation(outletProduct.getDonation()),
+                outletProduct.getOutletProductName(), outletProduct.getOutletProductDescription(),
+                outletProduct.getStatus());
+    }
 }

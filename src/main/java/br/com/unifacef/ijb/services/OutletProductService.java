@@ -27,9 +27,8 @@ public class OutletProductService {
     public OutletProductDTO createOutletProduct(OutletProductCreateDTO outletProductCreate) {
         OutletProduct outletProduct = OutletProductMapper
                 .convertOutletProductCreateDTOIntoOutletProduct(outletProductCreate);
-        outletProduct = save(outletProduct);
 
-        return OutletProductMapper.convertOutletProductIntoOutletProductDTO(outletProduct);
+        return OutletProductMapper.convertOutletProductIntoOutletProductDTO(save(outletProduct));
     }
 
     public List<OutletProductDTO> getAllOutletProducts() {
