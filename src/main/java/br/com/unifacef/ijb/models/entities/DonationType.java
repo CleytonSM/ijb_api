@@ -6,11 +6,15 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Entity
 @Table(name = "tb_tipos_doacoes")
+@AllArgsConstructor
+@NoArgsConstructor
 public class DonationType {
     @Id
     @GeneratedValue(generator = "native", strategy = GenerationType.AUTO)
@@ -18,4 +22,8 @@ public class DonationType {
     private Integer id;
     @Column(name = "nm_tipo_doacao", length = 30)
     private String typeDonationName;
+
+    public DonationType(String typeDonationName) {
+        this.typeDonationName = typeDonationName;
+    }
 }

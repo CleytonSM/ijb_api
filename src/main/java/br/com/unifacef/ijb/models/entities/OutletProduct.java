@@ -9,11 +9,15 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Entity
 @Table(name = "tb_produtos_outlet")
+@AllArgsConstructor
+@NoArgsConstructor
 public class OutletProduct {
     @Id
     @GeneratedValue(generator = "native", strategy = GenerationType.AUTO)
@@ -28,4 +32,11 @@ public class OutletProduct {
     private String outletProductDescription;
     @Column(name = "status", length = 20)
     private String status;
+
+    public OutletProduct(Donation donation, String outletProductName, String outletProductDescription, String status) {
+        this.donation = donation;
+        this.outletProductName = outletProductName;
+        this.outletProductDescription = outletProductDescription;
+        this.status = status;
+    }
 }
