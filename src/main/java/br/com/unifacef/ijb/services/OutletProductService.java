@@ -1,7 +1,7 @@
 package br.com.unifacef.ijb.services;
 
 import br.com.unifacef.ijb.helpers.OptionalHelper;
-import br.com.unifacef.ijb.helpers.OutletProductHelper;
+import br.com.unifacef.ijb.mappers.OutletProductMapper;
 import br.com.unifacef.ijb.models.dtos.OutletProductCreateDTO;
 import br.com.unifacef.ijb.models.dtos.OutletProductDTO;
 import br.com.unifacef.ijb.models.entities.OutletProduct;
@@ -24,35 +24,38 @@ public class OutletProductService {
 
     @Transactional
     public OutletProductDTO createOutletProduct(OutletProductCreateDTO outletProductCreate) {
-        OutletProduct outletProduct = OutletProductHelper
+        OutletProduct outletProduct = OutletProductMapper
                 .convertOutletProductCreateDTOIntoOutletProduct(outletProductCreate);
         outletProduct = save(outletProduct);
 
-        return OutletProductHelper.convertOutletProductIntoOutletProductDTO(outletProduct);
+        return OutletProductMapper.convertOutletProductIntoOutletProductDTO(outletProduct);
     }
 
     public List<OutletProductDTO> getAllOutletProducts() {
-        return OutletProductHelper.convertListOfOutletProductIntoListOfOutletProductDTO(repository.findAll());
+        return OutletProductMapper.convertListOfOutletProductIntoListOfOutletProductDTO(repository.findAll());
     }
 
     public List<OutletProductDTO> getAllOutletProductsByFilter(String nameOrDescription) {
         List<OutletProduct> outletProducts = repository.findAllByOutletProductName(nameOrDescription);
         if (!outletProducts.isEmpty()) {
-            return OutletProductHelper.convertListOfOutletProductIntoListOfOutletProductDTO(outletProducts);
+            return OutletProductMapper.convertListOfOutletProductIntoListOfOutletProductDTO(outletProducts);
         }
 
         outletProducts = repository.findAllByOutletProductDescription(nameOrDescription);
         if(!outletProducts.isEmpty()) {
-            return OutletProductHelper.convertListOfOutletProductIntoListOfOutletProductDTO(outletProducts);
+            return OutletProductMapper.convertListOfOutletProductIntoListOfOutletProductDTO(outletProducts);
         }
 
         throw new EntityNotFoundException("There aren't products with this name/description");
     }
 
     @Transactional
-    public OutletProductDTO updateOutletProducts(OutletProductDTO outletProductUpdate) {
+    public OutletProductDTO updateOutletProduct(OutletProductDTO outletProductUpdate) {
         OutletProduct outletProduct = OptionalHelper.getOptionalEntity(repository
                 .findById(outletProductUpdate.getId()));
-        outletProduct = OutletProductHelper.updateOutletProduct(o)
+        OutletProductMapper.updateOutletProduct(outletProductUpdate, outletProduct);
+
+        outletProduct = save(outletProduct);
+        return OutletProductMapper.convertOutletProductIntoOutletProductDTO(outletProduct);
     }
 }
