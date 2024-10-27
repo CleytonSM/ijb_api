@@ -14,10 +14,10 @@ public class SaleMapper {
                 saleCreate.getSaleValue(), saleCreate.getSaleDescription());
     }
 
-    public static SaleDTO convertSaleIntoSaleDTO(Sale save) {
-        return new SaleDTO(save.getId(),
-                OutletProductMapper.convertOutletProductIntoOutletProductDTO(save.getOutletProduct()),
-                save.getSaleValue(), save.getSaleDescription());
+    public static SaleDTO convertSaleIntoSaleDTO(Sale sale) {
+        return new SaleDTO(sale.getId(),
+                OutletProductMapper.convertOutletProductIntoOutletProductDTO(sale.getOutletProduct()),
+                sale.getSaleValue(), sale.getSaleDescription());
     }
 
     public static List<SaleDTO> convertListOfSaleIntoListOfSaleDTO(List<Sale> sales) {

@@ -23,6 +23,10 @@ public class OutletProductService {
         return repository.save(outletProduct);
     }
 
+    public OutletProduct getById(Integer id) {
+        return OptionalHelper.getOptionalEntity(repository.findById(id));
+    }
+
     @Transactional
     public OutletProductDTO createOutletProduct(OutletProductCreateDTO outletProductCreate) {
         OutletProduct outletProduct = OutletProductMapper
@@ -51,7 +55,7 @@ public class OutletProductService {
 
     @Transactional
     public OutletProductDTO updateOutletProduct(OutletProductDTO outletProductUpdate) {
-        OutletProduct outletProduct = OptionalHelper.getOptionalEntity(repository.findById(outletProductUpdate.getId()));
+        OutletProduct outletProduct = getById(outletProductUpdate.getId());
         updateRetrievedEntity(outletProductUpdate, outletProduct);
 
         return OutletProductMapper.convertOutletProductIntoOutletProductDTO(save(outletProduct));
@@ -59,7 +63,7 @@ public class OutletProductService {
 
     @Transactional
     public void deleteOutletProduct(Integer id) {
-        OutletProduct outletProduct = OptionalHelper.getOptionalEntity(repository.findById(id));
+        OutletProduct outletProduct = getById(id);
         save(changeOutletProductStatus(OutletProductStatus.INACTIVE, outletProduct));
     }
 

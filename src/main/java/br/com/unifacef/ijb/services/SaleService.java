@@ -23,6 +23,10 @@ public class SaleService {
         return repository.save(sale);
     }
 
+    public Sale getById(Integer id) {
+        return OptionalHelper.getOptionalEntity(repository.findById(id));
+    }
+
     @Transactional
     public SaleDTO createSale(SaleCreateDTO saleCreate) {
         Sale sale = SaleMapper.convertSaleCreateDTOIntoSale(saleCreate);
@@ -36,7 +40,7 @@ public class SaleService {
 
     @Transactional
     public SaleDTO updateOutletProduct(SaleDTO saleUpdate) {
-        Sale sale = OptionalHelper.getOptionalEntity(repository.findById(saleUpdate.getId()));
+        Sale sale = getById(saleUpdate.getId());
         updateRetrievedEntity(saleUpdate, sale);
 
         return SaleMapper.convertSaleIntoSaleDTO(save(sale));
@@ -44,7 +48,8 @@ public class SaleService {
 
     @Transactional
     public void deleteSale(Integer id) {
-        outletProductService.deleteOutletProduct(id);
+        Sale sale = getById(id);
+        outletProductService.deleteOutletProduct(sale.getOutletProduct().getId());
     }
 
     private void updateRetrievedEntity(SaleDTO saleUpdate, Sale sale) {
