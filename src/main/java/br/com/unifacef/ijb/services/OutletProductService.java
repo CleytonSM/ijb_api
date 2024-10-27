@@ -1,9 +1,9 @@
 package br.com.unifacef.ijb.services;
 
+import br.com.unifacef.ijb.helpers.OptionalHelper;
 import br.com.unifacef.ijb.helpers.OutletProductHelper;
 import br.com.unifacef.ijb.models.dtos.OutletProductCreateDTO;
 import br.com.unifacef.ijb.models.dtos.OutletProductDTO;
-import br.com.unifacef.ijb.models.dtos.OutletProductUpdateDTO;
 import br.com.unifacef.ijb.models.entities.OutletProduct;
 import br.com.unifacef.ijb.repositories.OutletProductRepository;
 import jakarta.persistence.EntityNotFoundException;
@@ -18,11 +18,11 @@ public class OutletProductService {
     @Autowired
     private OutletProductRepository repository;
 
-    @Transactional
     public OutletProduct save(OutletProduct outletProduct) {
         return repository.save(outletProduct);
     }
 
+    @Transactional
     public OutletProductDTO createOutletProduct(OutletProductCreateDTO outletProductCreate) {
         OutletProduct outletProduct = OutletProductHelper
                 .convertOutletProductCreateDTOIntoOutletProduct(outletProductCreate);
@@ -49,7 +49,10 @@ public class OutletProductService {
         throw new EntityNotFoundException("There aren't products with this name/description");
     }
 
-    public OutletProductDTO updateOutletProducts(OutletProductUpdateDTO outletProductUpdate) {
-
+    @Transactional
+    public OutletProductDTO updateOutletProducts(OutletProductDTO outletProductUpdate) {
+        OutletProduct outletProduct = OptionalHelper.getOptionalEntity(repository
+                .findById(outletProductUpdate.getId()));
+        outletProduct = OutletProductHelper.updateOutletProduct(o)
     }
 }
