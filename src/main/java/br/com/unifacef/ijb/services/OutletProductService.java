@@ -5,6 +5,7 @@ import br.com.unifacef.ijb.mappers.OutletProductMapper;
 import br.com.unifacef.ijb.models.dtos.OutletProductCreateDTO;
 import br.com.unifacef.ijb.models.dtos.OutletProductDTO;
 import br.com.unifacef.ijb.models.entities.OutletProduct;
+import br.com.unifacef.ijb.models.enums.OutletProductStatus;
 import br.com.unifacef.ijb.repositories.OutletProductRepository;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
@@ -51,11 +52,26 @@ public class OutletProductService {
 
     @Transactional
     public OutletProductDTO updateOutletProduct(OutletProductDTO outletProductUpdate) {
-        OutletProduct outletProduct = OptionalHelper.getOptionalEntity(repository
-                .findById(outletProductUpdate.getId()));
-        OutletProductMapper.updateOutletProduct(outletProductUpdate, outletProduct);
-
+        OutletProduct outletProduct = OptionalHelper.getOptionalEntity(repository.findById(outletProductUpdate.getId()));
+        updateRetrievedEntity(outletProductUpdate, outletProduct);
         outletProduct = save(outletProduct);
+
         return OutletProductMapper.convertOutletProductIntoOutletProductDTO(outletProduct);
+    }
+
+    @Transactional
+    public void deleteOutletProduct(Integer id) {
+        OutletProduct outletProduct = OptionalHelper.getOptionalEntity(repository.findById(id));
+        save(changeOutletProductStatus(OutletProductStatus.INACTIVE, outletProduct));
+    }
+
+    private void updateRetrievedEntity(OutletProductDTO outletProductUpdate, OutletProduct outletProduct) {
+        OutletProductMapper.updateOutletProduct(outletProductUpdate, outletProduct);
+    }
+
+    private OutletProduct changeOutletProductStatus(OutletProductStatus status, OutletProduct outletProduct) {
+        outletProduct.setStatus(status);
+
+        return outletProduct;
     }
 }

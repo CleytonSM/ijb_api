@@ -33,11 +33,9 @@ public class OutletProductMapper {
         return outletProductDTOs;
     }
 
-    public static OutletProduct updateOutletProduct(OutletProductDTO outletProductUpdate, OutletProduct outletProduct) {
+    public static void updateOutletProduct(OutletProductDTO outletProductUpdate, OutletProduct outletProduct) {
         outletProduct.setDonation(DonationMapper.convertDonationDTOIntoDonation(outletProductUpdate.getDonation()));
         outletProduct.setOutletProductName(outletProductUpdate.getOutletProductName());
         outletProduct.setOutletProductDescription(outletProduct.getOutletProductDescription());
-
-        return outletProduct;
     }
 }
