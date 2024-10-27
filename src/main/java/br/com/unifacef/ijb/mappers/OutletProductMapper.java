@@ -1,4 +1,4 @@
-package br.com.unifacef.ijb.helpers;
+package br.com.unifacef.ijb.mappers;
 
 import br.com.unifacef.ijb.models.dtos.OutletProductCreateDTO;
 import br.com.unifacef.ijb.models.dtos.OutletProductDTO;
@@ -7,17 +7,17 @@ import br.com.unifacef.ijb.models.entities.OutletProduct;
 import java.util.ArrayList;
 import java.util.List;
 
-public class OutletProductHelper {
+public class OutletProductMapper {
     public static OutletProduct convertOutletProductCreateDTOIntoOutletProduct(
             OutletProductCreateDTO outletProductCreate) {
-        return new OutletProduct(DonationHelper.convertDonationCreateDTOIntoDonation(outletProductCreate.getDonation()),
+        return new OutletProduct(DonationMapper.convertDonationCreateDTOIntoDonation(outletProductCreate.getDonation()),
                 outletProductCreate.getOutletProductName(), outletProductCreate.getOutletProductName(),
                 outletProductCreate.getStatus());
     }
 
     public static OutletProductDTO convertOutletProductIntoOutletProductDTO(OutletProduct outletProduct) {
         return new OutletProductDTO(outletProduct.getId(),
-                DonationHelper.convertDonationIntoDonationDTO(outletProduct.getDonation()),
+                DonationMapper.convertDonationIntoDonationDTO(outletProduct.getDonation()),
                 outletProduct.getOutletProductName(), outletProduct.getOutletProductDescription(),
                 outletProduct.getStatus());
     }
@@ -31,5 +31,13 @@ public class OutletProductHelper {
         }
 
         return outletProductDTOs;
+    }
+
+    public static OutletProduct updateOutletProduct(OutletProductDTO outletProductUpdate, OutletProduct outletProduct) {
+        outletProduct.setDonation(DonationMapper.convertDonationDTOIntoDonation(outletProductUpdate.getDonation()));
+        outletProduct.setOutletProductName(outletProductUpdate.getOutletProductName());
+        outletProduct.setOutletProductDescription(outletProduct.getOutletProductDescription());
+
+        return outletProduct;
     }
 }
