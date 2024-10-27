@@ -1,5 +1,6 @@
 package br.com.unifacef.ijb.models.dtos;
 
+import br.com.unifacef.ijb.models.enums.OutletProductStatus;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -14,5 +15,5 @@ public class OutletProductDTO {
     private DonationDTO donation;
     private String outletProductName;
     private String outletProductDescription;
-    private String status;
+    private OutletProductStatus status;
 }
