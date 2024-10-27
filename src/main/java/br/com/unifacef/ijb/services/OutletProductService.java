@@ -54,9 +54,8 @@ public class OutletProductService {
     public OutletProductDTO updateOutletProduct(OutletProductDTO outletProductUpdate) {
         OutletProduct outletProduct = OptionalHelper.getOptionalEntity(repository.findById(outletProductUpdate.getId()));
         updateRetrievedEntity(outletProductUpdate, outletProduct);
-        outletProduct = save(outletProduct);
 
-        return OutletProductMapper.convertOutletProductIntoOutletProductDTO(outletProduct);
+        return OutletProductMapper.convertOutletProductIntoOutletProductDTO(save(outletProduct));
     }
 
     @Transactional
