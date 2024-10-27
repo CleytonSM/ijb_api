@@ -32,6 +32,6 @@ public class Family {
     private BigDecimal income;
     @Column(name = "origem_renda", length = 40)
     private String incomeDescription;
-    @Column(name = "problemas_fisicos-mentais", length = 100)
-    private String physicalMentalProblems;
+    @Column(name = "problemas_de_saude", length = 100)
+    private String healthyProblems;
 }
