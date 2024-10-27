@@ -9,9 +9,8 @@ import java.math.BigDecimal;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class RebateDTO {
-    private Integer id;
-    private ExchangeDTO exchange;
+public class RebateCreateDTO {
+    private ExchangeCreateDTO exchange;
     private String description;
     private BigDecimal rebateValue;
 }
