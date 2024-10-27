@@ -76,4 +76,20 @@ public class OutletProductService {
 
         return outletProduct;
     }
+
+    @Transactional
+    public void deleteOutletProduct(Integer id) {
+        OutletProduct outletProduct = OptionalHelper.getOptionalEntity(repository.findById(id));
+        save(changeOutletProductStatus(OutletProductStatus.INACTIVE, outletProduct));
+    }
+
+    private void updateRetrievedEntity(OutletProductDTO outletProductUpdate, OutletProduct outletProduct) {
+        OutletProductMapper.updateOutletProduct(outletProductUpdate, outletProduct);
+    }
+
+    private OutletProduct changeOutletProductStatus(OutletProductStatus status, OutletProduct outletProduct) {
+        outletProduct.setStatus(status);
+
+        return outletProduct;
+    }
 }
