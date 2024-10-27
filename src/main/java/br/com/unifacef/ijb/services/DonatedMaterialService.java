@@ -8,6 +8,7 @@ import br.com.unifacef.ijb.models.dtos.DonatedMaterialDTO;
 import br.com.unifacef.ijb.models.dtos.OutletProductDTO;
 import br.com.unifacef.ijb.models.entities.DonatedMaterial;
 import br.com.unifacef.ijb.models.entities.OutletProduct;
+import br.com.unifacef.ijb.models.enums.OutletProductStatus;
 import br.com.unifacef.ijb.repositories.DonatedMaterialRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,7 +56,11 @@ public class DonatedMaterialService {
         return DonatedMaterialMapper.convertDonatedMaterialtIntoDonatedMaterialDTO(donatedMaterial);
     }
 
-
+    @Transactional
+    public void deleteDonatedMaterial(Integer id) {
+        DonatedMaterial donatedMaterial = OptionalHelper.getOptionalEntity(repository.findById(id));
+        repository.delete(donatedMaterial);
+    }
 
 
 
