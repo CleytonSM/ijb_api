@@ -1,9 +1,13 @@
 package br.com.unifacef.ijb.models.dtos;
 
 import br.com.unifacef.ijb.models.entities.Visit;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class VisitReportDTO {
     private Visit visit;
     private String report;

@@ -13,10 +13,13 @@ import lombok.Data;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+@Data
 @Entity
 @Table(name = "tb_beneficiarios")
-@Data
 public class Beneficiary {
+    public Beneficiary() {
+        //TODO Auto-generated constructor stub
+    }
     @Id
     @GeneratedValue(generator = "native", strategy = GenerationType.AUTO)
     @Column(name = "id_beneficiario")
