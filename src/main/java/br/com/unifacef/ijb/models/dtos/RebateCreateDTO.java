@@ -9,9 +9,8 @@ import java.math.BigDecimal;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class SaleDTO {
-    private Integer id;
-    private OutletProductDTO outletProduct;
-    private BigDecimal saleValue;
-    private String saleDescription;
+public class RebateCreateDTO {
+    private ExchangeCreateDTO exchange;
+    private String description;
+    private BigDecimal rebateValue;
 }
