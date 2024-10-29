@@ -1,4 +1,4 @@
-package br.com.unifacef.ijb.mapper;
+package br.com.unifacef.ijb.mappers;
 
 import br.com.unifacef.ijb.models.dtos.BeneficiaryDTO;
 import br.com.unifacef.ijb.models.entities.Beneficiary;

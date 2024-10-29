@@ -18,7 +18,7 @@ import java.math.BigDecimal;
 public class Family {
     @Id
     @GeneratedValue(generator = "native", strategy = GenerationType.AUTO)
-    private String id;
+    private Integer id;
     @ManyToOne()
     @JoinColumn(name = "id_beneficiario")
     private Beneficiary beneficiary;
