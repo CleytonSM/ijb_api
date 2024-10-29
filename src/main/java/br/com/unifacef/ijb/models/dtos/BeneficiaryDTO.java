@@ -18,6 +18,7 @@ public class BeneficiaryDTO {
     private String status;
     private String meetDescription;
     private String indicatorName;
+    
     private BigDecimal monthlyIncome;
     private LocalDateTime indicationDate;
     private String houseStatus;
