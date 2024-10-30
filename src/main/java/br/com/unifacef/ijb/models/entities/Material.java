@@ -9,11 +9,15 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Table(name = "tb_materiais")
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
 public class Material {
     @Id
     @GeneratedValue(generator = "native", strategy = GenerationType.AUTO)
@@ -25,4 +29,9 @@ public class Material {
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_material_comprado")
     private PurchasedMaterial purchasedMaterial;
+
+    public Material(DonatedMaterial donatedMaterial, PurchasedMaterial purchasedMaterial) {
+        this.donatedMaterial = donatedMaterial;
+        this.purchasedMaterial = purchasedMaterial;
+    }
 }
