@@ -8,12 +8,14 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Data
+@AllArgsConstructor
 @Entity
 @Table(name = "tb_beneficiarios")
 public class Beneficiary {
@@ -35,10 +37,16 @@ public class Beneficiary {
     private String meetDescription;
     @Column(name = "indicador", length = 60)
     private String indicatorName;
+    @Column(name = "add_info", length = 200)
+    private String additionalInfo;
+    @Column(name = "tem_terreno")
+    private Boolean hasLand;
     @Column(name = "renda_mensal")
     private BigDecimal monthlyIncome;
     @Column(name = "dt_indicacao")
     private LocalDateTime indicationDate;
     @Column(name = "status_moradia")
     private String houseStatus; // TODO VERIFICAR ENUM DISSO
+    @Column(name = "decisao_triagem", length = 200)
+    private String decisionTriage; // TODO VERIFICAR ENUM DISSO
 }

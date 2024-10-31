@@ -7,11 +7,13 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Entity
 @Table(name = "tb_relatorios_visistas")
 @Data
+@AllArgsConstructor
 public class VisitReport {
     @Id
     @ManyToOne
@@ -21,17 +23,17 @@ public class VisitReport {
     private String report;
     @Column(name = "imagem1")
     @Lob
-    private byte firstImage;
+    private byte[] firstImage;
     @Column(name = "imagem2")
     @Lob
-    private byte secondImage;
+    private byte[] secondImage;
     @Column(name = "imagem3")
     @Lob
-    private byte thirdImage;
+    private byte[] thirdImage;
     @Column(name = "imagem4")
     @Lob
-    private byte fourthImage;
+    private byte[] fourthImage;
     @Column(name = "imagem5")
     @Lob
-    private byte fifthImage;
+    private byte[] fifthImage;
 }

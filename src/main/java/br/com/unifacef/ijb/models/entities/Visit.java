@@ -9,6 +9,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.time.LocalDateTime;
@@ -16,6 +17,7 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "tb_visitas")
 @Data
+@AllArgsConstructor
 public class Visit {
     @Id
     @GeneratedValue(generator = "native", strategy = GenerationType.AUTO)

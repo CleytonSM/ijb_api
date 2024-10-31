@@ -1,4 +1,4 @@
-package br.com.unifacef.ijb.mapper;
+package br.com.unifacef.ijb.mappers;
 
 import br.com.unifacef.ijb.models.dtos.VisitReportDTO;
 import br.com.unifacef.ijb.models.entities.VisitReport;

@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 import br.com.unifacef.ijb.models.entities.Family;
 
 @Repository
-public interface FamilyRepository extends JpaRepository<Family, String> {
+public interface FamilyRepository extends JpaRepository<Family, Integer> {
 }
