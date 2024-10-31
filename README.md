@@ -86,6 +86,9 @@ Este projeto utiliza o padrão de design **MVC (Model-View-Controller)**. Abaixo
   
   O diretório `filters` inclui as classes responsáveis por filtrar as requisições antes que elas cheguem aos controladores, adicionando uma camada extra de validação.
 
+- **Mapper**
+  O diretório `mappers` tem como principal função a conversão de entidades para DTOs e vice-versa. Seus métodos devem ser estáticos.
+
 - **Helper**
   
   O diretório `helpers` armazena classes utilitárias que fornecem funcionalidades auxiliares que podem ser reutilizadas em diferentes partes da aplicação.
