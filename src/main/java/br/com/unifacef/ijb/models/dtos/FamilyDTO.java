@@ -16,8 +16,8 @@ public class FamilyDTO {
     private String familiarName;
     private String cpf;
     private String kinship;
-    private Date birthDate;
     private String scholarity;
+    private Date birthDate;
     private BigDecimal income;
     private String incomeDescription;
     private String healthyProblems;
