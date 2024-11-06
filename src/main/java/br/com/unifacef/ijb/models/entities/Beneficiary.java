@@ -15,6 +15,8 @@ import lombok.NoArgsConstructor;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+import br.com.unifacef.ijb.models.enums.BeneficiaryStatus;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -31,7 +33,7 @@ public class Beneficiary {
     @Column(name = "nm_representante", length = 60, nullable = false)
     private String name;
     @Column(name = "status")
-    private String status; // TODO VERIFICAR ENUM DISSO
+    private BeneficiaryStatus status; // TODO VERIFICAR ENUM DISSO
     @Column(name = "como_conheceu", length = 200)
     private String meetDescription;
     @Column(name = "indicador", length = 60)

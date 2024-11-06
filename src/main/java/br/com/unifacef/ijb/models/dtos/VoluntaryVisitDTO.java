@@ -1,6 +1,6 @@
 package br.com.unifacef.ijb.models.dtos;
 
-import br.com.unifacef.ijb.models.entities.Volunteer;
+import br.com.unifacef.ijb.models.dtos.VolunteerDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
