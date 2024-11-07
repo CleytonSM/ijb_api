@@ -18,4 +18,9 @@ public class VolunteerType {
     private Integer id;
     @Column(name = "nm_tipo_voluntario")
     private String volunteerNameType;
+
+    public VolunteerType(){}
+    public VolunteerType(String volunteerNameType){
+        this.volunteerNameType = volunteerNameType;
+    }
 }

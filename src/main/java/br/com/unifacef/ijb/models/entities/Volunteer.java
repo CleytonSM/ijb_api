@@ -8,12 +8,16 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 
 @Data
 @Entity
 @Table(name = "tb_voluntarios")
+@AllArgsConstructor
+@NoArgsConstructor
 public class Volunteer {
     @Id
     @GeneratedValue(generator = "native", strategy = GenerationType.AUTO)
@@ -33,4 +37,11 @@ public class Volunteer {
     private String hobby;
     @Column(name = "intencao", length = 200)
     private String intention;
+
+    public Volunteer(String desiredRole, String aboutYou, String hobby, String intention) {
+        this.desiredRole = desiredRole;
+        this.aboutYou = aboutYou;
+        this.hobby = hobby;
+        this.intention = intention;
+    }
 }
