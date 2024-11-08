@@ -1,6 +1,7 @@
 package br.com.unifacef.ijb.models.dtos;
 
 import br.com.unifacef.ijb.models.entities.User;
+import br.com.unifacef.ijb.models.enums.BeneficiaryStatus;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,7 +16,7 @@ public class BeneficiaryDTO {
     private Integer id;
     private User user;
     private String name;
-    private String status;
+    private BeneficiaryStatus status;
     private String meetDescription;
     private String indicatorName;
     private String additionalInfo;

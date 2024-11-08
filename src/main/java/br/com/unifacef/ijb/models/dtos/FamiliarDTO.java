@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class FamilyDTO {
+public class FamiliarDTO {
     private Integer id;
     private BeneficiaryDTO beneficiaryDTO;
     private String familiarName;

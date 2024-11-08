@@ -5,7 +5,8 @@ import lombok.Getter;
 @Getter
 public enum BeneficiaryStatus {
     ACTIVE("ativo"),
-    INACTIVE("inativo");
+    INACTIVE("inativo"),
+    NEED_ATENTION("precisa_de_atencao"),;
 
 
     private final String status;
