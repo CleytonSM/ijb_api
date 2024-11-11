@@ -27,31 +27,26 @@ public class Visit {
     @Column(name = "id_visita")
     private Integer id;
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "id_beneficiario")
+    @JoinColumn(name = "id_beneficiary")
     private Beneficiary beneficiary;
     @Column(name = "dt_visita")
     private LocalDateTime visitDate;
-    @Column(name = "relatorio_visita", length = 500)
-    private String visitReport;
-    @Column(name = "foto1")
+    @Column(name = "relatorio", length = 200)
+    private String report;
+    @Column(name = "imagem1")
     @Lob
-    private byte[] photo1;
-    @Column(name = "foto2")
+    private byte[] firstImage;
+    @Column(name = "imagem2")
     @Lob
-    private byte[] photo2;
-    @Column(name = "foto3")
+    private byte[] secondImage;
+    @Column(name = "imagem3")
     @Lob
-    private byte[] photo3;
-    @Column(name = "foto4")
+    private byte[] thirdImage;
+    @Column(name = "imagem4")
     @Lob
-    private byte[] photo4;
-    @Column(name = "foto5")
+    private byte[] fourthImage;
+    @Column(name = "imagem5")
     @Lob
-    private byte[] photo5;
-    @Column(name = "dt_criacao")
-    private LocalDateTime createdAt;
-    @Column(name = "dt_alteracao")
-    private LocalDateTime updatedAt;
-    @Column(name = "dt_exclusao")
-    private LocalDateTime deletedAt;
+    private byte[] fifthImage;
+
 }

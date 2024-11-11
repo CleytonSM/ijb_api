@@ -6,7 +6,10 @@ import lombok.Getter;
 public enum BeneficiaryStatus {
     ACTIVE("ativo"),
     INACTIVE("inativo"),
-    UNDER_ANALYSIS("em_analise"),
+    NEW("novo"),
+    APPROVED("aprovado"),
+    FINISHED("finalizado"),
+    RUNNING("em_andamento"),
     NEED_ATENTION("precisa_de_atencao");
 
 
