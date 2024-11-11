@@ -1,5 +1,6 @@
 package br.com.unifacef.ijb.services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,14 +41,26 @@ public class VisitService {
     }
 
     public void getVisitsByBeneficiaryId(Integer id){
-        // VERIFICAR COM ANA E LUCAS SE VAI IMPLEMENTAR
+        List<VisitDTO> allVisitDTOs = getAllVisits();
+        List<VisitDTO> visitDTOFiltered = new ArrayList<>();
+
+        for(VisitDTO eachVisitDTO : allVisitDTOs){
+            if(eachVisitDTO.getBeneficiaryDTO().getId().equals(id)){
+                visitDTOFiltered.add(eachVisitDTO);
+            }
+        }
     }
 
     public void updateRetrievedVisit(VisitDTO visitDTO, Visit visit){
         VisitMapper.updateVisit(visitDTO, visit);
     }
 
-    public void deleteVisit(Integer id){
-        // VERIFICAR COM ANA E LUCAS SE VAI IMPLEMENTAR
+    public VisitDTO updateVisit(VisitDTO visitDTO){
+        Visit visit = getById(visitDTO.getId());
+        updateRetrievedVisit(visitDTO, visit);
+        
+        return VisitMapper.convertVisitIntoVisitDTO(save(visit));
     }
+
+
 }
