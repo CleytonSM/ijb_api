@@ -6,7 +6,8 @@ import lombok.Getter;
 public enum BeneficiaryStatus {
     ACTIVE("ativo"),
     INACTIVE("inativo"),
-    NEED_ATENTION("precisa_de_atencao"),;
+    UNDER_ANALYSIS("em_analise"),
+    NEED_ATENTION("precisa_de_atencao");
 
 
     private final String status;

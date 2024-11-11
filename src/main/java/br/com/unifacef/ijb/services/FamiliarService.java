@@ -14,7 +14,7 @@ import br.com.unifacef.ijb.repositories.FamiliarRepository;
 import jakarta.transaction.Transactional;
 
 @Service
-public class FamilyService {
+public class FamiliarService {
     
     @Autowired
     private FamiliarRepository repository;
@@ -58,7 +58,7 @@ public class FamilyService {
     public FamiliarDTO updateFamiliar(FamiliarDTO familiarDTO){
         Familiar familiar = getById( familiarDTO.getId());
         updateRetrievedFamiliar(familiarDTO, familiar);
-        
+
         return FamiliarMapper.convertFamiliarIntoFamiliarDTO(save(familiar));
     }
 }
