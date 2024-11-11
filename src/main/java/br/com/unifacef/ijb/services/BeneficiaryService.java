@@ -36,6 +36,10 @@ public class BeneficiaryService {
         return BeneficiaryMapper.convertBeneficiaryIntoBeneficiaryDTO(save(beneficiary));
     }
 
+    public BeneficiaryDTO getByIdConvertedToDTO(Integer id){
+        return BeneficiaryMapper.convertBeneficiaryIntoBeneficiaryDTO(OptionalHelper.getOptionalEntity(repository.findById(id)));
+    }
+
     public List<BeneficiaryDTO> getAllBeneficiaries(){
         return BeneficiaryMapper.convertListBeneficiaryIntoListBeneficiaryDTO(repository.findAll());
     }
