@@ -1,5 +1,7 @@
 package br.com.unifacef.ijb.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -28,5 +30,7 @@ public class BeneficiaryController {
     }
 
     @GetMapping("/beneficiarios?")
-    public
+    public List<BeneficiaryDTO> getAllBeneficiaries(){
+        return service.getAllBeneficiaries();
+    }
 }
