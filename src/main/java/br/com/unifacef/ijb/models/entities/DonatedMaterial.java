@@ -13,6 +13,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+
 @Data
 @Table(name = "tb_materiais_doados")
 @Entity
@@ -30,6 +32,12 @@ public class DonatedMaterial {
     private String materialName;
     @Column(name = "qnt_material")
     private String materialQuantity;
+    @Column(name = "dt_criacao")
+    private LocalDateTime createdAt;
+    @Column(name = "dt_alteracao")
+    private LocalDateTime updatedAt;
+    @Column(name = "dt_exclusao")
+    private LocalDateTime deletedAt;
 
     public DonatedMaterial(Donation donation, String materialName, String materialQuantity) {
         this.donation = donation;

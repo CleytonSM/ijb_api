@@ -1,12 +1,12 @@
 package br.com.unifacef.ijb.models.dtos;
 
-import java.math.BigDecimal;
-import java.sql.Date;
-
 import br.com.unifacef.ijb.models.entities.Beneficiary;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.math.BigDecimal;
+import java.sql.Date;
 
 @AllArgsConstructor
 @NoArgsConstructor

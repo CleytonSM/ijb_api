@@ -5,9 +5,7 @@ import br.com.unifacef.ijb.models.entities.Beneficiary;
 
 public class BeneficiaryMapper {
     public static Beneficiary convertBeneficiaryDTOIntoBeneficiary(BeneficiaryDTO beneficiaryDTO){
-        return new Beneficiary(beneficiaryDTO.getId(), beneficiaryDTO.getUser(), beneficiaryDTO.getName(), beneficiaryDTO.getStatus(),
-        beneficiaryDTO.getMeetDescription(), beneficiaryDTO.getIndicatorName(), beneficiaryDTO.getAdditionalInfo(), beneficiaryDTO.getHasLand(),
-        beneficiaryDTO.getMonthlyIncome(), beneficiaryDTO.getIndicationDate(), beneficiaryDTO.getHouseStatus(), beneficiaryDTO.getDecisionTriage());
+        return new Beneficiary();
     }
 
     public static BeneficiaryDTO convertBeneficiaryIntoBeneficiaryDTO(Beneficiary beneficiary){

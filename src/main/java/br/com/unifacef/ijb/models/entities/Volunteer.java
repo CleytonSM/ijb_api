@@ -10,6 +10,8 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
 
+import java.time.LocalDateTime;
+
 @Data
 @Entity
 @Table(name = "tb_voluntarios")
@@ -32,4 +34,10 @@ public class Volunteer {
     private String hobby;
     @Column(name = "intencao", length = 200)
     private String intention;
+    @Column(name = "dt_criacao")
+    private LocalDateTime createdAt;
+    @Column(name = "dt_alteracao")
+    private LocalDateTime updatedAt;
+    @Column(name = "dt_exclusao")
+    private LocalDateTime deletedAt;
 }

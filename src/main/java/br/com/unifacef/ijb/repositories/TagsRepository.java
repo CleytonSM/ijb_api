@@ -1,6 +1,6 @@
 package br.com.unifacef.ijb.repositories;
 
-import org.springframework.core.metrics.StartupStep.Tags;
+import br.com.unifacef.ijb.models.entities.Tags;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

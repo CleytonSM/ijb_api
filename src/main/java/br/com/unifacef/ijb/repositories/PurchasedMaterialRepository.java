@@ -1,6 +1,5 @@
 package br.com.unifacef.ijb.repositories;
 
-import br.com.unifacef.ijb.models.entities.OutletProduct;
 import br.com.unifacef.ijb.models.entities.PurchasedMaterial;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -10,5 +9,5 @@ import java.util.List;
 @Repository
 public interface PurchasedMaterialRepository extends JpaRepository<PurchasedMaterial, Integer> {
 
-    List<PurchasedMaterial> findAllByPurchasedMaterialName(String name);
+    List<PurchasedMaterial> findAllByMaterialName(String name);
 }

@@ -46,12 +46,7 @@ public class DonatedMaterialMapper {
     }
 
     public static DonatedMaterial convertDonatedMaterialDTOIntoDonatedMaterial(DonatedMaterialDTO donatedMaterialDTO) {
-        return new DonatedMaterial(
-                donatedMaterialDTO.getId(),
-                DonationMapper.convertDonationDTOIntoDonation(donatedMaterialDTO.getDonation()),
-                donatedMaterialDTO.getMaterialName(),
-                donatedMaterialDTO.getMaterialQuantity()
-        );
+        return new DonatedMaterial();
     }
 
     public static DonatedMaterialDTO convertDonatedMaterialtIntoDonatedMaterialDTO(DonatedMaterial donatedMaterial) {

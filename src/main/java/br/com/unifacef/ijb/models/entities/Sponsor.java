@@ -9,6 +9,7 @@ import jakarta.persistence.Table;
 import lombok.Data;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "tb_patrocinadores")
@@ -22,4 +23,10 @@ public class Sponsor {
     private String sponsorName;
     @Column(name = "valor_investido")
     private BigDecimal investedValue;
+    @Column(name = "dt_criacao")
+    private LocalDateTime createdAt;
+    @Column(name = "dt_alteracao")
+    private LocalDateTime updatedAt;
+    @Column(name = "dt_exclusao")
+    private LocalDateTime deletedAt;
 }

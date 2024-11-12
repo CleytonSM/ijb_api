@@ -9,13 +9,11 @@ import java.util.List;
 public class ExchangedMaterialMapper {
     public static ExchangedMaterial convertExchangedMaterialCreateDTOIntoExchangedMaterial(
             ExchangedMaterialCreateDTO exchangedMaterialCreate) {
-        return new ExchangedMaterial(MaterialMapper.convertMaterialCreateDTOIntoMaterial(exchangedMaterialCreate.getMaterial()),
-                ExchangeMapper.convertExchangeCreateDTOIntoExchange(exchangedMaterialCreate.getExchange()));
+        return new ExchangedMaterial();
     }
 
     public static ExchangedMaterialDTO convertExchangedMaterialIntoExchangedMaterialDTO(ExchangedMaterial exchangedMaterial) {
-        return new ExchangedMaterialDTO(MaterialMapper.convertMaterialIntoMaterialDTO(exchangedMaterial.getMaterials()),
-                ExchangeMapper.convertExchangeIntoExchangeDTO(exchangedMaterial.getExchange()));
+        return new ExchangedMaterialDTO();
     }
 
     public static List<ExchangedMaterialDTO> convertListOfExchangedMaterialIntoListOfExchangedMaterialDTO(
@@ -30,14 +28,11 @@ public class ExchangedMaterialMapper {
     }
 
     public static void updateExchangedMaterial(ExchangedMaterialDTO exchangedMaterialUpdate, ExchangedMaterial exchangedMaterial) {
-        exchangedMaterial.setMaterials(MaterialMapper.convertMaterialDTOIntoMaterial(exchangedMaterialUpdate.getMaterial()));
         exchangedMaterial.setExchange(ExchangeMapper.convertExchangeDTOIntoExchange(exchangedMaterialUpdate.getExchange()));
     }
 
     public static ExchangedMaterial convertExchangedMaterialDTOIntoExchangedMaterial(ExchangedMaterialDTO exchangedMaterial) {
-        return new ExchangedMaterial(MaterialMapper.convertMaterialDTOIntoMaterial(exchangedMaterial.getMaterial()),
-                ExchangeMapper.convertExchangeDTOIntoExchange(exchangedMaterial.getExchange())
-                );
+        return new ExchangedMaterial();
 
     }
 }

@@ -10,18 +10,17 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Data
-@AllArgsConstructor
 @Entity
 @Table(name = "tb_beneficiarios")
+@NoArgsConstructor
+@AllArgsConstructor
 public class Beneficiary {
-    public Beneficiary() {
-        //TODO Auto-generated constructor stub
-    }
     @Id
     @GeneratedValue(generator = "native", strategy = GenerationType.AUTO)
     @Column(name = "id_beneficiario")
@@ -49,4 +48,10 @@ public class Beneficiary {
     private String houseStatus; // TODO VERIFICAR ENUM DISSO
     @Column(name = "decisao_triagem", length = 200)
     private String decisionTriage; // TODO VERIFICAR ENUM DISSO
+    @Column(name = "dt_criacao")
+    private LocalDateTime createdAt;
+    @Column(name = "dt_alteracao")
+    private LocalDateTime updatedAt;
+    @Column(name = "dt_exclusao")
+    private LocalDateTime deletedAt;
 }

@@ -14,14 +14,14 @@ import java.util.List;
 public class MaterialInUseMapper {
     public static MaterialInUse convertMaterialInUseCreateDTOIntoMaterialInUse(
             MaterialInUseCreateDTO materialInUseCreate) {
-        return new DonatedMaterial(
+        return new MaterialInUse(
                 MaterialMapper.convertMaterialCreateDTOIntoMaterial(materialInUseCreate.getMaterial()),
                 ConstructionMapper.convertConstructionCreateDTOIntoConstruction(materialInUseCreate.getConstruction())
         );
     }
 
     public static MaterialInUseDTO convertMaterialInUseIntoMaterialInUseDTO(MaterialInUse materialInUse) {
-        return new DonatedMaterialDTO(
+        return new MaterialInUseDTO(
                 materialInUse.getId(),
                 MaterialMapper.convertMaterialIntoMaterialDTO(materialInUse.getMaterial()),
                 ConstructionMapper.convertConstructionIntoConstructionDTO(materialInUse.getConstruction())
@@ -47,12 +47,7 @@ public class MaterialInUseMapper {
     }
 
     public static MaterialInUse convertMaterialInUseDTOIntoMaterialInUse(MaterialInUseDTO materialInUseDTO) {
-        return new MaterialInUse(
-                materialInUseDTO.getId(),
-                MaterialMapper.convertMaterialDTOIntoMaterial(materialInUseDTO.getMaterial()),
-                ConstructionMapper.convertConstructionDTOIntoConstruction(materialInUseDTO.getConstruction())
-
-        );
+        return new MaterialInUse();
     }
 
     public static MaterialInUseDTO convertMaterialInUsetIntoMaterialInUseDTO(MaterialInUse materialInUse) {

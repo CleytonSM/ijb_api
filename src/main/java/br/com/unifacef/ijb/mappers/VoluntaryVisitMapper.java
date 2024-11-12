@@ -5,6 +5,6 @@ import br.com.unifacef.ijb.models.entities.VoluntaryVisit;
 
 public class VoluntaryVisitMapper {
     public static VoluntaryVisit convertVoluntaryVisitDTOIntoVoluntaryVisit(VoluntaryVisitDTO voluntaryVisitDTO){
-        return new VoluntaryVisit(voluntaryVisitDTO.getId(), voluntaryVisitDTO.getVolunteer());
+        return new VoluntaryVisit();
     } 
 }

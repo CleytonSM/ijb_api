@@ -1,6 +1,6 @@
 package br.com.unifacef.ijb.models.dtos;
 
-import lombok.*;
+import lombok.Data;
 
 import java.time.LocalDateTime;
 

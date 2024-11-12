@@ -2,14 +2,9 @@ package br.com.unifacef.ijb.services;
 
 import br.com.unifacef.ijb.helpers.OptionalHelper;
 import br.com.unifacef.ijb.mappers.MaterialInUseMapper;
-import br.com.unifacef.ijb.mappers.OutletProductMapper;
 import br.com.unifacef.ijb.models.dtos.MaterialInUseCreateDTO;
 import br.com.unifacef.ijb.models.dtos.MaterialInUseDTO;
-import br.com.unifacef.ijb.models.dtos.OutletProductCreateDTO;
-import br.com.unifacef.ijb.models.dtos.OutletProductDTO;
 import br.com.unifacef.ijb.models.entities.MaterialInUse;
-import br.com.unifacef.ijb.models.entities.OutletProduct;
-import br.com.unifacef.ijb.models.enums.OutletProductStatus;
 import br.com.unifacef.ijb.repositories.MaterialInUseRepository;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
@@ -44,7 +39,7 @@ public class MaterialInUseService {
     }
 
     public List<MaterialInUseDTO> getAllMaterialInUseByFilter(Integer id) {
-        List<MaterialInUse> materialsInUse = repository.findAllByMaterialInUseId(id);
+        List<MaterialInUse> materialsInUse = repository.findAllById(id);
         if (!materialsInUse.isEmpty()) {
             return MaterialInUseMapper.convertListOfMaterialInUseIntoListOfMaterialInUseDTO(materialsInUse);
         }

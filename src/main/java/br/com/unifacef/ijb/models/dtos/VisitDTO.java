@@ -1,11 +1,11 @@
 package br.com.unifacef.ijb.models.dtos;
 
-import java.time.LocalDateTime;
-
 import br.com.unifacef.ijb.models.entities.Beneficiary;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.time.LocalDateTime;
 
 @Data
 @AllArgsConstructor

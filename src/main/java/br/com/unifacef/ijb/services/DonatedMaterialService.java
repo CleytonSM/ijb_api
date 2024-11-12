@@ -2,13 +2,9 @@ package br.com.unifacef.ijb.services;
 
 import br.com.unifacef.ijb.helpers.OptionalHelper;
 import br.com.unifacef.ijb.mappers.DonatedMaterialMapper;
-import br.com.unifacef.ijb.mappers.OutletProductMapper;
 import br.com.unifacef.ijb.models.dtos.DonatedMaterialCreateDTO;
 import br.com.unifacef.ijb.models.dtos.DonatedMaterialDTO;
-import br.com.unifacef.ijb.models.dtos.OutletProductDTO;
 import br.com.unifacef.ijb.models.entities.DonatedMaterial;
-import br.com.unifacef.ijb.models.entities.OutletProduct;
-import br.com.unifacef.ijb.models.enums.OutletProductStatus;
 import br.com.unifacef.ijb.repositories.DonatedMaterialRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +34,7 @@ public class DonatedMaterialService {
     }
 
     public List<DonatedMaterialDTO> getAllDonatedMaterialsByFilter(String name) {
-        List<DonatedMaterial> donatedMaterials = repository.findAllByDonatedMaterialName(name);
+        List<DonatedMaterial> donatedMaterials = repository.findAllByMaterialName(name);
         if (!donatedMaterials.isEmpty()) {
             return DonatedMaterialMapper.convertListOfDonatedMaterialIntoListOfDonatedMaterialDTO(donatedMaterials);
         }

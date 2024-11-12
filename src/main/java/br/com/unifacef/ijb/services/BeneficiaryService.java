@@ -1,10 +1,10 @@
 package br.com.unifacef.ijb.services;
 
 
+import br.com.unifacef.ijb.mappers.BeneficiaryMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.com.unifacef.ijb.mappers.BeneficiaryMapper;
 import br.com.unifacef.ijb.models.dtos.BeneficiaryDTO;
 import br.com.unifacef.ijb.models.entities.Beneficiary;
 import br.com.unifacef.ijb.repositories.BeneficiaryRepository;
@@ -16,20 +16,18 @@ import java.util.List;
 public class BeneficiaryService {
     
     @Autowired
-    BeneficiaryRepository inject;
+    private BeneficiaryRepository repository;
 
-    @Autowired
-    BeneficiaryMapper converter;
 
-    public BeneficiaryDTO InsertBeneficiary(BeneficiaryDTO beneficiaryDTO){
-        Beneficiary entity = converter.convertBeneficiaryDTOIntoBeneficiary(beneficiaryDTO);
-        Beneficiary savedEntity = inject.save(entity);
-        return converter.convertBeneficiaryIntoBeneficiaryDTO(savedEntity);
-    }
-
-    public List<BeneficiaryDTO> findAllBeneficiaries(){
-        List<Beneficiary> beneficiary = inject.findAll();
-        return beneficiary.stream().map(converter::convertBeneficiaryDTOIntoBeneficiary).collect(Collectors.toList());
-    }
+//    public BeneficiaryDTO InsertBeneficiary(BeneficiaryDTO beneficiaryDTO){
+//        Beneficiary entity = BeneficiaryMapper.convertBeneficiaryDTOIntoBeneficiary(beneficiaryDTO);
+//        Beneficiary savedEntity = repository.save(entity);
+//        return BeneficiaryMapper.convertBeneficiaryIntoBeneficiaryDTO(savedEntity);
+//    }
+//
+//    public List<BeneficiaryDTO> findAllBeneficiaries(){
+//        List<Beneficiary> beneficiary = repository.findAll();
+//        return beneficiary.stream().map(convertBeneficiaryDTOIntoBeneficiary).collect(Collectors.toList());
+//    }
 
 }
