@@ -14,7 +14,6 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDateTime;
 
 
-
 @Data
 @Table(name = "tb_usuarios")
 @Entity

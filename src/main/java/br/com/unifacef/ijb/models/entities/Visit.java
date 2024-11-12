@@ -27,7 +27,7 @@ public class Visit {
     @Column(name = "id_visita")
     private Integer id;
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "id_beneficiary")
+    @JoinColumn(name = "id_beneficiario")
     private Beneficiary beneficiary;
     @Column(name = "dt_visita")
     private LocalDateTime visitDate;

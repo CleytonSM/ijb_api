@@ -26,10 +26,4 @@ public class VolunteerType {
     private LocalDateTime updatedAt;
     @Column(name = "dt_exclusao")
     private LocalDateTime deletedAt;
-
-  
-    public VolunteerType(){}
-    public VolunteerType(String volunteerNameType){
-        this.volunteerNameType = volunteerNameType;
-    }
 }

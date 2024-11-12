@@ -14,6 +14,7 @@ import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.sql.Date;
+import java.time.LocalDateTime;
 
 @Data
 @AllArgsConstructor
@@ -23,11 +24,12 @@ import java.sql.Date;
 public class Familiar {
     @Id
     @GeneratedValue(generator = "native", strategy = GenerationType.AUTO)
+    @Column(name = "id_familiar")
     private Integer id;
     @ManyToOne()
     @JoinColumn(name = "id_beneficiario")
     private Beneficiary beneficiary;
-    @Column(name = "nm_familia", length = 60)
+    @Column(name = "nm_familiar", length = 60)
     private String familiarName;
     @Column(name = "cpf", length = 11)
     private String cpf;
@@ -39,8 +41,14 @@ public class Familiar {
     private Date birthDate;
     @Column(name = "valor_renda")
     private BigDecimal income;
-    @Column(name = "origem_renda", length = 40)
+    @Column(name = "fonte_de_renda", length = 40)
     private String incomeDescription;
     @Column(name = "problemas_de_saude", length = 100)
     private String healthyProblems;
+    @Column(name = "dt_criacao")
+    private LocalDateTime createdAt;
+    @Column(name = "dt_alteracao")
+    private LocalDateTime updatedAt;
+    @Column(name = "dt_exclusao")
+    private LocalDateTime deletedAt;
 }

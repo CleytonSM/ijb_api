@@ -22,6 +22,8 @@ import br.com.unifacef.ijb.models.enums.BeneficiaryStatus;
 @NoArgsConstructor
 @Entity
 @Table(name = "tb_beneficiarios")
+@NoArgsConstructor
+@AllArgsConstructor
 public class Beneficiary {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
