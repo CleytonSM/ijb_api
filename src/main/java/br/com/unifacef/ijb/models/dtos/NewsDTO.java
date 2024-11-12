@@ -1,8 +1,8 @@
 package br.com.unifacef.ijb.models.dtos;
 
-import java.sql.Date;
-
 import lombok.Data;
+
+import java.sql.Date;
 
 @Data
 public class NewsDTO {

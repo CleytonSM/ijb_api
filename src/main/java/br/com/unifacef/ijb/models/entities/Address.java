@@ -8,8 +8,10 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.Data;
 
+import java.time.LocalDateTime;
+
 @Entity
-@Table(name = "tb_endereco")
+@Table(name = "tb_enderecos")
 @Data
 public class Address {
     @Id
@@ -26,4 +28,10 @@ public class Address {
     private String neighborhood;
     @Column(name = "complemento")
     private String complement;
+    @Column(name = "dt_criacao")
+    private LocalDateTime createdAt;
+    @Column(name = "dt_alteracao")
+    private LocalDateTime updatedAt;
+    @Column(name = "dt_exclusao")
+    private LocalDateTime deletedAt;
 }

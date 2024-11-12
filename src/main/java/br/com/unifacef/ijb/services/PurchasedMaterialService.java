@@ -1,16 +1,10 @@
 package br.com.unifacef.ijb.services;
 
 import br.com.unifacef.ijb.helpers.OptionalHelper;
-import br.com.unifacef.ijb.mappers.OutletProductMapper;
 import br.com.unifacef.ijb.mappers.PurchasedMaterialMapper;
-import br.com.unifacef.ijb.models.dtos.OutletProductCreateDTO;
-import br.com.unifacef.ijb.models.dtos.OutletProductDTO;
 import br.com.unifacef.ijb.models.dtos.PurchasedMaterialCreateDTO;
 import br.com.unifacef.ijb.models.dtos.PurchasedMaterialDTO;
-import br.com.unifacef.ijb.models.entities.OutletProduct;
 import br.com.unifacef.ijb.models.entities.PurchasedMaterial;
-import br.com.unifacef.ijb.models.enums.OutletProductStatus;
-import br.com.unifacef.ijb.repositories.OutletProductRepository;
 import br.com.unifacef.ijb.repositories.PurchasedMaterialRepository;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
@@ -45,7 +39,7 @@ public class PurchasedMaterialService {
     }
 
     public List<PurchasedMaterialDTO> getAllPurchasedMaterialsByFilter(String name) {
-        List<PurchasedMaterial> purchasedMaterials = repository.findAllByPurchasedMaterialName(name);
+        List<PurchasedMaterial> purchasedMaterials = repository.findAllByMaterialName(name);
         if (!purchasedMaterials.isEmpty()) {
             return PurchasedMaterialMapper.convertListOfPurchasedMaterialIntoListOfPurchasedMaterialDTO(purchasedMaterials);
         }

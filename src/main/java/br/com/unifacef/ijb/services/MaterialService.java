@@ -2,15 +2,9 @@ package br.com.unifacef.ijb.services;
 
 import br.com.unifacef.ijb.helpers.OptionalHelper;
 import br.com.unifacef.ijb.mappers.MaterialMapper;
-import br.com.unifacef.ijb.mappers.OutletProductMapper;
 import br.com.unifacef.ijb.models.dtos.MaterialCreateDTO;
 import br.com.unifacef.ijb.models.dtos.MaterialDTO;
-import br.com.unifacef.ijb.models.dtos.OutletProductCreateDTO;
-import br.com.unifacef.ijb.models.dtos.OutletProductDTO;
-import br.com.unifacef.ijb.models.entities.DonatedMaterial;
 import br.com.unifacef.ijb.models.entities.Material;
-import br.com.unifacef.ijb.models.entities.OutletProduct;
-import br.com.unifacef.ijb.models.enums.OutletProductStatus;
 import br.com.unifacef.ijb.repositories.MaterialRepository;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
@@ -45,7 +39,7 @@ public class MaterialService {
     }
 
     public List<MaterialDTO> getAllMaterialsByFilter(Integer id) {
-        List<Material> materials = repository.findAllByMaterialId(id);
+        List<Material> materials = repository.findAllById(id);
         if (!materials.isEmpty()) {
             return MaterialMapper.convertListOfMaterialIntoListOfMaterialDTO(materials);
         }

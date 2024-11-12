@@ -17,6 +17,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Filter;
 
+import java.time.LocalDateTime;
+
 @Data
 @Entity
 @Table(name = "tb_produtos_outlet")
@@ -38,6 +40,12 @@ public class OutletProduct {
     @Column(name = "status", length = 20)
     @Enumerated(EnumType.STRING)
     private OutletProductStatus status;
+    @Column(name = "dt_criacao")
+    private LocalDateTime createdAt;
+    @Column(name = "dt_alteracao")
+    private LocalDateTime updatedAt;
+    @Column(name = "dt_exclusao")
+    private LocalDateTime deletedAt;
 
     public OutletProduct(Donation donation, String outletProductName, String outletProductDescription,
                          OutletProductStatus status) {

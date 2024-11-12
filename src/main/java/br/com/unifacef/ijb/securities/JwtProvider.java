@@ -24,7 +24,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Component
-@Eager
 public class JwtProvider {
     @Autowired
     private SecretKeyHelper secretKeyHelper;

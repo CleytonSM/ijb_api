@@ -2,7 +2,6 @@ package br.com.unifacef.ijb.models.entities;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -21,13 +20,13 @@ public class Event {
     @GeneratedValue(generator = "native", strategy = GenerationType.AUTO)
     @Column(name = "id_evento")
     private Integer id;
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "id_participante")
-    private Participant participant;
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "id_voluntarioApoiador")
+    @ManyToOne
+    @JoinColumn(name = "id_voluntario")
     private Volunteer volunteer;
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
+    @JoinColumn(name = "id_endereco")
+    private Address address;
+    @ManyToOne
     @JoinColumn(name = "id_noticia")
     private News news;
     @Column(name = "nm_evento", length = 20)
@@ -38,5 +37,10 @@ public class Event {
     private String eventLocation;
     @Column(name = "descrição_evento", length = 100)
     private String eventDescription;
-
+    @Column(name = "dt_criacao")
+    private LocalDateTime createdAt;
+    @Column(name = "dt_alteracao")
+    private LocalDateTime updatedAt;
+    @Column(name = "dt_exclusao")
+    private LocalDateTime deletedAt;
 }

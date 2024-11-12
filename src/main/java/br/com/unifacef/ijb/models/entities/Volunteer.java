@@ -12,6 +12,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
 
 @Data
 @Entity
@@ -37,8 +38,15 @@ public class Volunteer {
     private String hobby;
     @Column(name = "intencao", length = 200)
     private String intention;
+    @Column(name = "dt_criacao")
+    private LocalDateTime createdAt;
+    @Column(name = "dt_alteracao")
+    private LocalDateTime updatedAt;
+    @Column(name = "dt_exclusao")
+    private LocalDateTime deletedAt;
 
-    public Volunteer(String desiredRole, String aboutYou, String hobby, String intention) {
+  
+  public Volunteer(String desiredRole, String aboutYou, String hobby, String intention) {
         this.desiredRole = desiredRole;
         this.aboutYou = aboutYou;
         this.hobby = hobby;

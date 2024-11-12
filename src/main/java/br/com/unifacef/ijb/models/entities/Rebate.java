@@ -30,7 +30,7 @@ public class Rebate {
     private Exchange exchange;
     @Column(name = "ds_abatimento", length = 100)
     private String description;
-    @Column(name = "valor_abatimento")
+    @Column(name = "valor_abatido")
     private BigDecimal rebateValue;
 
     public Rebate(Exchange exchange, String description, BigDecimal rebateValue) {

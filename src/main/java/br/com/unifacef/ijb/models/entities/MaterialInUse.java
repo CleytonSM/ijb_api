@@ -9,11 +9,17 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.time.LocalDateTime;
 
 @Data
 @Table(name = "tb_materiais_em_uso")
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
 public class MaterialInUse {
     @Id
     @GeneratedValue(generator = "native", strategy = GenerationType.AUTO)
@@ -25,4 +31,15 @@ public class MaterialInUse {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_construcao")
     private Construction construction;
+    @Column(name = "dt_criacao")
+    private LocalDateTime createdAt;
+    @Column(name = "dt_alteracao")
+    private LocalDateTime updatedAt;
+    @Column(name = "dt_exclusao")
+    private LocalDateTime deletedAt;
+
+    public MaterialInUse(Material material, Construction construction) {
+        this.material = material;
+        this.construction = construction;
+    }
 }
