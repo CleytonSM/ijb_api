@@ -1,7 +1,8 @@
 package br.com.unifacef.ijb.models.dtos;
 
-import java.time.LocalDateTime;
 import lombok.Data;
+
+import java.time.LocalDateTime;
 
 @Data
 public class UserInfoDTO {

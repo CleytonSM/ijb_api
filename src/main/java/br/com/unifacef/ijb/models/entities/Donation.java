@@ -13,6 +13,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+
 @Data
 @Entity
 @Table(name = "tb_doacoes")
@@ -26,6 +28,12 @@ public class Donation {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_tipo_doacao")
     private DonationType donationType;
+    @Column(name = "dt_criacao")
+    private LocalDateTime createdAt;
+    @Column(name = "dt_alteracao")
+    private LocalDateTime updatedAt;
+    @Column(name = "dt_exclusao")
+    private LocalDateTime deletedAt;
 
     public Donation(DonationType donationType) {
         this.donationType = donationType;
