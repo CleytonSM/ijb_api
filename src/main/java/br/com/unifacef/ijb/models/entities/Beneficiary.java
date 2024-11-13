@@ -11,7 +11,6 @@ import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -23,8 +22,6 @@ import br.com.unifacef.ijb.models.enums.BeneficiaryStatus;
 @NoArgsConstructor
 @Entity
 @Table(name = "tb_beneficiarios")
-@NoArgsConstructor
-@AllArgsConstructor
 public class Beneficiary {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -53,10 +50,4 @@ public class Beneficiary {
     private String houseStatus; // TODO VERIFICAR ENUM DISSO
     @Column(name = "decisao_triagem", length = 200)
     private String decisionTriage; // TODO VERIFICAR ENUM DISSO
-    @Column(name = "dt_criacao")
-    private LocalDateTime createdAt;
-    @Column(name = "dt_alteracao")
-    private LocalDateTime updatedAt;
-    @Column(name = "dt_exclusao")
-    private LocalDateTime deletedAt;
 }

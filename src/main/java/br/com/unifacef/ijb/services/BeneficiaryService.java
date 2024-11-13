@@ -1,7 +1,6 @@
 package br.com.unifacef.ijb.services;
 
 
-import br.com.unifacef.ijb.mappers.BeneficiaryMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
