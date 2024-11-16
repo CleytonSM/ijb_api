@@ -1,13 +1,15 @@
 package br.com.unifacef.ijb.services;
 
 import br.com.unifacef.ijb.helpers.OptionalHelper;
-import br.com.unifacef.ijb.mappers.ExchangeMapper;
 import br.com.unifacef.ijb.mappers.RebateMapper;
-import br.com.unifacef.ijb.models.dtos.ExchangeDTO;
+import br.com.unifacef.ijb.mappers.TagsMapper;
 import br.com.unifacef.ijb.models.dtos.RebateCreateDTO;
 import br.com.unifacef.ijb.models.dtos.RebateDTO;
+import br.com.unifacef.ijb.models.dtos.TagsDTO;
 import br.com.unifacef.ijb.models.entities.Rebate;
+import br.com.unifacef.ijb.models.entities.Tags;
 import br.com.unifacef.ijb.repositories.RebateRepository;
+import br.com.unifacef.ijb.repositories.TagsRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
