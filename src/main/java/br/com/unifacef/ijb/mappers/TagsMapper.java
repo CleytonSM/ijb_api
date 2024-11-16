@@ -29,5 +29,4 @@ public class TagsMapper {
         tags.setHexColor(tagsUpdate.getHexColor());
     }
 
-
 }
