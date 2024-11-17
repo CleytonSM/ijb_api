@@ -2,12 +2,9 @@ package br.com.unifacef.ijb.controller;
 
 import java.util.List;
 
+import br.com.unifacef.ijb.mappers.BeneficiaryMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import br.com.unifacef.ijb.models.dtos.BeneficiaryDTO;
 import br.com.unifacef.ijb.services.BeneficiaryService;
@@ -25,12 +22,29 @@ public class BeneficiaryController {
     }
 
     @GetMapping("/{id}")
-    public BeneficiaryDTO getById(Integer id){
-        return service.getByIdConvertedToDTO(id);
+    public BeneficiaryDTO getBeneficiaryById(@PathVariable Integer id){
+        return BeneficiaryMapper.convertBeneficiaryIntoBeneficiaryDTO(service.getById(id));
     }
 
     @GetMapping("/beneficiarios?")
     public List<BeneficiaryDTO> getAllBeneficiaries(){
         return service.getAllBeneficiaries();
     }
+
+    @GetMapping("/beneficiarios?/getAllData/{id}")
+    public void getAllBeneficiariesDatas(@PathVariable Integer id){
+        service.g
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteBeneficiary(@PathVariable Integer id){
+        service.deleteBeneficiary(id);
+    }
+
+    @PutMapping
+    public BeneficiaryDTO updateBeneficiary(BeneficiaryDTO beneficiaryDTO){
+        return service.updateBeneficiary(beneficiaryDTO);
+    }
+
+
 }

@@ -40,7 +40,7 @@ public class VisitService {
         return VisitMapper.convertListVisitIntoListVisitDTO(repository.findAll());
     }
 
-    public void getVisitsByBeneficiaryId(Integer id){
+    public List<VisitDTO> getVisitsByBeneficiaryId(Integer id){
         List<VisitDTO> allVisitDTOs = getAllVisits();
         List<VisitDTO> visitDTOFiltered = new ArrayList<>();
 
@@ -49,6 +49,7 @@ public class VisitService {
                 visitDTOFiltered.add(eachVisitDTO);
             }
         }
+        return visitDTOFiltered;
     }
 
     public void updateRetrievedVisit(VisitDTO visitDTO, Visit visit){

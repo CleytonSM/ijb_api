@@ -11,7 +11,7 @@ import br.com.unifacef.ijb.models.entities.Beneficiary;
 public class BeneficiaryMapper {
     public static Beneficiary convertBeneficiaryDTOIntoBeneficiary(BeneficiaryDTO beneficiaryDTO){
         return new Beneficiary(beneficiaryDTO.getId(),
-        beneficiaryDTO.getUser(), 
+        beneficiaryDTO.getUser(),
         beneficiaryDTO.getName(), 
         beneficiaryDTO.getStatus(),
         beneficiaryDTO.getMeetDescription(), 
@@ -60,4 +60,5 @@ public class BeneficiaryMapper {
         beneficiary.setHouseStatus(beneficiaryDTO.getHouseStatus());
         beneficiary.setDecisionTriage(beneficiaryDTO.getDecisionTriage());
     }
+
 }
