@@ -3,6 +3,7 @@ package br.com.unifacef.ijb.controller;
 import java.util.List;
 
 import br.com.unifacef.ijb.mappers.BeneficiaryMapper;
+import br.com.unifacef.ijb.models.dtos.BenficiaryPlusFamiliarsDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -32,8 +33,8 @@ public class BeneficiaryController {
     }
 
     @GetMapping("/beneficiarios?/getAllData/{id}")
-    public void getAllBeneficiariesDatas(@PathVariable Integer id){
-        service.g
+    public BenficiaryPlusFamiliarsDTO getAllBeneficiariesDatas(@PathVariable Integer id){
+        return service.sendAllBeneficiaryWithAllStatus(id);
     }
 
     @DeleteMapping("/{id}")

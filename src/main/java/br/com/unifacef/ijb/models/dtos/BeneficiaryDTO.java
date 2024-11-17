@@ -14,7 +14,8 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class BeneficiaryDTO {
     private Integer id;
-    private User user;
+    private UserDTO user;
+    private UserInfoDTO userInfo;
     private String name;
     private BeneficiaryStatus status;
     private String meetDescription;

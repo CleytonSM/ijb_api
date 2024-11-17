@@ -6,12 +6,15 @@ import java.util.List;
 import br.com.unifacef.ijb.models.dtos.BeneficiaryDTO;
 import br.com.unifacef.ijb.models.dtos.BeneficiaryRegisterDTO;
 import br.com.unifacef.ijb.models.dtos.UserCreateDTO;
+import br.com.unifacef.ijb.models.dtos.BenficiaryPlusFamiliarsDTO;
+import br.com.unifacef.ijb.models.dtos.FamiliarDTO;
 import br.com.unifacef.ijb.models.entities.Beneficiary;
 
 public class BeneficiaryMapper {
     public static Beneficiary convertBeneficiaryDTOIntoBeneficiary(BeneficiaryDTO beneficiaryDTO){
         return new Beneficiary(beneficiaryDTO.getId(),
-        beneficiaryDTO.getUser(),
+        UserMapper.convertUserDTOIntoUser(beneficiaryDTO.getUser()),
+        UserInfoMapper.convertUserInfoDTOIntoUserInfo(beneficiaryDTO.getUserInfo()),
         beneficiaryDTO.getName(), 
         beneficiaryDTO.getStatus(),
         beneficiaryDTO.getMeetDescription(), 
@@ -26,7 +29,8 @@ public class BeneficiaryMapper {
 
     public static BeneficiaryDTO convertBeneficiaryIntoBeneficiaryDTO(Beneficiary beneficiary){
         return new BeneficiaryDTO(beneficiary.getId(),
-        beneficiary.getUser(), 
+        UserMapper.convertUserIntoUserDTO(beneficiary.getUser()),
+        UserInfoMapper.convertUserInfoIntoUserInfoDTO(beneficiary.getUserInfo()),
         beneficiary.getName(), 
         beneficiary.getStatus(),
         beneficiary.getMeetDescription(),

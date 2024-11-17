@@ -1,6 +1,8 @@
 package br.com.unifacef.ijb.services;
 
 
+import br.com.unifacef.ijb.mappers.BeneficiaryPlusFamiliarsMapper;
+import br.com.unifacef.ijb.models.dtos.BenficiaryPlusFamiliarsDTO;
 import br.com.unifacef.ijb.models.dtos.FamiliarDTO;
 import br.com.unifacef.ijb.models.entities.Familiar;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,16 +68,18 @@ public class BeneficiaryService {
         return beneficiary;
     }
 
-    private  sendAllBeneficiaryWithAllStatus(Integer id){
+    public BenficiaryPlusFamiliarsDTO sendAllBeneficiaryWithAllStatus(Integer id){
         List<FamiliarDTO> familiars = new ArrayList<FamiliarDTO>();
         Beneficiary beneficiary;
+        BeneficiaryDTO beneficiaryDTO;
+        BenficiaryPlusFamiliarsDTO benficiaryPlusFamiliarsDTO = new BenficiaryPlusFamiliarsDTO();
 
         beneficiary = getById(id);
+        beneficiaryDTO = BeneficiaryMapper.convertBeneficiaryIntoBeneficiaryDTO(beneficiary);
         familiars = familiarService.getAllFamiliarsByBeneficiaryID(beneficiary.getId());
+        benficiaryPlusFamiliarsDTO = BeneficiaryPlusFamiliarsMapper.createBenefPlusFamil(beneficiaryDTO, familiars);
 
-
-
-        return ;
+        return benficiaryPlusFamiliarsDTO;
     }
 
 
