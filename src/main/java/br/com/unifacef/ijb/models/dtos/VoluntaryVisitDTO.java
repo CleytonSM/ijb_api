@@ -10,5 +10,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class VoluntaryVisitDTO {
     private Integer id;
-    private Volunteer volunteer;
+    private VolunteerDTO volunteerDTO;
 }

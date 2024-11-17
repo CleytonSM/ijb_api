@@ -1,6 +1,5 @@
 package br.com.unifacef.ijb.models.dtos;
 
-import br.com.unifacef.ijb.models.entities.Visit;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,7 +8,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class VisitReportDTO {
-    private Visit visit;
+    private VisitDTO visitDTO;
     private String report;
     private byte[] firstImage;
     private byte[] secondImage;

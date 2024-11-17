@@ -45,10 +45,4 @@ public class Family {
     private String incomeDescription;
     @Column(name = "problemas_de_saude", length = 100)
     private String healthyProblems;
-    @Column(name = "dt_criacao")
-    private LocalDateTime createdAt;
-    @Column(name = "dt_alteracao")
-    private LocalDateTime updatedAt;
-    @Column(name = "dt_exclusao")
-    private LocalDateTime deletedAt;
 }
