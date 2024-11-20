@@ -24,8 +24,6 @@ public class Construction {
      @OneToOne
      @JoinColumn(name = "id_endereco")
      private Address address;
-     @Column(name="descricao")
-     private String description;
      @Column(name = "dt_inicio")
      private LocalDateTime startDate;
      @Column(name = "dt_termino")
@@ -42,15 +40,4 @@ public class Construction {
      private LocalDateTime updatedAt;
      @Column(name = "dt_exclusao")
      private LocalDateTime deletedAt;
-
-     public Construction(Address address, String description, LocalDateTime startDate, LocalDateTime endDate, String constructionStatus, BigDecimal estimatedCost, BigDecimal totalCost) {
-          this.address = address;
-          this.description = description;
-          this.startDate = startDate;
-          this.endDate = endDate;
-          this.constructionStatus = constructionStatus;
-          this.estimatedCost = estimatedCost;
-          this.totalCost = totalCost;
-
-     }
 }
