@@ -18,7 +18,7 @@ import java.time.LocalDateTime;
 @Data
 public class Construction {
      @Id
-     @GeneratedValue(generator = "native", strategy = GenerationType.AUTO)
+     @GeneratedValue(strategy = GenerationType.IDENTITY)
      @Column(name = "id_construcao")
      private Integer id;
      @OneToOne

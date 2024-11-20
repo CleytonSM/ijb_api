@@ -17,7 +17,7 @@ import java.time.LocalDateTime;
 @Entity
 public class Expense {
     @Id
-    @GeneratedValue(generator = "native", strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_despesa")
     private Integer id;
     @ManyToOne

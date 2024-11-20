@@ -13,6 +13,7 @@ public class VolunteerRegisterDTO {
     private String phone1;
     private String email;
     private String hobby;
+    private String password;
     private String cpf;
     private String intention;
     private String desiredRole;

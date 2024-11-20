@@ -17,7 +17,7 @@ import lombok.Data;
 @Table(name = "tb_tipos_movimentacoes")
 public class MovementsType {
     @Id
-    @GeneratedValue(generator = "native", strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_tipo_movimentacao")
     private Integer id;
     @ManyToOne(fetch = FetchType.EAGER)

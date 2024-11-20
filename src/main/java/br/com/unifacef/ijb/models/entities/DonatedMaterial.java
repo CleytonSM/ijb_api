@@ -22,7 +22,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class DonatedMaterial {
     @Id
-    @GeneratedValue(generator = "native", strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_material_doado")
     private Integer id;
     @ManyToOne(fetch = FetchType.EAGER)

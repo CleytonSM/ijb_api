@@ -18,7 +18,7 @@ import java.time.LocalDateTime;
 @Data
 public class News {
     @Id
-    @GeneratedValue(generator = "native", strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_noticia")
     private Integer id;
     @ManyToOne

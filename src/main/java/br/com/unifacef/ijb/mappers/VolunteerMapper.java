@@ -2,6 +2,7 @@ package br.com.unifacef.ijb.mappers;
 
 
 import br.com.unifacef.ijb.models.dtos.VolunteerDTO;
+import br.com.unifacef.ijb.models.dtos.VolunteerRegisterDTO;
 import br.com.unifacef.ijb.models.dtos.VolunteerTypeDTO;
 import br.com.unifacef.ijb.models.entities.Volunteer;
 import br.com.unifacef.ijb.models.entities.VolunteerType;
@@ -16,9 +17,9 @@ public class VolunteerMapper {
                 pessoaDTO.getAboutYou(), pessoaDTO.getHobby(), pessoaDTO.getIntention());
     }
 
-    public static VolunteerDTO convertVolunteerIntoVolunteerDTO(Volunteer pessoaEntity) {
-        return new VolunteerDTO(pessoaEntity.getDesiredRole(),
-                pessoaEntity.getAboutYou(), pessoaEntity.getHobby(), pessoaEntity.getIntention());
+    public static VolunteerDTO convertVolunteerIntoVolunteerDTO(Volunteer volunteer) {
+        return new VolunteerDTO(volunteer.getDesiredRole(),
+                volunteer.getAboutYou(), volunteer.getHobby(), volunteer.getIntention());
     }
 
     public static VolunteerType convertVolunteerTypeDTOIntoVolunteerType(VolunteerTypeDTO volunteerTypeDTO) {
@@ -35,5 +36,9 @@ public class VolunteerMapper {
             volunteerDTOs.add(convertVolunteerIntoVolunteerDTO(volunteer));
         }
         return volunteerDTOs;
+    }
+
+    public static Volunteer convertVolunteerRegisterDTOIntoVolunteer(VolunteerRegisterDTO volunteerRegister) {
+        return new Volunteer();
     }
 }
