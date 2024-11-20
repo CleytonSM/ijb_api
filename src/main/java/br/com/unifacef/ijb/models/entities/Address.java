@@ -6,13 +6,17 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "tb_enderecos")
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Address {
     @Id
     @GeneratedValue(generator = "native", strategy = GenerationType.AUTO)
@@ -34,4 +38,14 @@ public class Address {
     private LocalDateTime updatedAt;
     @Column(name = "dt_exclusao")
     private LocalDateTime deletedAt;
+
+    public Address(String cep, String street, String number, String neighborhood, String complement) {
+        this.cep = cep;
+        this.street = street;
+        this.number = number;
+        this.neighborhood = neighborhood;
+        this.complement = complement;
+        this.createdAt = LocalDateTime.now(); // Opcional: configurar um valor padrão
+    }
+
 }
