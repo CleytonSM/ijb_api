@@ -30,9 +30,6 @@ public class Authority {
     @Column(name = "nm_funcao", unique = true, length = 60)
     @Enumerated(value = EnumType.STRING)
     private Role role;
-    @Column(name = "ds_funcao", length = 60)
-    @OneToMany(mappedBy = "authority")
-    private List<UserInfo> userInfo;
     @Column(name = "dt_criacao")
     private LocalDateTime createdAt;
     @Column(name = "dt_alteracao")

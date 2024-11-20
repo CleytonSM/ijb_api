@@ -1,10 +1,13 @@
 package br.com.unifacef.ijb.configs;
 
+import br.com.unifacef.ijb.filter.JwtFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -34,10 +37,11 @@ public class SecurityConfig {
 
                     return config;
                 }))
+                .addFilterBefore(applicationContext.getBean(JwtFilter.class), UsernamePasswordAuthenticationFilter.class)
 //                .authorizeHttpRequests(request -> request
 //                        .requestMatchers())
-                .formLogin(login -> login.disable())
-                .httpBasic(httpBasic -> httpBasic.disable());
+                .formLogin(AbstractHttpConfigurer::disable)
+                .httpBasic(Customizer.withDefaults());
 
         return http.build();
     }
