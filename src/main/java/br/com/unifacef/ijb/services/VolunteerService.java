@@ -1,78 +1,97 @@
 package br.com.unifacef.ijb.services;
 
+import br.com.unifacef.ijb.mappers.UserMapper;
 import br.com.unifacef.ijb.mappers.VolunteerMapper;
+import br.com.unifacef.ijb.models.dtos.AuthorityDTO;
+import br.com.unifacef.ijb.models.dtos.UserCreateDTO;
+import br.com.unifacef.ijb.models.dtos.UserDTO;
+import br.com.unifacef.ijb.models.dtos.UserInfoCreateDTO;
+import br.com.unifacef.ijb.models.dtos.UserInfoDTO;
 import br.com.unifacef.ijb.models.dtos.VolunteerDTO;
 import br.com.unifacef.ijb.models.dtos.VolunteerTypeDTO;
+import br.com.unifacef.ijb.models.entities.Authority;
 import br.com.unifacef.ijb.models.entities.User;
+import br.com.unifacef.ijb.models.dtos.VolunteerRegisterDTO;
+import br.com.unifacef.ijb.models.entities.UserInfo;
 import br.com.unifacef.ijb.models.entities.Volunteer;
 import br.com.unifacef.ijb.models.entities.VolunteerType;
+import br.com.unifacef.ijb.models.enums.Role;
 import br.com.unifacef.ijb.repositories.UserRepository;
 import br.com.unifacef.ijb.repositories.VolunteerRepository;
 import br.com.unifacef.ijb.repositories.VolunteerTypeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
 @Service
 public class VolunteerService {
     @Autowired
-    private VolunteerRepository volunteerRepository;
-
+    private VolunteerRepository repository;
     @Autowired
-    private VolunteerTypeRepository volunteerTypeRepository;
-
+    private VolunteerTypeService volunteerTypeService;
     @Autowired
-    private UserRepository userRepository;
+    private AuthorityService authorityService;
+    @Autowired
+    private UserInfoService userInfoService;
 
-    public VolunteerDTO insere(VolunteerDTO pessoaDTO) {
-        VolunteerType volunteerType = volunteerTypeRepository
-                .findByVolunteerNameType(String.valueOf(pessoaDTO.getVolunteerType()))
-                .orElseGet(() -> volunteerTypeRepository.save(new VolunteerType(String.valueOf(pessoaDTO.getVolunteerType()))));
-
-        Optional<User> optionalUser = userRepository.findByEmail(pessoaDTO.getUser().getEmail());
-
-        User user = optionalUser.orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
-        Volunteer volunteer = VolunteerMapper.convertVolunteerDTOIntoVolunteer(pessoaDTO);
-
-        volunteer.setVolunteerType(volunteerType);
-        volunteer.setUser(user);
-
-        Volunteer volunteerEntity = volunteerRepository.save(volunteer);
-        return VolunteerMapper.convertVolunteerIntoVolunteerDTO(volunteerEntity);
+    public Volunteer save(Volunteer volunteer) {
+        return repository.save(volunteer);
     }
 
+    public VolunteerDTO createVolunteer(VolunteerRegisterDTO volunteerRegister) {
+        AuthorityDTO authorityDTO = authorityService.findAuthorityRole(Role.ROLE_VOLUNTARIO_BRONZE);
 
-    public List<VolunteerDTO> consultaTodos() {
-        List<Volunteer> volunteers = volunteerRepository.findAll();
+        UserCreateDTO userCreateDTO = setUpUserCreateDTOBasedOnVolunteerRegisterDTO(volunteerRegister);
+
+        UserInfoCreateDTO userInfoCreateDTO =
+                setUpUserInfoCreateDTOBasedOnUserCreateDTOAndAuthorityDTOAndVolunteerRegisterDTO(userCreateDTO,
+                        authorityDTO, volunteerRegister);
+
+        userInfoService.createUserInfo(userInfoCreateDTO);
+
+        Volunteer volunteer = VolunteerMapper.convertVolunteerRegisterDTOIntoVolunteer(volunteerRegister);
+
+        volunteer.setVolunteerType(volunteerTypeService.findByVolunteerNameType("VOLUNTARIO"));
+
+        return VolunteerMapper.convertVolunteerIntoVolunteerDTO(save(volunteer));
+    }
+
+    public List<VolunteerDTO> findAll() {
+        List<Volunteer> volunteers = repository.findAll();
         return VolunteerMapper.convertVolunteersIntoVolunteerDTOs(volunteers);
     }
 
-    public VolunteerDTO consultaPorId(Long id) {
-        Optional<Volunteer> optional = volunteerRepository.findById(id);
+    public VolunteerDTO findById(Integer id) {
+        Optional<Volunteer> optional = repository.findById(id);
         return optional.map(VolunteerMapper::convertVolunteerIntoVolunteerDTO).orElse(null);
     }
 
-    public String remove(Long id) {
-        if (volunteerRepository.existsById(id)) {
-            volunteerRepository.deleteById(id);
-            return "Cadastro removido com sucesso";
-        } else {
+    public String remove(Integer id) {
+        if (!repository.existsById(id)) {
+            repository.deleteById(id);
             return "Cadastro não encontrado";
         }
+
+        return "Cadastro removido com sucesso";
     }
 
     public String removeAll() {
-        volunteerRepository.deleteAll();
+        repository.deleteAll();
         return "Todos os cadastros foram removidos com sucesso";
     }
 
-    public VolunteerType converteDtoParaEntity(VolunteerTypeDTO volunteerTypeDTO) {
-        return VolunteerMapper.convertVolunteerTypeDTOIntoVolunteerType(volunteerTypeDTO);
+    private UserCreateDTO setUpUserCreateDTOBasedOnVolunteerRegisterDTO(VolunteerRegisterDTO volunteerRegister) {
+        return new UserCreateDTO(volunteerRegister.getEmail(),
+                volunteerRegister.getCpf(), volunteerRegister.getPassword());
     }
 
-    public VolunteerTypeDTO converteEntityParaDto(VolunteerType volunteerType) {
-        return VolunteerMapper.convertVolunteerTypeIntoVolunteerTypeDTO(volunteerType);
+    private UserInfoCreateDTO setUpUserInfoCreateDTOBasedOnUserCreateDTOAndAuthorityDTOAndVolunteerRegisterDTO
+            (UserCreateDTO userCreateDTO, AuthorityDTO authorityDTO, VolunteerRegisterDTO volunteerRegister) {
+        return new UserInfoCreateDTO(userCreateDTO, authorityDTO,
+                LocalDateTime.now(), volunteerRegister.getName(), volunteerRegister.getLastName(),
+                volunteerRegister.getPhone1(), LocalDateTime.now(), LocalDateTime.now());
     }
 }

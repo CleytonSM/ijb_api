@@ -22,7 +22,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class MaterialInUse {
     @Id
-    @GeneratedValue(generator = "native", strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_material_em_uso")
     private Integer id;
     @ManyToOne(fetch = FetchType.EAGER)

@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 @Data
 public class Address {
     @Id
-    @GeneratedValue(generator = "native", strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_endereco")
     private Integer id;
     @Column(name = "cep")

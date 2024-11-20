@@ -13,7 +13,7 @@ import lombok.Data;
 @Table(name = "tb_origem_movimentacoes")
 public class MovementsOrigin {
     @Id
-    @GeneratedValue(generator = "native", strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_origem")
     private Integer id;
     @Column(name = "nm_origem", length = 25)

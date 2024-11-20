@@ -21,7 +21,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class Volunteer {
     @Id
-    @GeneratedValue(generator = "native", strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_voluntario")
     private Integer id;
     @ManyToOne
