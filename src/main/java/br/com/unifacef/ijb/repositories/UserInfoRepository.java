@@ -6,9 +6,11 @@ import br.com.unifacef.ijb.models.entities.User;
 import br.com.unifacef.ijb.models.entities.UserInfo;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
+@Repository
 public interface UserInfoRepository extends JpaRepository<UserInfo, User> {
 
     @Query("SELECT ui FROM UserInfo ui " +

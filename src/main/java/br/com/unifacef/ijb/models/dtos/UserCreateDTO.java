@@ -5,7 +5,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-//@AllArgsConstructor
+@AllArgsConstructor
 @NoArgsConstructor
-public class BeneficiaryRegisterDTO {
+public class UserCreateDTO {
+    private String email;
+    private String cpf;
+    private String password;
 }

@@ -8,4 +8,9 @@ public class AuthorityMapper {
         return new AuthorityDTO(authority.getId(), authority.getRole(), authority.getCreatedAt(),
                 authority.getUpdatedAt(), authority.getDeletedAt());
     }
+
+    public static Authority convertAuthorityDTOIntoAuthority(AuthorityDTO authority) {
+        return new Authority(authority.getId(), authority.getRole(), authority.getCreatedAt(),
+                authority.getUpdatedAt(), authority.getDeletedAt());
+    }
 }

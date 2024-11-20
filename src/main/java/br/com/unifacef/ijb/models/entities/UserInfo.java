@@ -58,4 +58,22 @@ public class UserInfo {
     private LocalDateTime updatedAt;
     @Column(name = "dt_exclusao")
     private LocalDateTime deletedAt;
+
+    public UserInfo(User user, Authority authority, LocalDateTime registeredAt, String rg,
+                    byte[] profilePic, String name, String lastName, LocalDateTime birthdayDate, String phone1,
+                    LocalDateTime createdAt, LocalDateTime updatedAt, String phone2, LocalDateTime deletedAt) {
+        this.user = user;
+        this.authority = authority;
+        this.registeredAt = registeredAt;
+        this.rg = rg;
+        this.profilePic = profilePic;
+        this.name = name;
+        this.lastName = lastName;
+        this.birthdayDate = birthdayDate;
+        this.phone1 = phone1;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+        this.phone2 = phone2;
+        this.deletedAt = deletedAt;
+    }
 }

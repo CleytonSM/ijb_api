@@ -27,7 +27,7 @@ import java.time.LocalDateTime;
 @Filter(name = "statusFilter", condition = "status != INACTIVE")
 public class OutletProduct {
     @Id
-    @GeneratedValue(generator = "native", strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_prod_outlet")
     private Integer id;
     @ManyToOne(fetch = FetchType.EAGER)

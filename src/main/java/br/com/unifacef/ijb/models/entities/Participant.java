@@ -16,7 +16,7 @@ import lombok.Data;
 @Entity
 public class Participant {
     @Id
-    @GeneratedValue(generator = "native", strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_participante")
     private Integer id;
     @ManyToOne(fetch = FetchType.EAGER)

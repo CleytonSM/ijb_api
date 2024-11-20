@@ -34,12 +34,12 @@ public class LoginController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PostMapping("/register/beneficiary")
-    public ResponseEntity<Void> beneficiaryRegister(@RequestBody BeneficiaryRegisterDTO beneficiaryRegister) {
-        service.beneficiaryRegister(beneficiaryRegister);
-
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
+//    @PostMapping("/register/beneficiary")
+//    public ResponseEntity<Void> beneficiaryRegister(@RequestBody BeneficiaryRegisterDTO beneficiaryRegister) {
+//        service.beneficiaryRegister(beneficiaryRegister);
+//
+//        return new ResponseEntity<>(HttpStatus.OK);
+//    }
     @PostMapping("/login")
     public ResponseEntity<LoginResponseDTO> login(@RequestBody LoginDTO login) {
         return new ResponseEntity<>(service.login(login), HttpStatus.OK);

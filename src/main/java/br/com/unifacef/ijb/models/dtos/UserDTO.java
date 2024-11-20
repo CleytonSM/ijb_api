@@ -11,5 +11,11 @@ public class UserDTO {
     private Integer id;         
     private String email;        
     private String cpf;          
-    private String password;     
+    private String password;
+
+    public UserDTO(Integer id, String email, String cpf) {
+        this.id = id;
+        this.email = email;
+        this.cpf = cpf;
+    }
 }

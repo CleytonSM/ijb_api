@@ -24,7 +24,7 @@ import java.util.List;
 @AllArgsConstructor
 public class Authority {
     @Id
-    @GeneratedValue(generator = "native", strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_funcao")
     private Integer id;
     @Column(name = "nm_funcao", unique = true, length = 60)

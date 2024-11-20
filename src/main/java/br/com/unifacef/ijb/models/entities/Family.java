@@ -23,7 +23,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class Family {
     @Id
-    @GeneratedValue(generator = "native", strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_familiar")
     private Integer id;
     @ManyToOne()

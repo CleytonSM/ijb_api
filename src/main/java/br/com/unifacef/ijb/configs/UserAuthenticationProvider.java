@@ -36,7 +36,7 @@ public class UserAuthenticationProvider {
             throw new WrongCredentialsException("Wrong credentials");
         }
 
-        return new UsernamePasswordAuthenticationToken(user, password, grantedAuthorities(userInfo.getAuthority()));
+        return new UsernamePasswordAuthenticationToken(userInfo, password, grantedAuthorities(userInfo.getAuthority()));
     }
 
     public List<GrantedAuthority> grantedAuthorities(Authority authority) {
