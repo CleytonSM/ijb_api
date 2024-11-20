@@ -4,6 +4,7 @@ import br.com.unifacef.ijb.mappers.VolunteerMapper;
 import br.com.unifacef.ijb.models.dtos.VolunteerDTO;
 import br.com.unifacef.ijb.models.dtos.VolunteerTypeDTO;
 import br.com.unifacef.ijb.models.entities.User;
+import br.com.unifacef.ijb.models.dtos.VolunteerRegisterDTO;
 import br.com.unifacef.ijb.models.entities.Volunteer;
 import br.com.unifacef.ijb.models.entities.VolunteerType;
 import br.com.unifacef.ijb.repositories.UserRepository;
@@ -18,31 +19,13 @@ import java.util.Optional;
 @Service
 public class VolunteerService {
     @Autowired
-    private VolunteerRepository volunteerRepository;
+    private VolunteerRepository repository;
 
-    @Autowired
-    private VolunteerTypeRepository volunteerTypeRepository;
-
-    @Autowired
-    private UserRepository userRepository;
-
-    public VolunteerDTO insere(VolunteerDTO pessoaDTO) {
-        VolunteerType volunteerType = volunteerTypeRepository
-                .findByVolunteerNameType(String.valueOf(pessoaDTO.getVolunteerType()))
-                .orElseGet(() -> volunteerTypeRepository.save(new VolunteerType(String.valueOf(pessoaDTO.getVolunteerType()))));
-
-        Optional<User> optionalUser = userRepository.findByEmail(pessoaDTO.getUser().getEmail());
-
-        User user = optionalUser.orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
-        Volunteer volunteer = VolunteerMapper.convertVolunteerDTOIntoVolunteer(pessoaDTO);
-
-        volunteer.setVolunteerType(volunteerType);
-        volunteer.setUser(user);
-
-        Volunteer volunteerEntity = volunteerRepository.save(volunteer);
-        return VolunteerMapper.convertVolunteerIntoVolunteerDTO(volunteerEntity);
+    public Volunteer save(Volunteer volunteer) {
+        return repository.save(volunteer);
     }
 
+    public void createVolunteer(VolunteerRegisterDTO volunteerRegister) {
 
     public List<VolunteerDTO> consultaTodos() {
         List<Volunteer> volunteers = volunteerRepository.findAll();

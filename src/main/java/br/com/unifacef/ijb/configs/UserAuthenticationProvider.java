@@ -5,7 +5,7 @@ import br.com.unifacef.ijb.helpers.OptionalHelper;
 import br.com.unifacef.ijb.models.entities.Authority;
 import br.com.unifacef.ijb.models.entities.User;
 import br.com.unifacef.ijb.models.entities.UserInfo;
-import br.com.unifacef.ijb.repositories.UserRepository;
+import br.com.unifacef.ijb.repositories.UserInfoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -21,7 +21,7 @@ import java.util.List;
 @Component
 public class UserAuthenticationProvider {
     @Autowired
-    private UserRepository userRepository;
+    private UserInfoRepository userInfoRepository;
     @Autowired
     private PasswordEncoder passwordEncoder;
 
@@ -29,12 +29,13 @@ public class UserAuthenticationProvider {
         String email = authentication.getName();
         String password = authentication.getCredentials().toString();
 
-        User user = OptionalHelper.getOptionalEntity(userRepository.findByEmail(email));
+        UserInfo userInfo = OptionalHelper.getOptionalEntity(userInfoRepository.findByUserEmailOrCPF(email));
+
+        User user = userInfo.getUser();
         if(!passwordEncoder.matches(password, user.getPassword())) {
             throw new WrongCredentialsException("Wrong credentials");
         }
 
-        UserInfo userInfo = user.getUserInfo();
         return new UsernamePasswordAuthenticationToken(user, password, grantedAuthorities(userInfo.getAuthority()));
     }
 
