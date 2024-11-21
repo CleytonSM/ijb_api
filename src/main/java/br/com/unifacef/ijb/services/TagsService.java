@@ -1,17 +1,11 @@
 package br.com.unifacef.ijb.services;
 
 import br.com.unifacef.ijb.helpers.OptionalHelper;
-import br.com.unifacef.ijb.mappers.PurchasedMaterialMapper;
 import br.com.unifacef.ijb.mappers.TagsMapper;
-import br.com.unifacef.ijb.models.dtos.PurchasedMaterialCreateDTO;
-import br.com.unifacef.ijb.models.dtos.PurchasedMaterialDTO;
 import br.com.unifacef.ijb.models.dtos.TagsCreateDTO;
 import br.com.unifacef.ijb.models.dtos.TagsDTO;
-import br.com.unifacef.ijb.models.entities.DonatedMaterial;
-import br.com.unifacef.ijb.models.entities.PurchasedMaterial;
 import br.com.unifacef.ijb.models.entities.Tags;
 import br.com.unifacef.ijb.repositories.TagsRepository;
-import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
