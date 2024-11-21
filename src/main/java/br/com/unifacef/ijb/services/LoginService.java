@@ -33,15 +33,15 @@ public class LoginService {
     }
 
     public void volunteerRegister(VolunteerRegisterDTO volunteerRegister) {
-        volunteerService.createVolunteer(volunteerRegister);
+        volunteerService.createVolunteer(volunteerRegister, "VOLUNTARIO");
     }
 
-    public void supporterRegister(SupporterRegisterDTO supporterRegister) {
-
+    public void supporterRegister(VolunteerRegisterDTO volunteerRegister) {
+        volunteerService.createVolunteer(volunteerRegister, "APOIADOR");
     }
 
     private Authentication setUpAuthenticationByLoginDTO(LoginDTO login) {
         return userAuthenticationProvider
-                .authenticate(new UsernamePasswordAuthenticationToken(login, login.getPassword(), null));
+                .authenticate(new UsernamePasswordAuthenticationToken(login.getEmailOrCpf(), login.getPassword(), null));
     }
 }

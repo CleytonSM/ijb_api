@@ -28,8 +28,8 @@ public class LoginController {
     }
 
     @PostMapping("/register/supporter")
-    public ResponseEntity<Void> supporterRegister(@RequestBody SupporterRegisterDTO supporterRegister) {
-        service.supporterRegister(supporterRegister);
+    public ResponseEntity<Void> supporterRegister(@RequestBody VolunteerRegisterDTO volunteerRegister) {
+        service.supporterRegister(volunteerRegister);
 
         return new ResponseEntity<>(HttpStatus.OK);
     }

@@ -9,15 +9,13 @@ public class OptionalHelper {
 
     public static <T> void verifyEntityAlreadyExists(Optional<T> optionalEntity) {
         if(optionalEntity.isPresent()) {
-            T entity = optionalEntity.get();
-            throw new EntityAlreadyExistsException("This " + entity.getClass().getName() + " already exists.");
+            throw new EntityAlreadyExistsException("This entity already exists.");
         }
     }
 
     public static <T> T getOptionalEntity(Optional<T> optionalEntity) {
         if(optionalEntity.isEmpty()) {
-            T entity = optionalEntity.get();
-            throw new EntityNotFoundException("This " + entity.getClass().getName() + "  doesn't exist");
+            throw new EntityNotFoundException("This entity doesn't exist");
         }
 
         return optionalEntity.get();

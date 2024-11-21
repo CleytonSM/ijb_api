@@ -6,6 +6,7 @@ import br.com.unifacef.ijb.models.entities.Authority;
 import br.com.unifacef.ijb.models.entities.User;
 import br.com.unifacef.ijb.models.entities.UserInfo;
 import br.com.unifacef.ijb.repositories.UserInfoRepository;
+import br.com.unifacef.ijb.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -23,12 +24,15 @@ public class UserAuthenticationProvider {
     @Autowired
     private UserInfoRepository userInfoRepository;
     @Autowired
+    private UserRepository userRepository;
+    @Autowired
     private PasswordEncoder passwordEncoder;
 
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         String email = authentication.getName();
         String password = authentication.getCredentials().toString();
 
+        User user12 = OptionalHelper.getOptionalEntity(userRepository.findByEmail(email));
         UserInfo userInfo = OptionalHelper.getOptionalEntity(userInfoRepository.findByUserEmailOrCPF(email));
 
         User user = userInfo.getUser();

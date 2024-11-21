@@ -1,8 +1,11 @@
 package br.com.unifacef.ijb.services;
 
+import br.com.unifacef.ijb.helpers.UserInfoHelper;
+import br.com.unifacef.ijb.mappers.UserInfoMapper;
 import br.com.unifacef.ijb.mappers.UserMapper;
 import br.com.unifacef.ijb.mappers.VolunteerMapper;
 import br.com.unifacef.ijb.models.dtos.AuthorityDTO;
+import br.com.unifacef.ijb.models.dtos.SupporterRegisterDTO;
 import br.com.unifacef.ijb.models.dtos.UserCreateDTO;
 import br.com.unifacef.ijb.models.dtos.UserDTO;
 import br.com.unifacef.ijb.models.dtos.UserInfoCreateDTO;
@@ -41,20 +44,13 @@ public class VolunteerService {
         return repository.save(volunteer);
     }
 
-    public VolunteerDTO createVolunteer(VolunteerRegisterDTO volunteerRegister) {
+    public VolunteerDTO createVolunteer(VolunteerRegisterDTO volunteerRegister, String volunteerType) {
         AuthorityDTO authorityDTO = authorityService.findAuthorityRole(Role.ROLE_VOLUNTARIO_BRONZE);
-
-        UserCreateDTO userCreateDTO = setUpUserCreateDTOBasedOnVolunteerRegisterDTO(volunteerRegister);
-
-        UserInfoCreateDTO userInfoCreateDTO =
-                setUpUserInfoCreateDTOBasedOnUserCreateDTOAndAuthorityDTOAndVolunteerRegisterDTO(userCreateDTO,
-                        authorityDTO, volunteerRegister);
-
+        UserInfoCreateDTO userInfoCreateDTO = UserInfoHelper.setUpUserInfoCreateDTO(authorityDTO, volunteerRegister);
         userInfoService.createUserInfo(userInfoCreateDTO);
 
         Volunteer volunteer = VolunteerMapper.convertVolunteerRegisterDTOIntoVolunteer(volunteerRegister);
-
-        volunteer.setVolunteerType(volunteerTypeService.findByVolunteerNameType("VOLUNTARIO"));
+        volunteer.setVolunteerType(volunteerTypeService.findByVolunteerNameType(volunteerType));
 
         return VolunteerMapper.convertVolunteerIntoVolunteerDTO(save(volunteer));
     }
@@ -83,15 +79,4 @@ public class VolunteerService {
         return "Todos os cadastros foram removidos com sucesso";
     }
 
-    private UserCreateDTO setUpUserCreateDTOBasedOnVolunteerRegisterDTO(VolunteerRegisterDTO volunteerRegister) {
-        return new UserCreateDTO(volunteerRegister.getEmail(),
-                volunteerRegister.getCpf(), volunteerRegister.getPassword());
-    }
-
-    private UserInfoCreateDTO setUpUserInfoCreateDTOBasedOnUserCreateDTOAndAuthorityDTOAndVolunteerRegisterDTO
-            (UserCreateDTO userCreateDTO, AuthorityDTO authorityDTO, VolunteerRegisterDTO volunteerRegister) {
-        return new UserInfoCreateDTO(userCreateDTO, authorityDTO,
-                LocalDateTime.now(), volunteerRegister.getName(), volunteerRegister.getLastName(),
-                volunteerRegister.getPhone1(), LocalDateTime.now(), LocalDateTime.now());
-    }
 }
