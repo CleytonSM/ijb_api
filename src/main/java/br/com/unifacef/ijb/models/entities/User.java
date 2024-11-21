@@ -28,7 +28,7 @@ public class User {
     private String email;
     @Column(name = "cpf", length = 11)
     private String cpf;
-    @Column(name = "senha", length = 30)
+    @Column(name = "senha", length = 100)
     private String password;
     @Column(name = "dt_criacao")
     private LocalDateTime createdAt;

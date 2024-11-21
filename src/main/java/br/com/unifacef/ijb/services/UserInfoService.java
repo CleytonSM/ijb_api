@@ -2,8 +2,10 @@ package br.com.unifacef.ijb.services;
 
 import br.com.unifacef.ijb.helpers.OptionalHelper;
 import br.com.unifacef.ijb.mappers.UserInfoMapper;
+import br.com.unifacef.ijb.models.dtos.UserDTO;
 import br.com.unifacef.ijb.models.dtos.UserInfoCreateDTO;
 import br.com.unifacef.ijb.models.dtos.UserInfoDTO;
+import br.com.unifacef.ijb.models.entities.User;
 import br.com.unifacef.ijb.models.entities.UserInfo;
 import br.com.unifacef.ijb.models.idClasses.UserInfoId;
 import br.com.unifacef.ijb.repositories.UserInfoRepository;
@@ -32,11 +34,14 @@ public class UserInfoService {
     }
 
     public UserInfoDTO createUserInfo(UserInfoCreateDTO userInfoCreate) {
-//        OptionalHelper.verifyEntityAlreadyExists(repository.findByUserEmail(userInfoCreate.getUser().getEmail()));
+        OptionalHelper.verifyEntityAlreadyExists(repository.findByUserEmail(userInfoCreate.getUser().getEmail()));
+
+        UserDTO savedUser = userService.createUser(userInfoCreate.getUser());
 
         UserInfo userInfo = UserInfoMapper.convertUserInfoCreateDTOIntoUserInfo(userInfoCreate);
-        userService.save(userInfo.getUser());
-        userInfo.setId(new UserInfoId(userInfo.getUser().getId()));
+        userInfo.getUser().setId(savedUser.getId());
+        userInfo.setId(new UserInfoId(savedUser.getId()));
+
         return UserInfoMapper.convertUserInfoIntoUserInfoDTO(save(userInfo));
     }
 }

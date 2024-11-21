@@ -13,13 +13,13 @@ import java.util.Optional;
 @Repository
 public interface UserInfoRepository extends JpaRepository<UserInfo, User> {
 
-    @Query("SELECT ui FROM UserInfo ui " +
-           "INNER JOIN User u ON (u.id = ui.id)" +
-           "WHERE u.email = :email")
+    @Query("SELECT ui FROM UserInfo ui "+
+           "WHERE ui.user.email = :email")
     Optional<UserInfo> findByUserEmail(@Param("email") String email);
 
-    @Query("SELECT ui FROM UserInfo ui " +
-           "INNER JOIN User u ON (u.id = ui.id)" +
-           "WHERE u.email = :emailOrCPF OR u.cpf = :emailOrCPF")
+    @Query("SELECT userInfo FROM UserInfo userInfo " +
+           "WHERE userInfo.user.email = :emailOrCPF OR userInfo.user.cpf = :emailOrCPF")
     Optional<UserInfo> findByUserEmailOrCPF(@Param("emailOrCPF") String emailOrCPF);
+
+    Optional<UserInfo> findByUser(User user);
 }
