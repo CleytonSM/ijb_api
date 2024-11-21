@@ -8,13 +8,17 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
 @Data
 @Entity
 @Table(name = "tb_movimentacoes")
+@AllArgsConstructor
+@NoArgsConstructor
 public class Movement {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,4 +36,7 @@ public class Movement {
     private LocalDateTime updatedAt;
     @Column(name = "dt_exclusao")
     private LocalDateTime deletedAt;
+
+    public Movement(Receipt receipt, Expense expense) {
+    }
 }

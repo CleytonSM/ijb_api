@@ -10,11 +10,15 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Entity
 @Table(name = "tb_tipos_movimentacoes")
+@AllArgsConstructor
+@NoArgsConstructor
 public class MovementsType {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,4 +35,7 @@ public class MovementsType {
     private Donation donation;
     @Column(name = "nm_tipo_movimentacao", length = 25)
     private String movementTypeName;
+
+    public MovementsType(Sale sale, Rebate rebate, Donation donation, String movementTypeName) {
+    }
 }

@@ -1,18 +1,15 @@
 package br.com.unifacef.ijb.models.dtos;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class MovementDTO {
     private Integer id;
-    private MovementsTypeDTO movimentationType;
-    private MovementsOriginDTO movementsOrigin;
-    private MovementsSituationDTO movimentationSituation;
-    private BigDecimal value;
-    private LocalDateTime receiptDate;
-    private LocalDateTime dueDate;
-
+    private ReceiptDTO receipt;
+    private ExpenseDTO expense;
 }
