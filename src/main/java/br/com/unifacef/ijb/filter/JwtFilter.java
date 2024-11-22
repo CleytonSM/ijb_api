@@ -37,6 +37,8 @@ public class JwtFilter extends OncePerRequestFilter {
     @Override
     protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
         return request.getRequestURI().equals("/api/ijb/register/volunteer") ||
-                request.getRequestURI().equals("/api/ijb/login");
+                request.getRequestURI().equals("/api/ijb/login") ||
+                request.getRequestURI().equals("/api/ijb/register/supporter") ||
+                request.getRequestURI().equals("/api/ijb/register/beneficiary");
     }
 }

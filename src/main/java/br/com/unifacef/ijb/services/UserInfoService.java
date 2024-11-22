@@ -33,7 +33,7 @@ public class UserInfoService {
         return OptionalHelper.getOptionalEntity(repository.findByUserEmail(email));
     }
 
-    public UserInfoDTO createUserInfo(UserInfoCreateDTO userInfoCreate) {
+    public UserInfo createUserInfo(UserInfoCreateDTO userInfoCreate) {
         OptionalHelper.verifyEntityAlreadyExists(repository.findByUserEmail(userInfoCreate.getUser().getEmail()));
 
         UserDTO savedUser = userService.createUser(userInfoCreate.getUser());
@@ -42,6 +42,6 @@ public class UserInfoService {
         userInfo.getUser().setId(savedUser.getId());
         userInfo.setId(new UserInfoId(savedUser.getId()));
 
-        return UserInfoMapper.convertUserInfoIntoUserInfoDTO(save(userInfo));
+        return save(userInfo);
     }
 }
