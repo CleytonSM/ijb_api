@@ -9,6 +9,5 @@ import java.util.List;
 
 @Repository
 public interface ConstructionRepository extends JpaRepository<Construction, Integer> {
-
     List<Construction> findAllByConstructionDescription(String constructionDescription);
 }

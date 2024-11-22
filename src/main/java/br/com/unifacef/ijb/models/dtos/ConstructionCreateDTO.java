@@ -14,4 +14,5 @@ public class ConstructionCreateDTO {
     private String constructionStatus;
     private BigDecimal estimatedCost;
     private BigDecimal totalCost;
+
 }

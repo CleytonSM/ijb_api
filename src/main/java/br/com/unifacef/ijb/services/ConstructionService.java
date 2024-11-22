@@ -64,7 +64,7 @@ public class ConstructionService {
     }
 
     @Transactional
-    public void deleteOutletProduct(Integer id) {
+    public void deleteConstruction(Integer id) {
         Construction construction = getById(id);
         repository.delete(construction);
     }

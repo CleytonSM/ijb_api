@@ -22,6 +22,7 @@ public class ConstructionMapper {
                 construction.getConstructionStatus(), construction.getEstimatedCost(), construction.getTotalCost());
     }
 
+
     public static List<ConstructionDTO> convertListOfConstructionIntoListOfConstructionDTO(
             List<Construction> constructions) {
         List<ConstructionDTO> constructionDTOs = new ArrayList<>();
