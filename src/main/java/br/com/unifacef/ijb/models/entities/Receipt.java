@@ -43,4 +43,7 @@ public class Receipt {
     private LocalDateTime updatedAt;
     @Column(name = "dt_exclusao")
     private LocalDateTime deletedAt;
+
+    public Receipt(Donation donation, Sale sale, Rebate rebate) {
+    }
 }
