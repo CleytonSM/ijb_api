@@ -40,19 +40,26 @@ public class VolunteerService {
     @Autowired
     private UserInfoService userInfoService;
 
-    public Volunteer save(Volunteer volunteer) {
+    private Volunteer save(Volunteer volunteer) {
         return repository.save(volunteer);
     }
 
-    public VolunteerDTO createVolunteer(VolunteerRegisterDTO volunteerRegister, String volunteerType) {
+    public Volunteer createVolunteer(VolunteerRegisterDTO volunteerRegister, String volunteerType) {
         AuthorityDTO authorityDTO = authorityService.findAuthorityRole(Role.ROLE_VOLUNTARIO_BRONZE);
         UserInfoCreateDTO userInfoCreateDTO = UserInfoHelper.setUpUserInfoCreateDTO(authorityDTO, volunteerRegister);
-        userInfoService.createUserInfo(userInfoCreateDTO);
+        UserInfo userInfo = userInfoService.createUserInfo(userInfoCreateDTO);
 
         Volunteer volunteer = VolunteerMapper.convertVolunteerRegisterDTOIntoVolunteer(volunteerRegister);
         volunteer.setVolunteerType(volunteerTypeService.findByVolunteerNameType(volunteerType));
+        volunteer.setUser(userInfo.getUser());
+        volunteer.setDesiredRole(volunteer.getVolunteerType().getVolunteerNameType());
+        volunteer.setAboutYou(volunteerRegister.getAboutYou());
+        volunteer.setHobby(volunteerRegister.getHobby());
+        volunteer.setIntention(volunteer.getIntention());
+        volunteer.setCreatedAt(LocalDateTime.now());
+        volunteer.setUpdatedAt(LocalDateTime.now());
 
-        return VolunteerMapper.convertVolunteerIntoVolunteerDTO(save(volunteer));
+        return save(volunteer);
     }
 
     public List<VolunteerDTO> findAll() {

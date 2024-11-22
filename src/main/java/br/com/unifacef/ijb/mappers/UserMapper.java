@@ -1,5 +1,6 @@
 package br.com.unifacef.ijb.mappers;
 
+import br.com.unifacef.ijb.models.dtos.BeneficiaryRegisterDTO;
 import br.com.unifacef.ijb.models.dtos.UserCreateDTO;
 import br.com.unifacef.ijb.models.dtos.UserDTO;
 import br.com.unifacef.ijb.models.dtos.VolunteerRegisterDTO;
@@ -21,5 +22,11 @@ public class UserMapper {
     public static UserCreateDTO convertVolunteerRegisterDTOIntoUserCreateDTO(VolunteerRegisterDTO volunteerRegister) {
         return new UserCreateDTO(volunteerRegister.getEmail(),
                 volunteerRegister.getCpf(), volunteerRegister.getPassword());
+    }
+
+    public static UserCreateDTO convertBeneficiaryRegisterDTOIntoUserCreateDTO(
+            BeneficiaryRegisterDTO beneficiaryRegister) {
+        return new UserCreateDTO(beneficiaryRegister.getEmail(), beneficiaryRegister.getCpf(),
+                beneficiaryRegister.getPassword());
     }
 }

@@ -1,6 +1,7 @@
 package br.com.unifacef.ijb.mappers;
 
 import br.com.unifacef.ijb.models.dtos.AuthorityDTO;
+import br.com.unifacef.ijb.models.dtos.BeneficiaryRegisterDTO;
 import br.com.unifacef.ijb.models.dtos.UserCreateDTO;
 import br.com.unifacef.ijb.models.dtos.UserDTO;
 import br.com.unifacef.ijb.models.dtos.UserInfoCreateDTO;
@@ -31,8 +32,15 @@ public class UserInfoMapper {
 
     public static UserInfoCreateDTO setUpUserInfoCreateDTOBasedOnUserCreateDTOAndAuthorityDTOAndVolunteerRegisterDTO
             (UserCreateDTO userCreateDTO, AuthorityDTO authorityDTO, VolunteerRegisterDTO volunteerRegister){
-        return new UserInfoCreateDTO(userCreateDTO, authorityDTO,
-                LocalDateTime.now(), volunteerRegister.getName(), volunteerRegister.getLastName(),
-                volunteerRegister.getPhone1(), LocalDateTime.now(), LocalDateTime.now());
+        return new UserInfoCreateDTO(userCreateDTO, authorityDTO, LocalDateTime.now(), volunteerRegister.getName(),
+                volunteerRegister.getLastName(), volunteerRegister.getPhone1(), LocalDateTime.now(),
+                LocalDateTime.now());
+    }
+
+    public static UserInfoCreateDTO setUpUserInfoCreateDTOBasedOnUserCreateDToAndAuthorityDTOAndBeneficiaryRegisterDTO
+            (UserCreateDTO userCreateDTO, AuthorityDTO authorityDTO, BeneficiaryRegisterDTO beneficiaryRegister) {
+        return new UserInfoCreateDTO(userCreateDTO, authorityDTO, LocalDateTime.now(), beneficiaryRegister.getName(),
+                beneficiaryRegister.getLastName(), beneficiaryRegister.getPhone1(), beneficiaryRegister.getPhone2(),
+                LocalDateTime.now(), LocalDateTime.now());
     }
 }

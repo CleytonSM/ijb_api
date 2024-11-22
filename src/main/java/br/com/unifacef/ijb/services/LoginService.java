@@ -1,6 +1,7 @@
 package br.com.unifacef.ijb.services;
 
 import br.com.unifacef.ijb.configs.UserAuthenticationProvider;
+import br.com.unifacef.ijb.models.dtos.BeneficiaryRegisterDTO;
 import br.com.unifacef.ijb.models.dtos.LoginDTO;
 import br.com.unifacef.ijb.models.dtos.LoginResponseDTO;
 import br.com.unifacef.ijb.models.dtos.SupporterRegisterDTO;
@@ -23,6 +24,8 @@ public class LoginService {
     private JwtProvider jwtProvider;
     @Autowired
     private VolunteerService volunteerService;
+    @Autowired
+    private BeneficiaryService beneficiaryService;
 
     public LoginResponseDTO login(LoginDTO login) {
         Authentication authentication = setUpAuthenticationByLoginDTO(login);
@@ -38,6 +41,10 @@ public class LoginService {
 
     public void supporterRegister(VolunteerRegisterDTO volunteerRegister) {
         volunteerService.createVolunteer(volunteerRegister, "APOIADOR");
+    }
+
+    public void beneficiaryRegister(BeneficiaryRegisterDTO beneficiaryRegister) {
+        beneficiaryService.createBeneficiary(beneficiaryRegister);
     }
 
     private Authentication setUpAuthenticationByLoginDTO(LoginDTO login) {

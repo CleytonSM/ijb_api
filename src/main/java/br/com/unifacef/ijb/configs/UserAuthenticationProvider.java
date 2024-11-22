@@ -32,7 +32,6 @@ public class UserAuthenticationProvider {
         String email = authentication.getName();
         String password = authentication.getCredentials().toString();
 
-        User user12 = OptionalHelper.getOptionalEntity(userRepository.findByEmail(email));
         UserInfo userInfo = OptionalHelper.getOptionalEntity(userInfoRepository.findByUserEmailOrCPF(email));
 
         User user = userInfo.getUser();
