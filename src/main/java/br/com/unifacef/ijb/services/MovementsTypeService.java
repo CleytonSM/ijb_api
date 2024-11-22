@@ -1,5 +1,6 @@
 package br.com.unifacef.ijb.services;
 
+import br.com.unifacef.ijb.helpers.OptionalHelper;
 import br.com.unifacef.ijb.mappers.MovementsTypeMapper;
 import br.com.unifacef.ijb.models.dtos.MovementsTypeCreateDTO;
 import br.com.unifacef.ijb.models.dtos.MovementsTypeDTO;
@@ -24,30 +25,28 @@ public class MovementsTypeService {
 
     public MovementsTypeDTO updateMovementsType(Integer id, MovementsTypeCreateDTO movementsTypeDTO) {
         Optional<MovementsType> existingMovementsType = movementsTypeRepository.findById(id);
-        if (existingMovementsType.isPresent()) {
-            MovementsType movementsType = existingMovementsType.get();
-            MovementsTypeMapper.updateMovementsTypeFromDTO(movementsType, movementsTypeDTO);
-            MovementsType updatedMovementsType = movementsTypeRepository.save(movementsType);
-            return MovementsTypeMapper.convertMovementsTypeEntityToDTO(updatedMovementsType);
+        if (!existingMovementsType.isPresent()) {
+            return null;
         }
-        return null;
+
+        MovementsType movementsType = existingMovementsType.get();
+        MovementsTypeMapper.updateMovementsTypeFromDTO(movementsType, movementsTypeDTO);
+        MovementsType updatedMovementsType = movementsTypeRepository.save(movementsType);
+        return MovementsTypeMapper.convertMovementsTypeEntityToDTO(updatedMovementsType);
     }
 
+
     public List<MovementsTypeDTO> getAllMovementsTypes() {
-        List<MovementsType> movementsTypes = movementsTypeRepository.findAll();
-        return MovementsTypeMapper.convertListOfMovementsTypeToListOfDTOs(movementsTypes);
+        return MovementsTypeMapper.convertListOfMovementsTypeToListOfDTOs(movementsTypeRepository.findAll());
     }
 
     public MovementsTypeDTO getMovementsTypeById(Integer id) {
-        Optional<MovementsType> movementsType = movementsTypeRepository.findById(id);
-        return movementsType.map(MovementsTypeMapper::convertMovementsTypeEntityToDTO).orElse(null);
+        MovementsType movementsType = OptionalHelper.getOptionalEntity(movementsTypeRepository.findById(id));
+        return MovementsTypeMapper.convertMovementsTypeEntityToDTO(movementsType);
     }
 
-    public boolean deleteMovementsType(Integer id) {
-        if (movementsTypeRepository.existsById(id)) {
-            movementsTypeRepository.deleteById(id);
-            return true;
-        }
-        return false;
+    public void deleteMovementsType(Integer id) {
+        MovementsType movementsType = OptionalHelper.getOptionalEntity(movementsTypeRepository.findById(id));
+        movementsTypeRepository.delete(movementsType);
     }
 }

@@ -1,11 +1,11 @@
 package br.com.unifacef.ijb.services;
 
+import br.com.unifacef.ijb.helpers.OptionalHelper;
 import br.com.unifacef.ijb.mappers.MovementMapper;
 import br.com.unifacef.ijb.models.dtos.MovementCreateDTO;
 import br.com.unifacef.ijb.models.dtos.MovementDTO;
 import br.com.unifacef.ijb.models.entities.Movement;
 import br.com.unifacef.ijb.repositories.MovementRepository;
-import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,15 +33,13 @@ public class MovementService {
     }
 
     public MovementDTO getMovementById(Integer id) {
-        Movement movement = movementRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Movement not found with id " + id));
+        Movement movement = OptionalHelper.getOptionalEntity(movementRepository.findById(id));
         return MovementMapper.convertMovementIntoMovementDTO(movement);
     }
 
     @Transactional
     public MovementDTO updateMovement(Integer id, MovementCreateDTO movementDTO) {
-        Movement existingMovement = movementRepository.findById(id).orElseThrow(() ->
-                new EntityNotFoundException("Movement not found with id: " + id));
+        Movement existingMovement = OptionalHelper.getOptionalEntity(movementRepository.findById(id));
         MovementMapper.updateMovement(movementDTO, existingMovement);
         Movement updatedMovement = movementRepository.save(existingMovement);
 
@@ -50,8 +48,7 @@ public class MovementService {
 
     @Transactional
     public void deleteMovement(Integer id) {
-        Movement movement = movementRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Movement not found with id " + id));
+        Movement movement = OptionalHelper.getOptionalEntity(movementRepository.findById(id));
         movementRepository.delete(movement);
     }
 }
