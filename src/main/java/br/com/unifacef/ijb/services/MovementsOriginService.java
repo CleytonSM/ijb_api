@@ -1,5 +1,6 @@
 package br.com.unifacef.ijb.services;
 
+import br.com.unifacef.ijb.helpers.OptionalHelper;
 import br.com.unifacef.ijb.mappers.MovementsOriginMapper;
 import br.com.unifacef.ijb.models.dtos.MovementsOriginDTO;
 import br.com.unifacef.ijb.models.entities.MovementsOrigin;
@@ -32,25 +33,24 @@ public class MovementsOriginService {
     }
 
     public MovementsOriginDTO getMovementsOriginById(Integer id) {
-        MovementsOrigin movementsOrigin = movementsOriginRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Movement not found"));
+        MovementsOrigin movementsOrigin = OptionalHelper.getOptionalEntity(movementsOriginRepository.findById(id));
         return MovementsOriginMapper.convertMovementsOriginEntityIntoMovementDTO(movementsOrigin);
     }
 
     public MovementsOriginDTO updateMovementsOrigin(Integer id, MovementsOriginDTO movementsOriginDTO) {
         Optional<MovementsOrigin> existingMovementsOrigin = movementsOriginRepository.findById(id);
-        if (existingMovementsOrigin.isPresent()) {
-            MovementsOrigin movementsOriginToUpdate = existingMovementsOrigin.get();
-            MovementsOriginMapper.updateMovementsOrigin(movementsOriginToUpdate, movementsOriginDTO);
-            MovementsOrigin updatedMovementsOrigin = movementsOriginRepository.save(movementsOriginToUpdate);
-            return MovementsOriginMapper.convertMovementsOriginEntityIntoMovementDTO(updatedMovementsOrigin);
+        if (!existingMovementsOrigin.isPresent()) {
+            return null;
         }
-        return null;
+
+        MovementsOrigin movementsOriginToUpdate = existingMovementsOrigin.get();
+        MovementsOriginMapper.updateMovementsOrigin(movementsOriginToUpdate, movementsOriginDTO);
+        MovementsOrigin updatedMovementsOrigin = movementsOriginRepository.save(movementsOriginToUpdate);
+        return MovementsOriginMapper.convertMovementsOriginEntityIntoMovementDTO(updatedMovementsOrigin);
     }
 
     public void deleteMovementsOrigin(Integer id) {
-        if (movementsOriginRepository.existsById(id)) {
-            movementsOriginRepository.deleteById(id);
-        }
+        MovementsOrigin movementsOrigin = OptionalHelper.getOptionalEntity(movementsOriginRepository.findById(id));
+        movementsOriginRepository.delete(movementsOrigin);
     }
-
 }

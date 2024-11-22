@@ -1,10 +1,10 @@
 package br.com.unifacef.ijb.services;
 
+import br.com.unifacef.ijb.helpers.OptionalHelper;
 import br.com.unifacef.ijb.mappers.ExpenseMapper;
 import br.com.unifacef.ijb.models.dtos.ExpenseDTO;
 import br.com.unifacef.ijb.models.entities.Expense;
 import br.com.unifacef.ijb.repositories.ExpenseRepository;
-import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,15 +32,13 @@ public class ExpenseService {
     }
 
     public ExpenseDTO getExpenseById(Integer id) {
-        Expense expense = expenseRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Expense not found with id " + id));
+        Expense expense = OptionalHelper.getOptionalEntity(expenseRepository.findById(id));
         return ExpenseMapper.convertExpenseIntoExpenseDTO(expense);
     }
 
     @Transactional
     public ExpenseDTO updateExpense(Integer id, ExpenseDTO expenseDTO) {
-        Expense existingExpense = expenseRepository.findById(id).orElseThrow(() ->
-                new EntityNotFoundException("Expense not found with id: " + id));
+        Expense existingExpense = OptionalHelper.getOptionalEntity(expenseRepository.findById(id));
 
         ExpenseMapper.updateExpense(expenseDTO, existingExpense);
         Expense updatedExpense = expenseRepository.save(existingExpense);
@@ -50,10 +48,7 @@ public class ExpenseService {
 
     @Transactional
     public void deleteExpense(Integer id) {
-        Expense expense = expenseRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Expense not found with id " + id));
+        Expense expense = OptionalHelper.getOptionalEntity(expenseRepository.findById(id));
         expenseRepository.delete(expense);
     }
-
-
 }

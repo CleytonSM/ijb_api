@@ -1,5 +1,6 @@
 package br.com.unifacef.ijb.services;
 
+import br.com.unifacef.ijb.helpers.OptionalHelper;
 import br.com.unifacef.ijb.mappers.ReceiptMapper;
 import br.com.unifacef.ijb.models.dtos.ReceiptCreateDTO;
 import br.com.unifacef.ijb.models.dtos.ReceiptDTO;
@@ -33,15 +34,13 @@ public class ReceiptService {
     }
 
     public ReceiptDTO getReceiptById(Integer id) {
-        Receipt receipt = receiptRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Receipt not found with id " + id));
+        Receipt receipt = OptionalHelper.getOptionalEntity(receiptRepository.findById(id));
         return ReceiptMapper.convertReceiptIntoReceiptDTO(receipt);
     }
 
     @Transactional
     public ReceiptDTO updateReceipt(Integer id, ReceiptCreateDTO receiptDTO) {
-        Receipt existingReceipt = receiptRepository.findById(id).orElseThrow(() ->
-                new EntityNotFoundException("Receipt not found with id: " + id));
+        Receipt existingReceipt = OptionalHelper.getOptionalEntity(receiptRepository.findById(id));
         ReceiptMapper.updateReceipt(receiptDTO, existingReceipt);
         Receipt updatedReceipt = receiptRepository.save(existingReceipt);
 
@@ -50,8 +49,7 @@ public class ReceiptService {
 
     @Transactional
     public void deleteReceipt(Integer id) {
-        Receipt receipt = receiptRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Receipt not found with id " + id));
+        Receipt receipt = OptionalHelper.getOptionalEntity(receiptRepository.findById(id));
         receiptRepository.delete(receipt);
     }
 
