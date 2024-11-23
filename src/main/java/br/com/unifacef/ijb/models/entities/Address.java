@@ -34,4 +34,12 @@ public class Address {
     private LocalDateTime updatedAt;
     @Column(name = "dt_exclusao")
     private LocalDateTime deletedAt;
+
+    public Address(String cep, String street, String number, String neighborhood, String complement) {
+        this.cep = cep;
+        this.street = street;
+        this.number = number;
+        this.neighborhood = neighborhood;
+        this.complement = complement;
+    }
 }
