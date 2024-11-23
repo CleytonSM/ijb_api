@@ -2,16 +2,10 @@ package br.com.unifacef.ijb.services;
 
 import br.com.unifacef.ijb.helpers.OptionalHelper;
 import br.com.unifacef.ijb.mappers.ConstructionMapper;
-import br.com.unifacef.ijb.mappers.OutletProductMapper;
 import br.com.unifacef.ijb.models.dtos.ConstructionCreateDTO;
 import br.com.unifacef.ijb.models.dtos.ConstructionDTO;
-import br.com.unifacef.ijb.models.dtos.OutletProductCreateDTO;
-import br.com.unifacef.ijb.models.dtos.OutletProductDTO;
 import br.com.unifacef.ijb.models.entities.Construction;
-import br.com.unifacef.ijb.models.entities.OutletProduct;
-import br.com.unifacef.ijb.models.enums.OutletProductStatus;
 import br.com.unifacef.ijb.repositories.ConstructionRepository;
-import br.com.unifacef.ijb.repositories.OutletProductRepository;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,7 +39,7 @@ public class ConstructionService {
     }
 
     public List<ConstructionDTO> getAllConstructionsByFilter(String description) {
-        List<Construction> constructions = repository.findAllByConstructionDescription(description);
+        List<Construction> constructions = repository.findAllByDescription(description);
 
 
         if (!constructions.isEmpty()) {

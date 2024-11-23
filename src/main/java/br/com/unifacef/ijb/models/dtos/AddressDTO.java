@@ -11,4 +11,12 @@ public class AddressDTO {
     private String neighborhood;
     private String complement;
 
+    public AddressDTO(Integer id, String cep, String street, String number, String neighborhood, String complement) {
+        this.id = id;
+        this.cep = cep;
+        this.street = street;
+        this.number = number;
+        this.neighborhood = neighborhood;
+        this.complement = complement;
+    }
 }
