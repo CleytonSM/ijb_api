@@ -2,7 +2,6 @@ package br.com.unifacef.ijb.services;
 
 
 import br.com.unifacef.ijb.helpers.UserInfoHelper;
-import br.com.unifacef.ijb.mappers.BeneficiaryMapper;
 import br.com.unifacef.ijb.models.dtos.AuthorityDTO;
 import br.com.unifacef.ijb.models.dtos.BeneficiaryRegisterDTO;
 import br.com.unifacef.ijb.models.dtos.UserInfoCreateDTO;
@@ -11,7 +10,6 @@ import br.com.unifacef.ijb.models.enums.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.com.unifacef.ijb.models.dtos.BeneficiaryDTO;
 import br.com.unifacef.ijb.models.entities.Beneficiary;
 import br.com.unifacef.ijb.repositories.BeneficiaryRepository;
 
