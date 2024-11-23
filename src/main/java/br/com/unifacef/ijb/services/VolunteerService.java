@@ -1,8 +1,11 @@
 package br.com.unifacef.ijb.services;
 
+import br.com.unifacef.ijb.helpers.UserInfoHelper;
+import br.com.unifacef.ijb.mappers.UserInfoMapper;
 import br.com.unifacef.ijb.mappers.UserMapper;
 import br.com.unifacef.ijb.mappers.VolunteerMapper;
 import br.com.unifacef.ijb.models.dtos.AuthorityDTO;
+import br.com.unifacef.ijb.models.dtos.SupporterRegisterDTO;
 import br.com.unifacef.ijb.models.dtos.UserCreateDTO;
 import br.com.unifacef.ijb.models.dtos.UserDTO;
 import br.com.unifacef.ijb.models.dtos.UserInfoCreateDTO;
@@ -37,26 +40,26 @@ public class VolunteerService {
     @Autowired
     private UserInfoService userInfoService;
 
-    public Volunteer save(Volunteer volunteer) {
+    private Volunteer save(Volunteer volunteer) {
         return repository.save(volunteer);
     }
 
-    public VolunteerDTO createVolunteer(VolunteerRegisterDTO volunteerRegister) {
+    public Volunteer createVolunteer(VolunteerRegisterDTO volunteerRegister, String volunteerType) {
         AuthorityDTO authorityDTO = authorityService.findAuthorityRole(Role.ROLE_VOLUNTARIO_BRONZE);
-
-        UserCreateDTO userCreateDTO = setUpUserCreateDTOBasedOnVolunteerRegisterDTO(volunteerRegister);
-
-        UserInfoCreateDTO userInfoCreateDTO =
-                setUpUserInfoCreateDTOBasedOnUserCreateDTOAndAuthorityDTOAndVolunteerRegisterDTO(userCreateDTO,
-                        authorityDTO, volunteerRegister);
-
-        userInfoService.createUserInfo(userInfoCreateDTO);
+        UserInfoCreateDTO userInfoCreateDTO = UserInfoHelper.setUpUserInfoCreateDTO(authorityDTO, volunteerRegister);
+        UserInfo userInfo = userInfoService.createUserInfo(userInfoCreateDTO);
 
         Volunteer volunteer = VolunteerMapper.convertVolunteerRegisterDTOIntoVolunteer(volunteerRegister);
+        volunteer.setVolunteerType(volunteerTypeService.findByVolunteerNameType(volunteerType));
+        volunteer.setUser(userInfo.getUser());
+        volunteer.setDesiredRole(volunteer.getVolunteerType().getVolunteerNameType());
+        volunteer.setAboutYou(volunteerRegister.getAboutYou());
+        volunteer.setHobby(volunteerRegister.getHobby());
+        volunteer.setIntention(volunteer.getIntention());
+        volunteer.setCreatedAt(LocalDateTime.now());
+        volunteer.setUpdatedAt(LocalDateTime.now());
 
-        volunteer.setVolunteerType(volunteerTypeService.findByVolunteerNameType("VOLUNTARIO"));
-
-        return VolunteerMapper.convertVolunteerIntoVolunteerDTO(save(volunteer));
+        return save(volunteer);
     }
 
     public List<VolunteerDTO> findAll() {
@@ -83,15 +86,4 @@ public class VolunteerService {
         return "Todos os cadastros foram removidos com sucesso";
     }
 
-    private UserCreateDTO setUpUserCreateDTOBasedOnVolunteerRegisterDTO(VolunteerRegisterDTO volunteerRegister) {
-        return new UserCreateDTO(volunteerRegister.getEmail(),
-                volunteerRegister.getCpf(), volunteerRegister.getPassword());
-    }
-
-    private UserInfoCreateDTO setUpUserInfoCreateDTOBasedOnUserCreateDTOAndAuthorityDTOAndVolunteerRegisterDTO
-            (UserCreateDTO userCreateDTO, AuthorityDTO authorityDTO, VolunteerRegisterDTO volunteerRegister) {
-        return new UserInfoCreateDTO(userCreateDTO, authorityDTO,
-                LocalDateTime.now(), volunteerRegister.getName(), volunteerRegister.getLastName(),
-                volunteerRegister.getPhone1(), LocalDateTime.now(), LocalDateTime.now());
-    }
 }

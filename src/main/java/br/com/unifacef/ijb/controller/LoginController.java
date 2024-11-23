@@ -3,7 +3,6 @@ package br.com.unifacef.ijb.controller;
 import br.com.unifacef.ijb.models.dtos.BeneficiaryRegisterDTO;
 import br.com.unifacef.ijb.models.dtos.LoginDTO;
 import br.com.unifacef.ijb.models.dtos.LoginResponseDTO;
-import br.com.unifacef.ijb.models.dtos.SupporterRegisterDTO;
 import br.com.unifacef.ijb.models.dtos.VolunteerRegisterDTO;
 import br.com.unifacef.ijb.services.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,18 +27,19 @@ public class LoginController {
     }
 
     @PostMapping("/register/supporter")
-    public ResponseEntity<Void> supporterRegister(@RequestBody SupporterRegisterDTO supporterRegister) {
-        service.supporterRegister(supporterRegister);
+    public ResponseEntity<Void> supporterRegister(@RequestBody VolunteerRegisterDTO volunteerRegister) {
+        service.supporterRegister(volunteerRegister);
 
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-//    @PostMapping("/register/beneficiary")
-//    public ResponseEntity<Void> beneficiaryRegister(@RequestBody BeneficiaryRegisterDTO beneficiaryRegister) {
-//        service.beneficiaryRegister(beneficiaryRegister);
-//
-//        return new ResponseEntity<>(HttpStatus.OK);
-//    }
+    @PostMapping("/register/beneficiary")
+    public ResponseEntity<Void> beneficiaryRegister(@RequestBody BeneficiaryRegisterDTO beneficiaryRegister) {
+        service.beneficiaryRegister(beneficiaryRegister);
+
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
     @PostMapping("/login")
     public ResponseEntity<LoginResponseDTO> login(@RequestBody LoginDTO login) {
         return new ResponseEntity<>(service.login(login), HttpStatus.OK);

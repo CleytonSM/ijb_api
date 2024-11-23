@@ -42,7 +42,9 @@ public class SecurityConfig {
                     return config;
                 }))
                 .addFilterBefore(applicationContext.getBean(JwtFilter.class), UsernamePasswordAuthenticationFilter.class)
-                .authorizeHttpRequests(request -> request.requestMatchers("/api/ijb/register/**").permitAll())
+                .authorizeHttpRequests(request -> request
+                        .requestMatchers("/api/ijb/register/**").permitAll()
+                        .requestMatchers("/api/ijb/login").permitAll())
                 .formLogin(AbstractHttpConfigurer::disable)
                 .httpBasic(Customizer.withDefaults());
 

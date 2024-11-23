@@ -21,8 +21,9 @@ public class JwtFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        String token = jwtProvider.resolveToken(request);
         try {
+            String token = jwtProvider.resolveToken(request);
+
             if(token != null && jwtProvider.validateToken(token)) {
                 Authentication authentication = jwtProvider.getAuthentication(token);
                 SecurityContextHolder.getContext().setAuthentication(authentication);
@@ -36,6 +37,9 @@ public class JwtFilter extends OncePerRequestFilter {
 
     @Override
     protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
-        return request.getRequestURI().equals("/api/ijb/register/volunteer");
+        return request.getRequestURI().equals("/api/ijb/register/volunteer") ||
+                request.getRequestURI().equals("/api/ijb/login") ||
+                request.getRequestURI().equals("/api/ijb/register/supporter") ||
+                request.getRequestURI().equals("/api/ijb/register/beneficiary");
     }
 }

@@ -35,4 +35,16 @@ public class UserInfoCreateDTO {
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
     }
+
+    public UserInfoCreateDTO(UserCreateDTO user, AuthorityDTO authority, LocalDateTime registeredAt, String name, String lastName, String phone1, String phone2, LocalDateTime createdAt, LocalDateTime updatedAt) {
+        this.user = user;
+        this.registeredAt = registeredAt;
+        this.authority = authority;
+        this.name = name;
+        this.lastName = lastName;
+        this.phone1 = phone1;
+        this.phone2 = phone2;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+    }
 }
