@@ -32,4 +32,10 @@ public class Tags {
     private LocalDateTime updatedAt;
     @Column(name = "dt_exclusao")
     private LocalDateTime deletedAt;
+
+    public Tags(String labelName, String colorHexadecimal) {
+        this.labelName = labelName;
+        this.colorHexadecimal = colorHexadecimal;
+    }
+
 }
