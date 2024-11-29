@@ -1,15 +1,16 @@
 package br.com.unifacef.ijb.models.dtos;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class InvoicesDTO {
     private Integer id;
-    private String taxCode;
-    private String cnpjSupplier;
-    private Float value;
-    private LocalDateTime dueDate;
+    private MovementDTO movement;
+    private byte[] invoicePhoto;
 
 }

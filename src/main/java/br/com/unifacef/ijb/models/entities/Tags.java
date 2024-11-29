@@ -19,7 +19,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class Tags {
     @Id
-    @GeneratedValue(generator = "native", strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_etiqueta")
     private Integer id;
     @Column(name = "nm_etiqueta", length = 20)
@@ -32,4 +32,10 @@ public class Tags {
     private LocalDateTime updatedAt;
     @Column(name = "dt_exclusao")
     private LocalDateTime deletedAt;
+
+    public Tags(String labelName, String colorHexadecimal) {
+        this.labelName = labelName;
+        this.colorHexadecimal = colorHexadecimal;
+    }
+
 }

@@ -21,7 +21,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class Receipt {
     @Id
-    @GeneratedValue(generator = "native", strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_receita")
     private Integer id;
     @ManyToOne
@@ -43,4 +43,7 @@ public class Receipt {
     private LocalDateTime updatedAt;
     @Column(name = "dt_exclusao")
     private LocalDateTime deletedAt;
+
+    public Receipt(Donation donation, Sale sale, Rebate rebate) {
+    }
 }
