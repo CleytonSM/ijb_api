@@ -1,17 +1,15 @@
 package br.com.unifacef.ijb.services;
 
 
-import br.com.unifacef.ijb.mappers.BeneficiaryPlusFamiliarsMapper;
-import br.com.unifacef.ijb.models.dtos.BenficiaryPlusFamiliarsDTO;
-import br.com.unifacef.ijb.models.dtos.FamiliarDTO;
+import br.com.unifacef.ijb.mappers.*;
+import br.com.unifacef.ijb.models.dtos.*;
 import br.com.unifacef.ijb.models.entities.Familiar;
+import br.com.unifacef.ijb.models.entities.UserInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.query.Meta;
 import org.springframework.stereotype.Service;
 
 import br.com.unifacef.ijb.helpers.OptionalHelper;
-import br.com.unifacef.ijb.mappers.BeneficiaryMapper;
-import br.com.unifacef.ijb.models.dtos.BeneficiaryDTO;
 import br.com.unifacef.ijb.models.entities.Beneficiary;
 import br.com.unifacef.ijb.models.enums.BeneficiaryStatus;
 import br.com.unifacef.ijb.repositories.BeneficiaryRepository;
@@ -27,6 +25,8 @@ public class BeneficiaryService {
     private BeneficiaryRepository repository;
     @Autowired
     private FamiliarService familiarService;
+    @Autowired
+    private UserService userService;
 
     public Beneficiary save(Beneficiary beneficiary){
         return repository.save(beneficiary);
@@ -70,16 +70,20 @@ public class BeneficiaryService {
 
     public BenficiaryPlusFamiliarsDTO sendAllBeneficiaryWithAllStatus(Integer id){
         List<FamiliarDTO> familiars = new ArrayList<FamiliarDTO>();
-        Beneficiary beneficiary;
-        BeneficiaryDTO beneficiaryDTO;
+        Beneficiary beneficiary = getById(id);
+        BeneficiaryDTO beneficiaryDTO = BeneficiaryMapper.convertBeneficiaryIntoBeneficiaryDTO(beneficiary);
         BenficiaryPlusFamiliarsDTO benficiaryPlusFamiliarsDTO = new BenficiaryPlusFamiliarsDTO();
 
-        beneficiary = getById(id);
-        beneficiaryDTO = BeneficiaryMapper.convertBeneficiaryIntoBeneficiaryDTO(beneficiary);
+
         familiars = familiarService.getAllFamiliarsByBeneficiaryID(beneficiary.getId());
         benficiaryPlusFamiliarsDTO = BeneficiaryPlusFamiliarsMapper.createBenefPlusFamil(beneficiaryDTO, familiars);
 
         return benficiaryPlusFamiliarsDTO;
+    }
+
+    public UserPlusUserInfoDTO sendUserAndUserInfoByBeneficiaryId(Integer id){
+        Beneficiary beneficiary = getById(id);
+
     }
 
 

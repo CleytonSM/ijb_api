@@ -4,6 +4,7 @@ import java.util.List;
 
 import br.com.unifacef.ijb.mappers.BeneficiaryMapper;
 import br.com.unifacef.ijb.models.dtos.BenficiaryPlusFamiliarsDTO;
+import br.com.unifacef.ijb.models.dtos.UserPlusUserInfoDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,6 +26,11 @@ public class BeneficiaryController {
     @GetMapping("/{id}")
     public BeneficiaryDTO getBeneficiaryById(@PathVariable Integer id){
         return BeneficiaryMapper.convertBeneficiaryIntoBeneficiaryDTO(service.getById(id));
+    }
+
+    @GetMapping("/beneficiario?/getAllData/getUserInfos/{id}")
+    public UserPlusUserInfoDTO getUserPlusUserInfoData(@PathVariable Integer id){
+        return service.sendUserAndUserInfoByBeneficiaryId(id);
     }
 
     @GetMapping("/beneficiarios?")
