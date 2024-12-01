@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 @Data
 public class VolunteerType {
     @Id
-    @GeneratedValue(generator = "native", strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_tipo_voluntario")
     private Integer id;
     @Column(name = "nm_tipo_voluntario")
@@ -26,4 +26,10 @@ public class VolunteerType {
     private LocalDateTime updatedAt;
     @Column(name = "dt_exclusao")
     private LocalDateTime deletedAt;
+
+  
+    public VolunteerType(){}
+    public VolunteerType(String volunteerNameType){
+        this.volunteerNameType = volunteerNameType;
+    }
 }

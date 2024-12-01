@@ -15,7 +15,7 @@ import lombok.Data;
 @Entity
 public class Report {
     @Id
-    @GeneratedValue(generator = "native", strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id_relatorio")
     private Integer id;
     @ManyToOne()

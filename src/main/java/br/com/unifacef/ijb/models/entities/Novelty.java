@@ -15,7 +15,7 @@ import lombok.Data;
 @Data
 public class Novelty {
     @Id
-    @GeneratedValue(generator = "native", strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_novidade")
     private Integer id;
     @ManyToOne

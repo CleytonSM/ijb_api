@@ -64,7 +64,7 @@ CREATE TABLE tb_endereco_usuario (
     FOREIGN KEY (id_endereco) REFERENCES tb_enderecos(id_endereco)
 );
 
-CREATE TABLE tb_beneficiarios(
+CREATE TABLE tb_beneficiarios (
 id_beneficiario INTEGER NOT NULL AUTO_INCREMENT,
 id_usuario INTEGER,
 nm_representante VARCHAR(60) NOT NULL,
@@ -72,17 +72,16 @@ status VARCHAR(60),
 como_conheceu VARCHAR(200) NOT NULL,
 indicador VARCHAR(60),
 add_info LONGTEXT,
-tem_terreno	BOOL,
+tem_terreno BOOL,
 renda_mensal DECIMAL(8,2),
 dt_indicacao DATE NOT NULL,
 status_moradia VARCHAR(60),
-decisao_triagem	LONGTEXT,
+decisao_triagem LONGTEXT,
 dt_criacao DATE,
 dt_alteracao DATE,
 dt_exclusao DATE,
-
-PRIMARY KEY(id_beneficiario),
-CONSTRAINT fk_tb_benef_id_usuario FOREIGN KEY(id_usuario) REFERENCES tb_usuarios(id_usuario)
+PRIMARY KEY (id_beneficiario),
+CONSTRAINT fk_tb_benef_id_usuario FOREIGN KEY (id_usuario) REFERENCES tb_usuarios (id_usuario)
 );
 
 

@@ -8,6 +8,7 @@ import br.com.unifacef.ijb.models.entities.Authority;
 import br.com.unifacef.ijb.models.entities.User;
 import br.com.unifacef.ijb.models.entities.UserInfo;
 import br.com.unifacef.ijb.models.enums.Role;
+import br.com.unifacef.ijb.repositories.UserInfoRepository;
 import br.com.unifacef.ijb.repositories.UserRepository;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
@@ -28,7 +29,7 @@ public class JwtProvider {
     @Autowired
     private SecretKeyHelper secretKeyHelper;
     @Autowired
-    private UserRepository userRepository;
+    private UserInfoRepository userInfoRepository;
     @Autowired
     private UserAuthenticationProvider userAuthenticationProvider;
 
@@ -47,8 +48,8 @@ public class JwtProvider {
     }
 
     private Map<String, String> claimsSetup(Authentication authentication) {
-        User user = (User) authentication.getPrincipal();
-        UserInfo userInfo = user.getUserInfo();
+        UserInfo userInfo = (UserInfo) authentication.getPrincipal();
+        User user = userInfo.getUser();
         Authority authority = userInfo.getAuthority();
         Role role = authority.getRole();
 
@@ -82,10 +83,10 @@ public class JwtProvider {
     }
 
     public Authentication getAuthentication(String token) {
-        User user = OptionalHelper.getOptionalEntity(userRepository.findByEmail(getUserEmailFromToken(token)));
-        UserInfo userInfo = user.getUserInfo();
+        UserInfo userInfo = OptionalHelper.getOptionalEntity(userInfoRepository.findByUserEmail
+                (getUserEmailFromToken(token)));
 
-        return new UsernamePasswordAuthenticationToken(user, "",
+        return new UsernamePasswordAuthenticationToken(userInfo, "",
                 userAuthenticationProvider.grantedAuthorities(userInfo.getAuthority()));
     }
 

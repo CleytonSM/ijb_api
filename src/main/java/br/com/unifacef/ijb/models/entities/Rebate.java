@@ -22,7 +22,7 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 public class Rebate {
     @Id
-    @GeneratedValue(generator = "native", strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_abatimento")
     private Integer id;
     @ManyToOne(fetch = FetchType.EAGER)

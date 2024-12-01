@@ -21,14 +21,14 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class User {
     @Id
-    @GeneratedValue(generator = "native", strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_usuario")
     private Integer id;
     @Column(name = "email", length = 100)
     private String email;
     @Column(name = "cpf", length = 11)
     private String cpf;
-    @Column(name = "senha", length = 30)
+    @Column(name = "senha", length = 100)
     private String password;
     @Column(name = "dt_criacao")
     private LocalDateTime createdAt;
@@ -37,6 +37,9 @@ public class User {
     @Column(name = "dt_exclusao")
     private LocalDateTime deletedAt;
 
-    @OneToOne(mappedBy = "user")
-    private UserInfo userInfo;
+    public User(String email, String cpf, String password) {
+        this.email = email;
+        this.cpf = cpf;
+        this.password = password;
+    }
 }
