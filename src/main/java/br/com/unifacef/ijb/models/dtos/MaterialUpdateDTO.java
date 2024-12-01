@@ -1,5 +1,6 @@
 package br.com.unifacef.ijb.models.dtos;
 
+import br.com.unifacef.ijb.models.enums.MaterialOrigin;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,8 +10,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class MaterialUpdateDTO {
     private Integer id;
-    private String materialName;
+    private String name;
     private Integer quantity;
     private String description;
-    private Boolean isDonated;
+    private MaterialOrigin origin;
 }
