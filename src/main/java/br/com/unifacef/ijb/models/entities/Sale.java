@@ -45,4 +45,11 @@ public class Sale {
         this.saleValue = saleValue;
         this.saleDescription = saleDescription;
     }
+
+    public Sale(OutletProduct outletProduct, BigDecimal saleValue, String saleDescription, LocalDateTime createdAt) {
+        this.outletProduct = outletProduct;
+        this.saleValue = saleValue;
+        this.saleDescription = saleDescription;
+        this.createdAt = createdAt;
+    }
 }

@@ -21,8 +21,8 @@ CREATE TABLE tb_funcao (
 );
 
 CREATE TABLE tb_infos_usuario (
-    id_usuario INTEGER,
-    id_funcao INTEGER,
+    id_usuario INTEGER NOT NULL,
+    id_funcao INTEGER NOT NULL,
     celular1 VARCHAR(11),
     celular2 VARCHAR(11),
     foto_perfil LONGBLOB,
@@ -36,8 +36,8 @@ CREATE TABLE tb_infos_usuario (
     dt_alteracao DATE,
     dt_exclusao DATE,
     PRIMARY KEY (id_usuario),
-    FOREIGN KEY (id_usuario) REFERENCES tb_usuarios(id_usuario),
-    FOREIGN KEY (id_funcao) REFERENCES tb_funcao(id_funcao)
+    FOREIGN KEY (id_usuario) REFERENCES tb_usuarios (id_usuario),
+    FOREIGN KEY (id_funcao) REFERENCES tb_funcao (id_funcao)
 );
 
 CREATE TABLE tb_enderecos (
@@ -53,57 +53,46 @@ CREATE TABLE tb_enderecos (
     PRIMARY KEY (id_endereco)
 );
 
-CREATE TABLE tb_endereco_usuario (
-    id_endereco INTEGER,
+CREATE TABLE tb_beneficiarios (
+    id_beneficiario INTEGER AUTO_INCREMENT,
     id_usuario INTEGER,
+    nm_representante VARCHAR(60),
+    status VARCHAR(60),
+    como_conheceu VARCHAR(200),
+    indicador VARCHAR(60),
+    add_info LONGTEXT,
+    tem_terreno BOOL,
+    renda_mensal DECIMAL(8,2),
+    dt_indicacao DATE NOT NULL,
+    status_moradia VARCHAR(60),
+    decisao_triagem LONGTEXT,
     dt_criacao DATE,
     dt_alteracao DATE,
     dt_exclusao DATE,
-    PRIMARY KEY (id_endereco, id_usuario),
-    FOREIGN KEY (id_usuario) REFERENCES tb_usuarios(id_usuario),
-    FOREIGN KEY (id_endereco) REFERENCES tb_enderecos(id_endereco)
-);
-
-CREATE TABLE tb_beneficiarios (
-id_beneficiario INTEGER NOT NULL AUTO_INCREMENT,
-id_usuario INTEGER,
-nm_representante VARCHAR(60) NOT NULL,
-status VARCHAR(60),
-como_conheceu VARCHAR(200) NOT NULL,
-indicador VARCHAR(60),
-add_info LONGTEXT,
-tem_terreno BOOL,
-renda_mensal DECIMAL(8,2),
-dt_indicacao DATE NOT NULL,
-status_moradia VARCHAR(60),
-decisao_triagem LONGTEXT,
-dt_criacao DATE,
-dt_alteracao DATE,
-dt_exclusao DATE,
-PRIMARY KEY (id_beneficiario),
-CONSTRAINT fk_tb_benef_id_usuario FOREIGN KEY (id_usuario) REFERENCES tb_usuarios (id_usuario)
+    PRIMARY KEY (id_beneficiario),
+    FOREIGN KEY (id_usuario) REFERENCES tb_usuarios(id_usuario)
 );
 
 
-CREATE TABLE tb_familiares(
-id_familiar			INTEGER NOT NULL AUTO_INCREMENT,
-id_beneficiario			INTEGER,
-nm_familiar			VARCHAR(60),
-cpf				VARCHAR(11),
-parentesco			VARCHAR(30),
-dt_nascimento			DATE,
-escolaridade			VARCHAR(40),
-valor_renda			DECIMAL(8,2),
-fonte_de_renda			VARCHAR(40),
-problemas_de_saude		VARCHAR(100),
-dt_criacao DATE,
-dt_alteracao DATE,
-dt_exclusao DATE,
-
-CONSTRAINT pk_tb_familiares_id_famil PRIMARY KEY(id_familiar),
-CONSTRAINT fk_tb_familiares_id_benef FOREIGN KEY(id_beneficiario)
-	REFERENCES tb_beneficiarios(id_beneficiario)
+CREATE TABLE tb_familiares (
+    id_familiar         INTEGER AUTO_INCREMENT,
+    id_beneficiario     INTEGER,
+    nm_familiar         VARCHAR(60),
+    cpf                 VARCHAR(11),
+    parentesco          VARCHAR(30),
+    dt_nascimento       DATE,
+    escolaridade        VARCHAR(40),
+    valor_renda         DECIMAL(8,2),
+    fonte_de_renda      VARCHAR(40),
+    problemas_de_saude  VARCHAR(100),
+    dt_criacao          DATE,
+    dt_alteracao        DATE,
+    dt_exclusao         DATE,
+    CONSTRAINT pk_tb_familiares_id_famil PRIMARY KEY (id_familiar),
+    CONSTRAINT fk_tb_familiares_id_benef FOREIGN KEY (id_beneficiario)
+        REFERENCES tb_beneficiarios (id_beneficiario)
 );
+
 
 CREATE TABLE tb_visitas(
 id_visita INTEGER NOT NULL AUTO_INCREMENT,
@@ -196,40 +185,38 @@ CONSTRAINT fk_tb_visitas_id_visita FOREIGN KEY(id_visita) REFERENCES tb_visitas(
 CONSTRAINT fk_tb_visitas_id_voluntario FOREIGN KEY(id_voluntario) REFERENCES tb_voluntarios(id_voluntario)
 );
 
-CREATE TABLE tb_materiais (
-    id_material INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    nm_material VARCHAR(50),
-    quantidade INTEGER,
-    ds_material VARCHAR(70),
-    dt_criacao DATE,
-    dt_alteracao DATE,
-    dt_exclusao DATE
-);
 
 
 CREATE TABLE tb_materiais_doados (
-id_material INTEGER,
-id_doacao INTEGER,
-dt_criacao DATE,
-dt_alteracao DATE,
-dt_exclusao DATE,
-
-PRIMARY KEY (id_material, id_doacao),
-FOREIGN KEY (id_material) REFERENCES tb_materiais(id_material),
-FOREIGN KEY (id_doacao) REFERENCES tb_doacoes(id_doacao)
+    id_material_doado INTEGER NOT NULL AUTO_INCREMENT,
+    id_doacao INTEGER,
+    nm_material VARCHAR(50),
+    qnt_material INTEGER,
+    descricao VARCHAR(100),
+    dt_criacao DATE,
+    dt_alteracao DATE,
+    dt_exclusao DATE,
+    PRIMARY KEY (id_material_doado),
+    FOREIGN KEY (id_doacao) REFERENCES tb_doacoes(id_doacao)
 );
 
 CREATE TABLE tb_materiais_comprados (
-id_compra INT NOT NULL AUTO_INCREMENT,
-id_material INTEGER,
-quantidade INTEGER,
-vlr_pago DECIMAL(7,2),
-dt_criacao DATE,
-dt_alteracao DATE,
-dt_exclusao DATE,
+    id_material_comprado INTEGER NOT NULL AUTO_INCREMENT,
+    nm_material VARCHAR(50),
+    qnt_material INTEGER,
+    descricao VARCHAR(100),
+    dt_criacao DATE,
+    dt_alteracao DATE,
+    dt_exclusao DATE,
+    PRIMARY KEY (id_material_comprado)
+);
 
-PRIMARY KEY (id_compra),
-FOREIGN KEY (id_material) REFERENCES tb_materiais(id_material)
+CREATE TABLE tb_materiais (
+    id_material INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    id_material_doado INTEGER NULL,
+    id_material_comprado INTEGER NULL,
+    FOREIGN KEY (id_material_doado) REFERENCES tb_materiais_doados(id_material_doado),
+    FOREIGN KEY (id_material_comprado) REFERENCES tb_materiais_comprados(id_material_comprado)
 );
 
 CREATE TABLE tb_obras(

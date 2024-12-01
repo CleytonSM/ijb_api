@@ -4,9 +4,10 @@ import lombok.Getter;
 
 @Getter
 public enum OutletProductStatus {
-    ACTIVE("ativo"),
-    INACTIVE("inativo"),
-    SOLD("vendido");
+    ACTIVE("ATIVO"),
+    EXCHANGED("TROCADO"),
+    REBATED("ABATIDO"),
+    SOLD("VENDIDO");
 
     private final String status;
 

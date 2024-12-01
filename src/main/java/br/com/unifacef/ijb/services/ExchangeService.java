@@ -11,13 +11,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ExchangeService {
     @Autowired
     private ExchangeRepository repository;
-    @Autowired
-    private OutletProductService outletProductService;
 
     public Exchange save(Exchange exchange) {
         return repository.save(exchange);
@@ -46,13 +45,24 @@ public class ExchangeService {
         return ExchangeMapper.convertExchangeIntoExchangeDTO(save(exchange));
     }
 
-    @Transactional
-    public void deleteExchange(Integer id) {
-        Exchange exchange = getById(id);
-        outletProductService.deleteOutletProduct(exchange.getOutletProduct().getId());
-    }
-
     private void updateRetrievedEntity(ExchangeDTO exchangeUpdate, Exchange exchange) {
         ExchangeMapper.updateExchange(exchangeUpdate, exchange);
+    }
+
+    public List<ExchangeDTO> findByFilter(String search) {
+        List<Exchange> exchanges = findExchangesBySearch(search);
+        if(Optional.ofNullable(exchanges).isPresent() && !exchanges.isEmpty()) {
+            return ExchangeMapper.convertListOfExchangeIntoListOfExchangeDTO(exchanges);
+        }
+
+        return null;
+    }
+
+    private List<Exchange> findExchangesBySearch(String search) {
+        return repository.findAllBySearch(search);
+    }
+
+    public void deleteById(Integer id) {
+        repository.delete(getById(id));
     }
 }

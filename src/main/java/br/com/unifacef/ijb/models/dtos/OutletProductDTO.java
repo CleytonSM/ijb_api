@@ -16,4 +16,10 @@ public class OutletProductDTO {
     private String outletProductName;
     private String outletProductDescription;
     private OutletProductStatus status;
+
+    public OutletProductDTO(Integer id, String outletProductName, OutletProductStatus status) {
+        this.id = id;
+        this.outletProductName = outletProductName;
+        this.status = status;
+    }
 }

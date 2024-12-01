@@ -6,14 +6,15 @@ import br.com.unifacef.ijb.models.dtos.OutletProductDTO;
 import br.com.unifacef.ijb.models.entities.Exchange;
 import br.com.unifacef.ijb.models.entities.OutletProduct;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ExchangeMapper {
     public static Exchange convertExchangeCreateDTOIntoExchange(ExchangeCreateDTO exchangeCreate) {
         return new Exchange(OutletProductMapper
-                .convertOutletProductCreateDTOIntoOutletProduct(exchangeCreate.getOutletProduct()),
-                exchangeCreate.getExchangesDescription());
+                .convertOutletProductDTOIntoOutletProduct(exchangeCreate.getOutletProduct()),
+                exchangeCreate.getExchangesDescription(), LocalDateTime.now());
     }
 
     public static ExchangeDTO convertExchangeIntoExchangeDTO(Exchange exchange) {
@@ -39,7 +40,8 @@ public class ExchangeMapper {
     }
 
     public static Exchange convertExchangeDTOIntoExchange(ExchangeDTO exchange) {
-        return new Exchange(OutletProductMapper.convertOutletProductDTOIntoOutletProduct(exchange.getOutletProduct()),
+        return new Exchange(exchange.getId(), OutletProductMapper
+                    .convertOutletProductDTOIntoOutletProduct(exchange.getOutletProduct()),
                 exchange.getExchangesDescription());
     }
 }

@@ -5,12 +5,13 @@ import br.com.unifacef.ijb.models.dtos.RebateDTO;
 import br.com.unifacef.ijb.models.entities.Exchange;
 import br.com.unifacef.ijb.models.entities.Rebate;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 public class RebateMapper {
     public static Rebate convertRebateCreateDTOIntoRebate(RebateCreateDTO rebateCreate) {
-        return new Rebate(ExchangeMapper.convertExchangeCreateDTOIntoExchange(rebateCreate.getExchange()),
+        return new Rebate(ExchangeMapper.convertExchangeDTOIntoExchange(rebateCreate.getExchange()),
                 rebateCreate.getDescription(), rebateCreate.getRebateValue());
     }
 

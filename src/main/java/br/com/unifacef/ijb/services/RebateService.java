@@ -2,6 +2,7 @@ package br.com.unifacef.ijb.services;
 
 import br.com.unifacef.ijb.helpers.OptionalHelper;
 import br.com.unifacef.ijb.mappers.RebateMapper;
+import br.com.unifacef.ijb.mappers.SaleMapper;
 import br.com.unifacef.ijb.mappers.TagsMapper;
 import br.com.unifacef.ijb.models.dtos.RebateCreateDTO;
 import br.com.unifacef.ijb.models.dtos.RebateDTO;
@@ -15,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class RebateService {
@@ -50,13 +52,24 @@ public class RebateService {
         return RebateMapper.convertRebateIntoRebateDTO(save(rebate));
     }
 
-    @Transactional
-    public void deleteRebate(Integer id) {
-        Rebate rebate = getById(id);
-        exchangeService.deleteExchange(rebate.getExchange().getId());
-    }
-
     private void updateRetrievedEntity(RebateDTO rebateUpdate, Rebate rebate) {
         RebateMapper.updateRebate(rebateUpdate, rebate);
+    }
+
+    public List<RebateDTO> findByFilter(String search) {
+        List<Rebate> rebates = findRebatesBySearch(search);
+        if(Optional.ofNullable(rebates).isPresent() && !rebates.isEmpty()) {
+            return RebateMapper.convertListOfRebateIntoListOfRebateDTO(rebates);
+        }
+
+        return null;
+    }
+
+    private List<Rebate> findRebatesBySearch(String search) {
+        return repository.findAllBySearch(search);
+    }
+
+    public void deleteById(Integer id) {
+        repository.delete(getById(id));
     }
 }

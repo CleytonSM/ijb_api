@@ -33,10 +33,10 @@ public class OutletProduct {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_doacao")
     private Donation donation;
-    @Column(name = "nm_prod_outlet", length = 60)
+    @Column(name = "nm_produto_outlet", length = 60)
     private String outletProductName;
-    @Column(name = "ds_prod_outlet", length = 100)
-    private String outletProductDescription;
+    @Column(name = "ds_prod_outlet")
+    private String description;
     @Column(name = "status", length = 20)
     @Enumerated(EnumType.STRING)
     private OutletProductStatus status;
@@ -47,11 +47,25 @@ public class OutletProduct {
     @Column(name = "dt_exclusao")
     private LocalDateTime deletedAt;
 
-    public OutletProduct(Donation donation, String outletProductName, String outletProductDescription,
-                         OutletProductStatus status) {
-        this.donation = donation;
+    public OutletProduct(String outletProductName, String description, OutletProductStatus status, LocalDateTime createdAt) {
         this.outletProductName = outletProductName;
-        this.outletProductDescription = outletProductDescription;
+        this.description = description;
+        this.status = status;
+        this.createdAt = createdAt;
+    }
+
+    public OutletProduct(Integer id, String outletProductName, String description, OutletProductStatus status, LocalDateTime createdAt) {
+        this.id = id;
+        this.outletProductName = outletProductName;
+        this.description = description;
+        this.status = status;
+        this.createdAt = createdAt;
+    }
+
+    public OutletProduct(Integer id, String outletProductName, String description, OutletProductStatus status) {
+        this.id = id;
+        this.outletProductName = outletProductName;
+        this.description = description;
         this.status = status;
     }
 }

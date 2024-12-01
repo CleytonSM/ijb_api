@@ -4,14 +4,15 @@ import br.com.unifacef.ijb.models.dtos.SaleCreateDTO;
 import br.com.unifacef.ijb.models.dtos.SaleDTO;
 import br.com.unifacef.ijb.models.entities.Sale;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 public class SaleMapper {
     public static Sale convertSaleCreateDTOIntoSale(SaleCreateDTO saleCreate) {
         return new Sale(OutletProductMapper
-                .convertOutletProductCreateDTOIntoOutletProduct(saleCreate.getOutletProduct()),
-                saleCreate.getSaleValue(), saleCreate.getSaleDescription());
+                .convertOutletProductDTOIntoOutletProduct(saleCreate.getOutletProduct()),
+                saleCreate.getSaleValue(), saleCreate.getSaleDescription(), LocalDateTime.now());
     }
 
     public static SaleDTO convertSaleIntoSaleDTO(Sale sale) {

@@ -10,7 +10,7 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @NoArgsConstructor
 public class RebateCreateDTO {
-    private ExchangeCreateDTO exchange;
+    private ExchangeDTO exchange;
     private String description;
     private BigDecimal rebateValue;
 }

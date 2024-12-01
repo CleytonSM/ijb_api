@@ -11,13 +11,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class SaleService {
     @Autowired
     private SaleRepository repository;
-    @Autowired
-    private OutletProductService outletProductService;
 
     public Sale save(Sale sale) {
         return repository.save(sale);
@@ -46,13 +45,25 @@ public class SaleService {
         return SaleMapper.convertSaleIntoSaleDTO(save(sale));
     }
 
-    @Transactional
-    public void deleteSale(Integer id) {
-        Sale sale = getById(id);
-        outletProductService.deleteOutletProduct(sale.getOutletProduct().getId());
-    }
 
     private void updateRetrievedEntity(SaleDTO saleUpdate, Sale sale) {
         SaleMapper.updateSale(saleUpdate, sale);
+    }
+
+    public List<SaleDTO> findByFilter(String search) {
+        List<Sale> sales = findSalesBySearch(search);
+        if(Optional.ofNullable(sales).isPresent() && !sales.isEmpty()) {
+            return SaleMapper.convertListOfSaleIntoListOfSaleDTO(sales);
+        }
+
+        return null;
+    }
+
+    private List<Sale> findSalesBySearch(String search) {
+        return repository.findAllBySearch(search);
+    }
+
+    public void deleteById(Integer id) {
+        repository.delete(getById(id));
     }
 }

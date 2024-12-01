@@ -40,4 +40,16 @@ public class Exchange {
         this.outletProduct = outletProduct;
         this.exchangesDescription = exchangesDescription;
     }
+
+    public Exchange(OutletProduct outletProduct, String exchangesDescription, LocalDateTime createdAt) {
+        this.outletProduct = outletProduct;
+        this.exchangesDescription = exchangesDescription;
+        this.createdAt = createdAt;
+    }
+
+    public Exchange(Integer id, OutletProduct outletProduct, String exchangesDescription) {
+        this.id = id;
+        this.outletProduct = outletProduct;
+        this.exchangesDescription = exchangesDescription;
+    }
 }
