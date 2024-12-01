@@ -17,6 +17,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Filter;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Data
@@ -34,12 +35,14 @@ public class OutletProduct {
     @JoinColumn(name = "id_doacao")
     private Donation donation;
     @Column(name = "nm_produto_outlet", length = 60)
-    private String outletProductName;
+    private String name;
     @Column(name = "ds_prod_outlet")
     private String description;
     @Column(name = "status", length = 20)
     @Enumerated(EnumType.STRING)
     private OutletProductStatus status;
+    @Column(name = "preco")
+    private BigDecimal price;
     @Column(name = "dt_criacao")
     private LocalDateTime createdAt;
     @Column(name = "dt_alteracao")
@@ -47,25 +50,11 @@ public class OutletProduct {
     @Column(name = "dt_exclusao")
     private LocalDateTime deletedAt;
 
-    public OutletProduct(String outletProductName, String description, OutletProductStatus status, LocalDateTime createdAt) {
-        this.outletProductName = outletProductName;
+    public OutletProduct(String name, String description, OutletProductStatus status, BigDecimal price, LocalDateTime createdAt) {
+        this.name = name;
         this.description = description;
         this.status = status;
+        this.price = price;
         this.createdAt = createdAt;
-    }
-
-    public OutletProduct(Integer id, String outletProductName, String description, OutletProductStatus status, LocalDateTime createdAt) {
-        this.id = id;
-        this.outletProductName = outletProductName;
-        this.description = description;
-        this.status = status;
-        this.createdAt = createdAt;
-    }
-
-    public OutletProduct(Integer id, String outletProductName, String description, OutletProductStatus status) {
-        this.id = id;
-        this.outletProductName = outletProductName;
-        this.description = description;
-        this.status = status;
     }
 }

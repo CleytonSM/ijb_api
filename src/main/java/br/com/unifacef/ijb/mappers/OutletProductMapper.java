@@ -9,34 +9,37 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class OutletProductMapper {
-    public static OutletProduct convertOutletProductCreateDTOIntoOutletProduct(
-            OutletProductCreateDTO outletProductCreate) {
-        return new OutletProduct(outletProductCreate.getName(), outletProductCreate.getDescription(),
-                outletProductCreate.getStatus(), LocalDateTime.now());
-    }
-
-    public static OutletProductDTO convertOutletProductIntoOutletProductDTO(OutletProduct outletProduct) {
-        return new OutletProductDTO(outletProduct.getId(), outletProduct.getOutletProductName(), outletProduct.getStatus());
-    }
-
+//    public static OutletProduct convertOutletProductCreateDTOIntoOutletProduct(
+//            OutletProductCreateDTO outletProductCreate) {
+//        return new OutletProduct(outletProductCreate.getName(), outletProductCreate.getDescription(),
+//                outletProductCreate.getStatus(), LocalDateTime.now());
+//    }
+//
+//    public static OutletProductDTO convertOutletProductIntoOutletProductDTO(OutletProduct outletProduct) {
+//        return new OutletProductDTO(outletProduct.getId(), outletProduct.getOutletProductName(), outletProduct.getStatus());
+//    }
+//
     public static List<OutletProductDTO> convertListOfOutletProductIntoListOfOutletProductDTO(
             List<OutletProduct> outletProducts) {
         List<OutletProductDTO> outletProductDTOs = new ArrayList<>();
 
-        for (OutletProduct outletProduct : outletProducts) {
-            outletProductDTOs.add(convertOutletProductIntoOutletProductDTO(outletProduct));
-        }
+        outletProducts.forEach(outletProduct -> outletProductDTOs.add(convertOutletProductIntoOutletProductDTO(outletProduct)));
 
         return outletProductDTOs;
     }
 
-    public static void updateOutletProduct(OutletProductDTO outletProductUpdate, OutletProduct outletProduct) {
-        outletProduct.setDonation(DonationMapper.convertDonationDTOIntoDonation(outletProductUpdate.getDonation()));
-        outletProduct.setOutletProductName(outletProductUpdate.getOutletProductName());
+    private static OutletProductDTO convertOutletProductIntoOutletProductDTO(OutletProduct outletProduct) {
+        return new OutletProductDTO(outletProduct.getId(), outletProduct.getName(), outletProduct.getDescription(),
+                outletProduct.getPrice(), outletProduct.getStatus());
     }
-
-    public static OutletProduct convertOutletProductDTOIntoOutletProduct(OutletProductDTO outletProduct) {
-        return new OutletProduct(outletProduct.getId(), outletProduct.getOutletProductName(),
-                outletProduct.getOutletProductDescription(), outletProduct.getStatus());
-    }
+//
+//    public static void updateOutletProduct(OutletProductDTO outletProductUpdate, OutletProduct outletProduct) {
+//        outletProduct.setDonation(DonationMapper.convertDonationDTOIntoDonation(outletProductUpdate.getDonation()));
+//        outletProduct.setOutletProductName(outletProductUpdate.getOutletProductName());
+//    }
+//
+//    public static OutletProduct convertOutletProductDTOIntoOutletProduct(OutletProductDTO outletProduct) {
+//        return new OutletProduct(outletProduct.getId(), outletProduct.getOutletProductName(),
+//                outletProduct.getOutletProductDescription(), outletProduct.getStatus());
+//    }
 }

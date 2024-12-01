@@ -56,6 +56,7 @@ public class MaterialService {
         material.setName(materialUpdate.getName());
         material.setQuantity(materialUpdate.getQuantity());
         material.setDescription(materialUpdate.getDescription());
+        material.setPrice(materialUpdate.getPrice());
         material.setOrigin(materialUpdate.getOrigin());
         material.setUpdatedAt(LocalDateTime.now());
 

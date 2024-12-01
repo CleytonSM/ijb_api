@@ -12,9 +12,8 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 public class OutletProductUpdateDTO {
     private Integer id;
-    private String outletProductName;
-    private BigDecimal price;
+    private String name;
     private String description;
-//    private OutletProductStatus previousStatus;
+    private BigDecimal price;
     private OutletProductStatus status;
 }

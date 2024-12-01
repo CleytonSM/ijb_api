@@ -9,10 +9,7 @@ import java.util.List;
 
 @Repository
 public interface OutletProductRepository extends JpaRepository<OutletProduct, Integer> {
-    List<OutletProduct> findAllByOutletProductName(String outletProductName);
-
     @Query("SELECT op FROM OutletProduct op " +
-           "WHERE op.outletProductName LIKE(CONCAT('%', :search, '%')) " +
-           "AND op.status = ACTIVE")
+           "WHERE op.name LIKE(CONCAT('%', :search, '%')) ")
     List<OutletProduct> findAllBySearch(String search);
 }

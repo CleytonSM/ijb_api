@@ -191,7 +191,10 @@ CREATE TABLE tb_materiais (
     quantidade INTEGER,
     ds_material VARCHAR(255),
     preco DECIMAL(10, 2),
-    origem VARCHAR(255)
+    origem VARCHAR(255),
+    dt_criacao DATE,
+    dt_alteracao DATE,
+    dt_exclusao DATE
 );
 
 CREATE TABLE tb_obras(
@@ -228,7 +231,7 @@ id_doacao VARCHAR(5),
 ds_prod_outlet VARCHAR(100),
 nm_produto_outlet VARCHAR(60),
 status VARCHAR(20),
-valor DECIMAL(10, 2)
+preco DECIMAL(10, 2),
 dt_criacao DATE,
 dt_alteracao DATE,
 dt_exclusao DATE

@@ -1,7 +1,7 @@
 package br.com.unifacef.ijb.controller;
 
 import br.com.unifacef.ijb.models.dtos.OutletProductCreateDTO;
-import br.com.unifacef.ijb.models.dtos.OutletProductFilterResponseDTO;
+import br.com.unifacef.ijb.models.dtos.OutletProductDTO;
 import br.com.unifacef.ijb.models.dtos.OutletProductUpdateDTO;
 import br.com.unifacef.ijb.models.enums.OutletProductStatus;
 import br.com.unifacef.ijb.services.OutletProductService;
@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/ijb/outletProduct")
 public class OutletProductController {
@@ -31,14 +33,13 @@ public class OutletProductController {
     }
 
     @GetMapping("/filter")
-    public ResponseEntity<OutletProductFilterResponseDTO> findOutletProductByFilter(@RequestParam String search) {
+    public ResponseEntity<List<OutletProductDTO>> findOutletProductByFilter(@RequestParam String search) {
         return new ResponseEntity<>(service.findByFilter(search), HttpStatus.OK);
     }
 
     @DeleteMapping("/delete")
-    public ResponseEntity<Void> deleteOutletProductById(@RequestParam Integer id,
-                                                        @RequestParam OutletProductStatus status) {
-        service.deleteOutletProduct(id, status);
+    public ResponseEntity<Void> deleteOutletProductById(@RequestParam Integer id) {
+        service.deleteOutletProduct(id);
 
         return new ResponseEntity<>(HttpStatus.OK);
     }
