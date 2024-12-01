@@ -36,10 +36,10 @@ public class MaterialService {
         save(material);
     }
 
-    public List<MaterialDTO> findByFilter(String search) {
-        List<Material> materials =  repository.findAllBySearch(search);
+    public List<MaterialDTO> findAllMaterials() {
+        List<Material> materials = repository.findAll();
 
-        if (Optional.ofNullable(materials).isEmpty() || materials.isEmpty()) {
+        if (materials.isEmpty()) {
             return new ArrayList<>();
         }
 
@@ -50,8 +50,8 @@ public class MaterialService {
         repository.delete(getById(id));
     }
 
-    public void updateMaterial(MaterialUpdateDTO materialUpdate) {
-        Material material = getById(materialUpdate.getId());
+    public void updateMaterial(Integer id, MaterialUpdateDTO materialUpdate) {
+        Material material = getById(id);
 
         material.setName(materialUpdate.getName());
         material.setQuantity(materialUpdate.getQuantity());

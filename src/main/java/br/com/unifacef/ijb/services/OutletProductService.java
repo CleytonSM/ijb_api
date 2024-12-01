@@ -39,10 +39,10 @@ public class OutletProductService {
         save(outletProduct);
     }
 
-    public List<OutletProductDTO> findByFilter(String search) {
-        List<OutletProduct> outletProducts = repository.findAllBySearch(search);
+    public List<OutletProductDTO> findByFilter() {
+        List<OutletProduct> outletProducts = repository.findAll();
 
-        if(Optional.ofNullable(outletProducts).isEmpty() || outletProducts.isEmpty()){
+        if(outletProducts.isEmpty()){
             return new ArrayList<>();
         }
 
@@ -53,8 +53,8 @@ public class OutletProductService {
         repository.delete(getById(id));
     }
 
-    public void updateOutletProduct(OutletProductUpdateDTO outletProductUpdate) {
-        OutletProduct outletProduct = getById(outletProductUpdate.getId());
+    public void updateOutletProduct(Integer id, OutletProductUpdateDTO outletProductUpdate) {
+        OutletProduct outletProduct = getById(id);
 
         outletProduct.setName(outletProductUpdate.getName());
         outletProduct.setDescription(outletProductUpdate.getDescription());

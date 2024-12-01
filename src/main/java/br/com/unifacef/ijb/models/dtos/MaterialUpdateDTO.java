@@ -11,7 +11,6 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @NoArgsConstructor
 public class MaterialUpdateDTO {
-    private Integer id;
     private String name;
     private Integer quantity;
     private BigDecimal price;

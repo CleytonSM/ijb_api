@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -32,9 +33,9 @@ public class OutletProductController {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    @GetMapping("/filter")
-    public ResponseEntity<List<OutletProductDTO>> findOutletProductByFilter(@RequestParam String search) {
-        return new ResponseEntity<>(service.findByFilter(search), HttpStatus.OK);
+    @GetMapping()
+    public ResponseEntity<List<OutletProductDTO>> findAllOutletProduct() {
+        return new ResponseEntity<>(service.findByFilter(), HttpStatus.OK);
     }
 
     @DeleteMapping("/delete")
@@ -44,9 +45,10 @@ public class OutletProductController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PutMapping("/update")
-    public ResponseEntity<Void> updateOutletProductById(@RequestBody OutletProductUpdateDTO outletProductUpdate) {
-        service.updateOutletProduct(outletProductUpdate);
+    @PutMapping("/update/{id}")
+    public ResponseEntity<Void> updateOutletProductById(@PathVariable("id") Integer id,
+                                                        @RequestBody OutletProductUpdateDTO outletProductUpdate) {
+        service.updateOutletProduct(id, outletProductUpdate);
 
         return new ResponseEntity<>(HttpStatus.OK);
     }

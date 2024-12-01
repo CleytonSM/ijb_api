@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -31,21 +32,21 @@ public class MaterialController {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    @GetMapping("/filter")
-    public ResponseEntity<List<MaterialDTO>> findMaterialByFilter(@RequestParam String search) {
-        return new ResponseEntity<>(service.findByFilter(search), HttpStatus.OK);
+    @GetMapping()
+    public ResponseEntity<List<MaterialDTO>> findAllMaterials() {
+        return new ResponseEntity<>(service.findAllMaterials(), HttpStatus.OK);
     }
 
-    @DeleteMapping("/delete")
-    public ResponseEntity<Void> deleteMaterial(@RequestParam Integer id) {
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<Void> deleteMaterial(@PathVariable Integer id) {
         service.deleteById(id);
 
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PutMapping("/update")
-    public ResponseEntity<Void> deleteMaterial(@RequestBody MaterialUpdateDTO materialUpdate) {
-        service.updateMaterial(materialUpdate);
+    @PutMapping("/update/{id}")
+    public ResponseEntity<Void> updateMaterial(@PathVariable("id") Integer id, @RequestBody MaterialUpdateDTO materialUpdate) {
+        service.updateMaterial(id, materialUpdate);
 
         return new ResponseEntity<>(HttpStatus.OK);
     }
