@@ -185,38 +185,13 @@ CONSTRAINT fk_tb_visitas_id_visita FOREIGN KEY(id_visita) REFERENCES tb_visitas(
 CONSTRAINT fk_tb_visitas_id_voluntario FOREIGN KEY(id_voluntario) REFERENCES tb_voluntarios(id_voluntario)
 );
 
-
-
-CREATE TABLE tb_materiais_doados (
-    id_material_doado INTEGER NOT NULL AUTO_INCREMENT,
-    id_doacao INTEGER,
-    nm_material VARCHAR(50),
-    qnt_material INTEGER,
-    descricao VARCHAR(100),
-    dt_criacao DATE,
-    dt_alteracao DATE,
-    dt_exclusao DATE,
-    PRIMARY KEY (id_material_doado),
-    FOREIGN KEY (id_doacao) REFERENCES tb_doacoes(id_doacao)
-);
-
-CREATE TABLE tb_materiais_comprados (
-    id_material_comprado INTEGER NOT NULL AUTO_INCREMENT,
-    nm_material VARCHAR(50),
-    qnt_material INTEGER,
-    descricao VARCHAR(100),
-    dt_criacao DATE,
-    dt_alteracao DATE,
-    dt_exclusao DATE,
-    PRIMARY KEY (id_material_comprado)
-);
-
 CREATE TABLE tb_materiais (
     id_material INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    id_material_doado INTEGER NULL,
-    id_material_comprado INTEGER NULL,
-    FOREIGN KEY (id_material_doado) REFERENCES tb_materiais_doados(id_material_doado),
-    FOREIGN KEY (id_material_comprado) REFERENCES tb_materiais_comprados(id_material_comprado)
+    nm_material VARCHAR(255),
+    quantidade INTEGER,
+    ds_material VARCHAR(255),
+    preco DECIMAL(10, 2),
+    origem VARCHAR(255)
 );
 
 CREATE TABLE tb_obras(
@@ -253,72 +228,25 @@ id_doacao VARCHAR(5),
 ds_prod_outlet VARCHAR(100),
 nm_produto_outlet VARCHAR(60),
 status VARCHAR(20),
+valor DECIMAL(10, 2)
 dt_criacao DATE,
 dt_alteracao DATE,
 dt_exclusao DATE
 );
 
-CREATE TABLE tb_trocas (
-id_troca INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-id_prod_outlet INTEGER,
-ds_troca VARCHAR(100),
-dt_criacao DATE,
-dt_alteracao DATE,
-dt_exclusao DATE,
-
-FOREIGN KEY (id_prod_outlet) REFERENCES tb_produtos_outlet(id_prod_outlet)
-);
-
-CREATE TABLE tb_materiais_trocados (
-id_material INTEGER,
-id_troca INTEGER,
-dt_criacao DATE,
-dt_alteracao DATE,
-dt_exclusao DATE,
-
-PRIMARY KEY (id_material, id_troca),
-FOREIGN KEY (id_material) REFERENCES tb_materiais(id_material),
-FOREIGN KEY (id_troca) REFERENCES tb_trocas(id_troca)
-);
-
-CREATE TABLE tb_vendas (
-id_venda INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-id_prod_outlet INTEGER,
-valor_venda DECIMAL(7,2),
-ds_venda VARCHAR(100),
-dt_criacao DATE,
-dt_alteracao DATE,
-dt_exclusao DATE,
-
-FOREIGN KEY (id_prod_outlet) REFERENCES tb_produtos_outlet(id_prod_outlet)
-);
-
-CREATE TABLE tb_abatimentos (
-    id_abatimento INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    id_troca INTEGER,
-    ds_abatimento VARCHAR(100),
-    valor_abatido DECIMAL(7,2),
-    FOREIGN KEY (id_troca) REFERENCES tb_trocas(id_troca)
-);
-
 CREATE TABLE tb_receitas(
 	id_receita INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	id_doacao INTEGER,
-	id_venda INTEGER,
-	id_abatimento INTEGER,
 	dt_recebimento DATE,
 	dt_vencimento DATE,
 	dt_criacao DATE,
 	dt_alteracao DATE,
 	dt_exclusao DATE,
-	FOREIGN KEY (id_doacao) REFERENCES tb_doacoes(id_doacao),
-	FOREIGN KEY (id_venda) REFERENCES tb_vendas(id_venda),
-	FOREIGN KEY (id_abatimento) REFERENCES tb_abatimentos(id_abatimento)
+	FOREIGN KEY (id_doacao) REFERENCES tb_doacoes(id_doacao)
 );
 
 CREATE TABLE tb_despesas(
 	id_despesa INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-	id_compra INTEGER,
 	id_obra INTEGER,
 	dt_recebimento DATE,
 	dt_vencimento DATE,
@@ -326,7 +254,6 @@ CREATE TABLE tb_despesas(
 	dt_alteracao DATE,
 	dt_exclusao DATE,
 
-	FOREIGN KEY (id_compra) REFERENCES tb_materiais_comprados(id_compra),
 	FOREIGN KEY (id_obra) REFERENCES tb_obras(id_obra)
 );
 

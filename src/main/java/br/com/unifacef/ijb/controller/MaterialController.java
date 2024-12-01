@@ -1,7 +1,7 @@
 package br.com.unifacef.ijb.controller;
 
 import br.com.unifacef.ijb.models.dtos.MaterialCreateDTO;
-import br.com.unifacef.ijb.models.dtos.MaterialFilterResponseDTO;
+import br.com.unifacef.ijb.models.dtos.MaterialDTO;
 import br.com.unifacef.ijb.models.dtos.MaterialUpdateDTO;
 import br.com.unifacef.ijb.services.MaterialService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/ijb/material")
@@ -30,13 +32,13 @@ public class MaterialController {
     }
 
     @GetMapping("/filter")
-    public ResponseEntity<MaterialFilterResponseDTO> findMaterialByFilter(@RequestParam String search) {
+    public ResponseEntity<List<MaterialDTO>> findMaterialByFilter(@RequestParam String search) {
         return new ResponseEntity<>(service.findByFilter(search), HttpStatus.OK);
     }
 
     @DeleteMapping("/delete")
-    public ResponseEntity<Void> deleteMaterial(@RequestParam Integer id, @RequestParam Boolean isDonation) {
-        service.deleteMaterial(id, isDonation);
+    public ResponseEntity<Void> deleteMaterial(@RequestParam Integer id) {
+        service.deleteById(id);
 
         return new ResponseEntity<>(HttpStatus.OK);
     }
