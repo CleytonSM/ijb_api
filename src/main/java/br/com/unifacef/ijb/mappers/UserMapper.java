@@ -6,13 +6,15 @@ import br.com.unifacef.ijb.models.dtos.UserDTO;
 import br.com.unifacef.ijb.models.dtos.VolunteerRegisterDTO;
 import br.com.unifacef.ijb.models.entities.User;
 
+import java.time.LocalDateTime;
+
 public class UserMapper {
     public static UserDTO convertUserIntoUserDTO(User user) {
         return new UserDTO(user.getId(), user.getEmail(), user.getCpf(), user.getPassword());
     }
 
     public static User convertUserCreateDTOToUser(UserCreateDTO userCreateDTO) {
-        return new User(userCreateDTO.getEmail(), userCreateDTO.getCpf(), userCreateDTO.getPassword());
+        return new User(userCreateDTO.getEmail(), userCreateDTO.getCpf(), userCreateDTO.getPassword(), LocalDateTime.now());
     }
 
     public static UserDTO convertUserToUserDTO(User user) {
