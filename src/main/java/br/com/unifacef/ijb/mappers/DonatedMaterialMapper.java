@@ -2,8 +2,9 @@ package br.com.unifacef.ijb.mappers;
 
 import br.com.unifacef.ijb.models.dtos.DonatedMaterialCreateDTO;
 import br.com.unifacef.ijb.models.dtos.DonatedMaterialDTO;
-import br.com.unifacef.ijb.models.dtos.OutletProductDTO;
 import br.com.unifacef.ijb.models.entities.DonatedMaterial;
+
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,16 +12,17 @@ public class DonatedMaterialMapper {
     public static DonatedMaterial convertDonatedMaterialCreateDTOIntoDonatedMaterial(
             DonatedMaterialCreateDTO donatedMaterialCreate) {
         return new DonatedMaterial(
-                DonationMapper.convertDonationCreateDTOIntoDonation(donatedMaterialCreate.getDonation()),
-                donatedMaterialCreate.getMaterialName(),
-                donatedMaterialCreate.getMaterialQuantity()
+//                DonationMapper.convertDonationCreateDTOIntoDonation(donatedMaterialCreate.getDonation()),
+                donatedMaterialCreate.getMaterialName(), donatedMaterialCreate.getMaterialQuantity(),
+                donatedMaterialCreate.getDescription(),
+                LocalDateTime.now()
         );
     }
 
     public static DonatedMaterialDTO convertDonatedMaterialIntoDonatedMaterialDTO(DonatedMaterial donatedMaterial) {
         return new DonatedMaterialDTO(
                 donatedMaterial.getId(),
-                DonationMapper.convertDonationIntoDonationDTO(donatedMaterial.getDonation()),
+                //DonationMapper.convertDonationIntoDonationDTO(donatedMaterial.getDonation()),
                 donatedMaterial.getMaterialName(),
                 donatedMaterial.getMaterialQuantity()
         );
@@ -30,9 +32,8 @@ public class DonatedMaterialMapper {
             List<DonatedMaterial> donatedMaterials) {
         List<DonatedMaterialDTO> donatedMaterialDTOS = new ArrayList<>();
 
-        for (DonatedMaterial donatedMaterial : donatedMaterials) {
-            donatedMaterialDTOS.add(convertDonatedMaterialIntoDonatedMaterialDTO(donatedMaterial));
-        }
+        donatedMaterials.forEach(donatedMaterial ->
+                donatedMaterialDTOS.add(convertDonatedMaterialIntoDonatedMaterialDTO(donatedMaterial)));
 
         return donatedMaterialDTOS;
     }
@@ -51,7 +52,6 @@ public class DonatedMaterialMapper {
 
     public static DonatedMaterialDTO convertDonatedMaterialtIntoDonatedMaterialDTO(DonatedMaterial donatedMaterial) {
         return new DonatedMaterialDTO(donatedMaterial.getId(),
-                DonationMapper.convertDonationIntoDonationDTO(donatedMaterial.getDonation()),
                 donatedMaterial.getMaterialName(),
                 donatedMaterial.getMaterialQuantity());
     }

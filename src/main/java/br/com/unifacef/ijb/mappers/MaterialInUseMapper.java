@@ -15,7 +15,7 @@ public class MaterialInUseMapper {
     public static MaterialInUse convertMaterialInUseCreateDTOIntoMaterialInUse(
             MaterialInUseCreateDTO materialInUseCreate) {
         return new MaterialInUse(
-                MaterialMapper.convertMaterialCreateDTOIntoMaterial(materialInUseCreate.getMaterial()),
+               null,
                 ConstructionMapper.convertConstructionCreateDTOIntoConstruction(materialInUseCreate.getConstruction())
         );
     }
@@ -39,12 +39,12 @@ public class MaterialInUseMapper {
         return materialInUseDTOS;
     }
 
-    public static MaterialInUse updateMaterialInUse(MaterialInUseDTO materialInUseUpdate, MaterialInUse materialInUse) {
-        materialInUse.setMaterial(MaterialMapper.convertMaterialDTOIntoMaterial(materialInUseUpdate.getMaterial()));
-        materialInUse.setConstruction(ConstructionMapper.convertConstructionDTOIntoConstruction(materialInUseUpdate.getConstruction()));
-
-        return materialInUse;
-    }
+//    public static MaterialInUse updateMaterialInUse(MaterialInUseDTO materialInUseUpdate, MaterialInUse materialInUse) {
+//        materialInUse.setMaterial(MaterialMapper.convertMaterialDTOIntoMaterial(materialInUseUpdate.getMaterial()));
+//        materialInUse.setConstruction(ConstructionMapper.convertConstructionDTOIntoConstruction(materialInUseUpdate.getConstruction()));
+//
+//        return materialInUse;
+//    }
 
     public static MaterialInUse convertMaterialInUseDTOIntoMaterialInUse(MaterialInUseDTO materialInUseDTO) {
         return new MaterialInUse();

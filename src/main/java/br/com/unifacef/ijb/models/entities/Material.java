@@ -31,15 +31,12 @@ public class Material {
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_material_comprado")
     private PurchasedMaterial purchasedMaterial;
-    @Column(name = "dt_criacao")
-    private LocalDateTime createdAt;
-    @Column(name = "dt_alteracao")
-    private LocalDateTime updatedAt;
-    @Column(name = "dt_exclusao")
-    private LocalDateTime deletedAt;
 
-    public Material(DonatedMaterial donatedMaterial, PurchasedMaterial purchasedMaterial) {
+    public Material(DonatedMaterial donatedMaterial) {
         this.donatedMaterial = donatedMaterial;
+    }
+
+    public Material(PurchasedMaterial purchasedMaterial) {
         this.purchasedMaterial = purchasedMaterial;
     }
 }

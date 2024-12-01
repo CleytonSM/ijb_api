@@ -11,7 +11,9 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PurchasedMaterialService {
@@ -27,11 +29,11 @@ public class PurchasedMaterialService {
     }
 
     @Transactional
-    public PurchasedMaterialDTO createPurchasedMaterial(PurchasedMaterialCreateDTO purchasedMaterialCreate) {
+    public PurchasedMaterial createPurchasedMaterial(PurchasedMaterialCreateDTO purchasedMaterialCreate) {
         PurchasedMaterial purchasedMaterial = PurchasedMaterialMapper
                 .convertPurchasedMaterialCreateDTOIntoPurchasedMaterial(purchasedMaterialCreate);
 
-        return PurchasedMaterialMapper.convertPurchasedMaterialIntoPurchasedMaterialDTO(save(purchasedMaterial));
+        return save(purchasedMaterial);
     }
 
     public List<PurchasedMaterialDTO> getAllPurchasedMaterials() {
@@ -56,9 +58,8 @@ public class PurchasedMaterialService {
     }
 
     @Transactional
-    public void deleteOutletProduct(Integer id) {
-        PurchasedMaterial purchasedMaterial = getById(id);
-        repository.delete(purchasedMaterial);
+    public void deletePurchasedMaterial(Integer id) {
+        repository.delete(getById(id));
     }
 
     private void updateRetrievedEntity(PurchasedMaterialDTO purchasedMaterialUpdate, PurchasedMaterial purchasedMaterial) {
@@ -66,4 +67,17 @@ public class PurchasedMaterialService {
     }
 
 
+    public List<PurchasedMaterialDTO> findByFilter(String search) {
+        List<PurchasedMaterial> purchasedMaterials = findPurchasedMaterialsBySearch(search);
+        if (Optional.ofNullable(purchasedMaterials).isPresent() && !purchasedMaterials.isEmpty()) {
+            return PurchasedMaterialMapper
+                    .convertListOfPurchasedMaterialIntoListOfPurchasedMaterialDTO(purchasedMaterials);
+        }
+
+        return null;
+    }
+
+    private List<PurchasedMaterial> findPurchasedMaterialsBySearch(String search) {
+        return repository.findAllBySearch(search);
+    }
 }

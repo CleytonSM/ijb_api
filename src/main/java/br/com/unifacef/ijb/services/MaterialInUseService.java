@@ -62,7 +62,7 @@ public class MaterialInUseService {
     }
 
     private void updateRetrievedEntity(MaterialInUseDTO materialInUseUpdate, MaterialInUse materialInUse) {
-        MaterialInUseMapper.updateMaterialInUse(materialInUseUpdate, materialInUse);
+//        MaterialInUseMapper.updateMaterialInUse(materialInUseUpdate, materialInUse);
     }
 
 }

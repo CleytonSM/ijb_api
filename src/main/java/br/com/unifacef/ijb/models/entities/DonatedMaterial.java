@@ -31,7 +31,9 @@ public class DonatedMaterial {
     @Column(name = "nm_material", length = 60)
     private String materialName;
     @Column(name = "qnt_material")
-    private String materialQuantity;
+    private Integer materialQuantity;
+    @Column(name = "descricao")
+    private String description;
     @Column(name = "dt_criacao")
     private LocalDateTime createdAt;
     @Column(name = "dt_alteracao")
@@ -39,9 +41,18 @@ public class DonatedMaterial {
     @Column(name = "dt_exclusao")
     private LocalDateTime deletedAt;
 
-    public DonatedMaterial(Donation donation, String materialName, String materialQuantity) {
+    public DonatedMaterial(Donation donation, String materialName, Integer materialQuantity, String description, LocalDateTime createdAt) {
         this.donation = donation;
         this.materialName = materialName;
         this.materialQuantity = materialQuantity;
+        this.description = description;
+        this.createdAt = createdAt;
+    }
+
+    public DonatedMaterial(String materialName, Integer materialQuantity, String description, LocalDateTime createdAt) {
+        this.materialName = materialName;
+        this.materialQuantity = materialQuantity;
+        this.description = description;
+        this.createdAt = createdAt;
     }
 }

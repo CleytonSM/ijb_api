@@ -7,8 +7,10 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class PurchasedMaterialCreateDTO {
+public class MaterialUpdateDTO {
+    private Integer id;
     private String materialName;
-    private Integer materialQuantity;
+    private Integer quantity;
     private String description;
+    private Boolean isDonated;
 }

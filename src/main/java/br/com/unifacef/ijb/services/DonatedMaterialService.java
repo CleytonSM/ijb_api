@@ -11,7 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class DonatedMaterialService {
@@ -21,12 +23,11 @@ public class DonatedMaterialService {
     public DonatedMaterial save(DonatedMaterial donatedMaterial){ return repository.save(donatedMaterial);}
 
     @Transactional
-    public DonatedMaterialDTO createDonateMaterial(DonatedMaterialCreateDTO donatedMaterialCreate){
+    public DonatedMaterial createDonatedMaterial(DonatedMaterialCreateDTO donatedMaterialCreate){
         DonatedMaterial donatedMaterial = DonatedMaterialMapper
                 .convertDonatedMaterialCreateDTOIntoDonatedMaterial(donatedMaterialCreate);
-        donatedMaterial = save(donatedMaterial);
 
-        return DonatedMaterialMapper.convertDonatedMaterialtIntoDonatedMaterialDTO(donatedMaterial);
+        return save(donatedMaterial);
     }
 
     public List<DonatedMaterialDTO> getAllDonatedMaterials() {
@@ -44,8 +45,7 @@ public class DonatedMaterialService {
 
     @Transactional
     public DonatedMaterialDTO updateDonatedMaterial(DonatedMaterialDTO donatedMaterialUpdate){
-        DonatedMaterial donatedMaterial = OptionalHelper.getOptionalEntity(repository
-                .findById(donatedMaterialUpdate.getId()));
+        DonatedMaterial donatedMaterial = getById(donatedMaterialUpdate.getId());
         DonatedMaterialMapper.updateDonatedMaterial(donatedMaterialUpdate, donatedMaterial);
 
         donatedMaterial = save(donatedMaterial);
@@ -54,10 +54,24 @@ public class DonatedMaterialService {
 
     @Transactional
     public void deleteDonatedMaterial(Integer id) {
-        DonatedMaterial donatedMaterial = OptionalHelper.getOptionalEntity(repository.findById(id));
-        repository.delete(donatedMaterial);
+        repository.delete(getById(id));
     }
 
 
+    public List<DonatedMaterialDTO> findByFilter(String search) {
+        List<DonatedMaterial> donatedMaterials = findPurchasedMaterialsBySearch(search);
+        if (Optional.ofNullable(donatedMaterials).isPresent() && !donatedMaterials.isEmpty()) {
+            return DonatedMaterialMapper.convertListOfDonatedMaterialIntoListOfDonatedMaterialDTO(donatedMaterials);
+        }
 
+        return null;
+    }
+
+    private List<DonatedMaterial> findPurchasedMaterialsBySearch(String search) {
+        return repository.findAllBySearch(search);
+    }
+
+    public DonatedMaterial getById(Integer id) {
+        return OptionalHelper.getOptionalEntity(repository.findById(id));
+    }
 }

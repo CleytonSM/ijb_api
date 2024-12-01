@@ -4,6 +4,7 @@ import br.com.unifacef.ijb.models.dtos.PurchasedMaterialCreateDTO;
 import br.com.unifacef.ijb.models.dtos.PurchasedMaterialDTO;
 import br.com.unifacef.ijb.models.entities.PurchasedMaterial;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,11 +12,10 @@ public class PurchasedMaterialMapper {
 
     public static PurchasedMaterial convertPurchasedMaterialCreateDTOIntoPurchasedMaterial(
             PurchasedMaterialCreateDTO purchasedMaterialCreate) {
-        return new PurchasedMaterial(
-                purchasedMaterialCreate.getMaterialName(),
-                Integer.parseInt(purchasedMaterialCreate.getMaterialQuantity())
-
-        );
+        return new PurchasedMaterial(purchasedMaterialCreate.getMaterialName(),
+                purchasedMaterialCreate.getMaterialQuantity(),
+                purchasedMaterialCreate.getDescription(),
+                LocalDateTime.now());
     }
 
     public static PurchasedMaterialDTO convertPurchasedMaterialIntoPurchasedMaterialDTO(PurchasedMaterial purchasedMaterial) {
@@ -30,9 +30,8 @@ public class PurchasedMaterialMapper {
             List<PurchasedMaterial> purchasedMaterials) {
         List<PurchasedMaterialDTO> purchasedMaterialDTOs = new ArrayList<>();
 
-        for (PurchasedMaterial purchasedMaterial : purchasedMaterials) {
-            purchasedMaterialDTOs.add(convertPurchasedMaterialIntoPurchasedMaterialDTO(purchasedMaterial));
-        }
+        purchasedMaterials.forEach(purchasedMaterial -> purchasedMaterialDTOs.
+                add(convertPurchasedMaterialIntoPurchasedMaterialDTO(purchasedMaterial)));
 
         return purchasedMaterialDTOs;
     }

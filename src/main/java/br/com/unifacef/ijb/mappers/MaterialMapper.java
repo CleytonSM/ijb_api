@@ -1,25 +1,23 @@
 package br.com.unifacef.ijb.mappers;
 
-import br.com.unifacef.ijb.models.dtos.MaterialCreateDTO;
 import br.com.unifacef.ijb.models.dtos.MaterialDTO;
-import br.com.unifacef.ijb.models.dtos.OutletProductCreateDTO;
-import br.com.unifacef.ijb.models.dtos.OutletProductDTO;
+import br.com.unifacef.ijb.models.dtos.MaterialUpdateDTO;
 import br.com.unifacef.ijb.models.entities.Material;
-import br.com.unifacef.ijb.models.entities.OutletProduct;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class MaterialMapper {
-    public static Material convertMaterialCreateDTOIntoMaterial(
-            MaterialCreateDTO materialCreate) {
-        return new Material(DonatedMaterialMapper.convertDonatedMaterialCreateDTOIntoDonatedMaterial(materialCreate.getDonatedMaterial()),
-                PurchasedMaterialMapper.convertPurchasedMaterialCreateDTOIntoPurchasedMaterial(materialCreate.getPurchasedMaterial()));
 
-    }
     public static MaterialDTO convertMaterialIntoMaterialDTO(Material material) {
+        if(Optional.ofNullable(material.getDonatedMaterial()).isPresent()) {
+           return new MaterialDTO(material.getId(),
+                   DonatedMaterialMapper.convertDonatedMaterialIntoDonatedMaterialDTO(material.getDonatedMaterial()));
+        }
+
         return new MaterialDTO(material.getId(),
-                DonatedMaterialMapper.convertDonatedMaterialIntoDonatedMaterialDTO(material.getDonatedMaterial()),
                 PurchasedMaterialMapper.convertPurchasedMaterialIntoPurchasedMaterialDTO(material.getPurchasedMaterial())
         );
     }
@@ -35,15 +33,22 @@ public class MaterialMapper {
         return materialDTOs;
     }
 
-    public static void updateMaterial(MaterialDTO materialUpdate, Material material) {
-        material.setDonatedMaterial(DonatedMaterialMapper.convertDonatedMaterialDTOIntoDonatedMaterial(materialUpdate.getDonatedMaterial()));
-        material.setPurchasedMaterial(PurchasedMaterialMapper.convertPurchasedMaterialDTOIntoPurchasedMaterial(materialUpdate.getPurchasedMaterial()));
+    public static Material updateMaterial(MaterialUpdateDTO materialUpdate, Material material) {
+        if(Optional.ofNullable(material.getDonatedMaterial()).isPresent()) {
+            material.getDonatedMaterial().setMaterialName(materialUpdate.getMaterialName());
+            material.getDonatedMaterial().setMaterialQuantity(materialUpdate.getQuantity());
+            material.getDonatedMaterial().setDescription(materialUpdate.getDescription());
+            material.getDonatedMaterial().setUpdatedAt(LocalDateTime.now());
+        }
+
+        if(Optional.ofNullable(material.getPurchasedMaterial()).isPresent()) {
+            material.getPurchasedMaterial().setMaterialName(materialUpdate.getMaterialName());
+            material.getPurchasedMaterial().setMaterialQuantity(materialUpdate.getQuantity());
+            material.getPurchasedMaterial().setDescription(materialUpdate.getDescription());
+            material.getPurchasedMaterial().setUpdatedAt(LocalDateTime.now());
+        }
+
+        return material;
     }
 
-    public static Material convertMaterialDTOIntoMaterial(MaterialDTO materialDTO) {
-        return new Material(
-                DonatedMaterialMapper.convertDonatedMaterialDTOIntoDonatedMaterial(materialDTO.getDonatedMaterial()),
-                PurchasedMaterialMapper.convertPurchasedMaterialDTOIntoPurchasedMaterial(materialDTO.getPurchasedMaterial())
-        );
-    }
 }

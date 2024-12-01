@@ -20,12 +20,14 @@ import java.time.LocalDateTime;
 public class PurchasedMaterial {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_material_doado")
+    @Column(name = "id_material_comprado")
     private Integer id;
     @Column(name = "nm_material", length = 60)
     private String materialName;
     @Column(name = "qnt_material")
     private Integer materialQuantity;
+    @Column(name = "descricao")
+    private String description;
     @Column(name = "dt_criacao")
     private LocalDateTime createdAt;
     @Column(name = "dt_alteracao")
@@ -38,4 +40,10 @@ public class PurchasedMaterial {
         this.materialQuantity = materialQuantity;
     }
 
+    public PurchasedMaterial(String materialName, Integer materialQuantity, String description, LocalDateTime createdAt) {
+        this.materialName = materialName;
+        this.materialQuantity = materialQuantity;
+        this.description = description;
+        this.createdAt = createdAt;
+    }
 }
