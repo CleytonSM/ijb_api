@@ -25,8 +25,8 @@ public class Expense {
     @Column(name = "id_despesa")
     private Integer id;
     @ManyToOne
-    @JoinColumn(name = "id_material_comprado")
-    private PurchasedMaterial purchasedMaterial;
+    @JoinColumn(name = "id_material")
+    private Material material;
     @ManyToOne
     @JoinColumn(name = "id_obra")
     private Construction construction;
@@ -41,6 +41,10 @@ public class Expense {
     @Column(name = "dt_exclusao")
     private LocalDateTime deletedAt;
 
-    public Expense(PurchasedMaterial purchasedMaterial, Construction construction, LocalDateTime receiptDate, LocalDateTime expiryDate) {
+    public Expense(Material material, Construction construction, LocalDateTime receiptDate, LocalDateTime expiryDate) {
+        this.material = material;
+        this.construction = construction;
+        this.receiptDate = receiptDate;
+        this.expiryDate = expiryDate;
     }
 }
