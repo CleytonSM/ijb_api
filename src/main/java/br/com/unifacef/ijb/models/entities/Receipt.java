@@ -27,12 +27,6 @@ public class Receipt {
     @ManyToOne
     @JoinColumn(name = "id_doacao")
     private Donation donation;
-    @ManyToOne
-    @JoinColumn(name = "id_venda")
-    private Sale sale;
-    @ManyToOne
-    @JoinColumn(name = "id_abatimento")
-    private Rebate rebate;
     @Column(name = "dt_recebimento")
     private LocalDateTime receiptDate;
     @Column(name = "dt_vencimento")
@@ -44,6 +38,9 @@ public class Receipt {
     @Column(name = "dt_exclusao")
     private LocalDateTime deletedAt;
 
-    public Receipt(Donation donation, Sale sale, Rebate rebate) {
+    public Receipt(Donation donation) {
+        this.donation = donation;
     }
+
+
 }
