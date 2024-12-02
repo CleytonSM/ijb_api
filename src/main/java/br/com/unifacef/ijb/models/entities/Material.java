@@ -53,4 +53,12 @@ public class Material {
         this.origin = origin;
         this.createdAt = createdAt;
     }
+
+    public Material(String name, Integer quantity, String description, BigDecimal price, MaterialOrigin origin) {
+        this.name = name;
+        this.quantity = quantity;
+        this.description = description;
+        this.price = price;
+        this.origin = origin;
+    }
 }

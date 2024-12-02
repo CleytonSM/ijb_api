@@ -1,11 +1,7 @@
 package br.com.unifacef.ijb.mappers;
 
-import br.com.unifacef.ijb.models.dtos.DonatedMaterialCreateDTO;
-import br.com.unifacef.ijb.models.dtos.DonatedMaterialDTO;
 import br.com.unifacef.ijb.models.dtos.MaterialInUseCreateDTO;
 import br.com.unifacef.ijb.models.dtos.MaterialInUseDTO;
-import br.com.unifacef.ijb.models.entities.Construction;
-import br.com.unifacef.ijb.models.entities.DonatedMaterial;
 import br.com.unifacef.ijb.models.entities.MaterialInUse;
 
 import java.util.ArrayList;

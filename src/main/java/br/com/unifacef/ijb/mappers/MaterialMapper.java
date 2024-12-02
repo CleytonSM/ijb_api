@@ -12,8 +12,8 @@ import java.util.Optional;
 public class MaterialMapper {
 
     public static MaterialDTO convertMaterialIntoMaterialDTO(Material material) {
-        return new MaterialDTO(material.getId(), material.getName(), material.getQuantity(), material.getDescription(),
-                material.getOrigin());
+        return new MaterialDTO(material.getId(), material.getName(), material.getQuantity(), material.getPrice(),
+                material.getDescription(), material.getOrigin());
     }
 
     public static List<MaterialDTO> convertListOfMaterialIntoListOfMaterialDTO(
@@ -23,5 +23,9 @@ public class MaterialMapper {
         materials.forEach(material -> materialDTOs.add(convertMaterialIntoMaterialDTO(material)));
 
         return materialDTOs;
+    }
+
+    public static Material convertMaterialDTOIntoMaterial(MaterialDTO material) {
+        return new Material(material.getName(), material.getQuantity(), material.getDescription(), material.getPrice(), material.getOrigin());
     }
 }
