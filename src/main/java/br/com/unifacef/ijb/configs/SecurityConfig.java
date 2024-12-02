@@ -52,8 +52,8 @@ public class SecurityConfig {
                         .requestMatchers("/api/ijb/material/delete/**").permitAll()
                         .requestMatchers("/api/ijb/material/update/**").permitAll()
                         .requestMatchers("/api/ijb/outletProduct/register").permitAll()
-                        .requestMatchers("/api/ijb/outletProduct/update").permitAll()
-                        .requestMatchers("/api/ijb/outletProduct/delete").permitAll()
+                        .requestMatchers("/api/ijb/outletProduct/update/**").permitAll()
+                        .requestMatchers("/api/ijb/outletProduct/delete/**").permitAll()
                         .requestMatchers("/api/ijb/outletProduct").permitAll())
                 .formLogin(AbstractHttpConfigurer::disable)
                 .httpBasic(Customizer.withDefaults());
