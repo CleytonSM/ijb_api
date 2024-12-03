@@ -4,13 +4,12 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.math.BigDecimal;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class RebateCreateDTO {
-    private ExchangeDTO exchange;
-    private String description;
-    private BigDecimal rebateValue;
+public class MaterialFilterResponseDTO {
+    private List<DonatedMaterialDTO> donatedMaterials;
+    private List<PurchasedMaterialDTO> purchasedMaterials;
 }

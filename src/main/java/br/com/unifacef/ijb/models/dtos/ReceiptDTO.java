@@ -12,8 +12,6 @@ import java.time.LocalDateTime;
 public class ReceiptDTO {
     private Integer id;
     private DonationDTO donation;
-    private SaleDTO sale;
-    private RebateDTO rebate;
     private LocalDateTime receiptDate;
     private LocalDateTime expiryDate;
 }

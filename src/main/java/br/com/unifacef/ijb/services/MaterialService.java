@@ -4,14 +4,16 @@ import br.com.unifacef.ijb.helpers.OptionalHelper;
 import br.com.unifacef.ijb.mappers.MaterialMapper;
 import br.com.unifacef.ijb.models.dtos.MaterialCreateDTO;
 import br.com.unifacef.ijb.models.dtos.MaterialDTO;
+import br.com.unifacef.ijb.models.dtos.MaterialUpdateDTO;
 import br.com.unifacef.ijb.models.entities.Material;
 import br.com.unifacef.ijb.repositories.MaterialRepository;
-import jakarta.persistence.EntityNotFoundException;
-import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class MaterialService {
@@ -26,43 +28,38 @@ public class MaterialService {
         return OptionalHelper.getOptionalEntity(repository.findById(id));
     }
 
-    @Transactional
-    public MaterialDTO createMaterial(MaterialCreateDTO materialCreate) {
-        Material material = MaterialMapper
-                .convertMaterialCreateDTOIntoMaterial(materialCreate);
+    public void createMaterial(MaterialCreateDTO materialCreate) {
+        Material material = new Material(materialCreate.getName(), materialCreate.getQuantity(),
+                materialCreate.getDescription(), materialCreate.getPrice(), materialCreate.getOrigin(),
+                LocalDateTime.now());
 
-        return MaterialMapper.convertMaterialIntoMaterialDTO(save(material));
+        save(material);
     }
 
-    public List<MaterialDTO> getAllMaterials() {
-        return MaterialMapper.convertListOfMaterialIntoListOfMaterialDTO(repository.findAll());
-    }
+    public List<MaterialDTO> findAllMaterials() {
+        List<Material> materials = repository.findAll();
 
-    public List<MaterialDTO> getAllMaterialsByFilter(Integer id) {
-        List<Material> materials = repository.findAllById(id);
-        if (!materials.isEmpty()) {
-            return MaterialMapper.convertListOfMaterialIntoListOfMaterialDTO(materials);
+        if (materials.isEmpty()) {
+            return new ArrayList<>();
         }
 
-        throw new EntityNotFoundException("There aren't materials with this ID");
+        return MaterialMapper.convertListOfMaterialIntoListOfMaterialDTO(materials);
     }
 
-    @Transactional
-    public MaterialDTO updateMaterial(MaterialDTO materialUpdate) {
-        Material material = getById(materialUpdate.getId());
-        updateRetrievedEntity(materialUpdate, material);
-
-        return MaterialMapper.convertMaterialIntoMaterialDTO(save(material));
+    public void deleteById(Integer id) {
+        repository.delete(getById(id));
     }
 
-    private void updateRetrievedEntity(MaterialDTO materialUpdate, Material material) {
-        MaterialMapper.updateMaterial(materialUpdate, material);
-    }
+    public void updateMaterial(Integer id, MaterialUpdateDTO materialUpdate) {
+        Material material = getById(id);
 
-    @Transactional
-    public void deleteMaterial(Integer id) {
-        Material material = OptionalHelper.getOptionalEntity(repository.findById(id));
-        repository.delete(material);
-    }
+        material.setName(materialUpdate.getName());
+        material.setQuantity(materialUpdate.getQuantity());
+        material.setDescription(materialUpdate.getDescription());
+        material.setPrice(materialUpdate.getPrice());
+        material.setOrigin(materialUpdate.getOrigin());
+        material.setUpdatedAt(LocalDateTime.now());
 
+        save(material);
+    }
 }

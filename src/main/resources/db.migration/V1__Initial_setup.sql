@@ -1,3 +1,9 @@
+DROP DATABASE ijb;
+
+CREATE DATABASE ijb;
+
+USE ijb;
+
 CREATE TABLE tb_usuarios (
     id_usuario INTEGER NOT NULL AUTO_INCREMENT,
     email VARCHAR(100),
@@ -21,8 +27,8 @@ CREATE TABLE tb_funcao (
 );
 
 CREATE TABLE tb_infos_usuario (
-    id_usuario INTEGER,
-    id_funcao INTEGER,
+    id_usuario INTEGER NOT NULL,
+    id_funcao INTEGER NOT NULL,
     celular1 VARCHAR(11),
     celular2 VARCHAR(11),
     foto_perfil LONGBLOB,
@@ -36,8 +42,8 @@ CREATE TABLE tb_infos_usuario (
     dt_alteracao DATE,
     dt_exclusao DATE,
     PRIMARY KEY (id_usuario),
-    FOREIGN KEY (id_usuario) REFERENCES tb_usuarios(id_usuario),
-    FOREIGN KEY (id_funcao) REFERENCES tb_funcao(id_funcao)
+    FOREIGN KEY (id_usuario) REFERENCES tb_usuarios (id_usuario),
+    FOREIGN KEY (id_funcao) REFERENCES tb_funcao (id_funcao)
 );
 
 CREATE TABLE tb_enderecos (
@@ -53,285 +59,210 @@ CREATE TABLE tb_enderecos (
     PRIMARY KEY (id_endereco)
 );
 
-CREATE TABLE tb_endereco_usuario (
-    id_endereco INTEGER,
+CREATE TABLE tb_beneficiarios (
+    id_beneficiario INTEGER AUTO_INCREMENT,
     id_usuario INTEGER,
+    nm_representante VARCHAR(60),
+    status VARCHAR(60),
+    como_conheceu VARCHAR(200),
+    indicador VARCHAR(60),
+    add_info LONGTEXT,
+    tem_terreno BOOL,
+    renda_mensal DECIMAL(8,2),
+    dt_indicacao DATE NOT NULL,
+    status_moradia VARCHAR(60),
+    decisao_triagem LONGTEXT,
     dt_criacao DATE,
     dt_alteracao DATE,
     dt_exclusao DATE,
-    PRIMARY KEY (id_endereco, id_usuario),
-    FOREIGN KEY (id_usuario) REFERENCES tb_usuarios(id_usuario),
-    FOREIGN KEY (id_endereco) REFERENCES tb_enderecos(id_endereco)
-);
-
-CREATE TABLE tb_beneficiarios (
-id_beneficiario INTEGER NOT NULL AUTO_INCREMENT,
-id_usuario INTEGER,
-nm_representante VARCHAR(60) NOT NULL,
-status VARCHAR(60),
-como_conheceu VARCHAR(200) NOT NULL,
-indicador VARCHAR(60),
-add_info LONGTEXT,
-tem_terreno BOOL,
-renda_mensal DECIMAL(8,2),
-dt_indicacao DATE NOT NULL,
-status_moradia VARCHAR(60),
-decisao_triagem LONGTEXT,
-dt_criacao DATE,
-dt_alteracao DATE,
-dt_exclusao DATE,
-PRIMARY KEY (id_beneficiario),
-CONSTRAINT fk_tb_benef_id_usuario FOREIGN KEY (id_usuario) REFERENCES tb_usuarios (id_usuario)
+    PRIMARY KEY (id_beneficiario),
+    FOREIGN KEY (id_usuario) REFERENCES tb_usuarios(id_usuario)
 );
 
 
-CREATE TABLE tb_familiares(
-id_familiar			INTEGER NOT NULL AUTO_INCREMENT,
-id_beneficiario			INTEGER,
-nm_familiar			VARCHAR(60),
-cpf				VARCHAR(11),
-parentesco			VARCHAR(30),
-dt_nascimento			DATE,
-escolaridade			VARCHAR(40),
-valor_renda			DECIMAL(8,2),
-fonte_de_renda			VARCHAR(40),
-problemas_de_saude		VARCHAR(100),
-dt_criacao DATE,
-dt_alteracao DATE,
-dt_exclusao DATE,
-
-CONSTRAINT pk_tb_familiares_id_famil PRIMARY KEY(id_familiar),
-CONSTRAINT fk_tb_familiares_id_benef FOREIGN KEY(id_beneficiario)
-	REFERENCES tb_beneficiarios(id_beneficiario)
+CREATE TABLE tb_familiares (
+    id_familiar         INTEGER AUTO_INCREMENT,
+    id_beneficiario     INTEGER,
+    nm_familiar         VARCHAR(60),
+    cpf                 VARCHAR(11),
+    parentesco          VARCHAR(30),
+    dt_nascimento       DATE,
+    escolaridade        VARCHAR(40),
+    valor_renda         DECIMAL(8,2),
+    fonte_de_renda      VARCHAR(40),
+    problemas_de_saude  VARCHAR(100),
+    dt_criacao          DATE,
+    dt_alteracao        DATE,
+    dt_exclusao         DATE,
+    CONSTRAINT pk_tb_familiares_id_famil PRIMARY KEY (id_familiar),
+    CONSTRAINT fk_tb_familiares_id_benef FOREIGN KEY (id_beneficiario)
+        REFERENCES tb_beneficiarios (id_beneficiario)
 );
+
 
 CREATE TABLE tb_visitas(
-id_visita INTEGER NOT NULL AUTO_INCREMENT,
-id_beneficiario INTEGER,
-dt_visita DATE,
-relatorio_visita VARCHAR(500),
-foto1 LONGBLOB,
-foto2 LONGBLOB,
-foto3 LONGBLOB,
-foto4 LONGBLOB,
-foto5 LONGBLOB,
-dt_criacao DATE,
-dt_alteracao DATE,
-dt_exclusao DATE,
+	id_visita INTEGER NOT NULL AUTO_INCREMENT,
+	id_beneficiario INTEGER,
+	dt_visita DATE,
+	relatorio_visita VARCHAR(500),
+	foto1 LONGBLOB,
+	foto2 LONGBLOB,
+	foto3 LONGBLOB,
+	foto4 LONGBLOB,
+	foto5 LONGBLOB,
+	dt_criacao DATE,
+	dt_alteracao DATE,
+	dt_exclusao DATE,
 
-CONSTRAINT pk_tb_visitas_id_visita PRIMARY KEY(id_visita),
-CONSTRAINT fk_tb_visitas_id_benef FOREIGN KEY(id_beneficiario)
-	REFERENCES tb_beneficiarios(id_beneficiario)
+	CONSTRAINT pk_tb_visitas_id_visita PRIMARY KEY(id_visita),
+	CONSTRAINT fk_tb_visitas_id_benef FOREIGN KEY(id_beneficiario)
+		REFERENCES tb_beneficiarios(id_beneficiario)
 );
 
 CREATE TABLE tb_tipos_voluntarios (
-id_tipo_voluntario INTEGER NOT NULL AUTO_INCREMENT,
-nm_tipo_voluntario VARCHAR(30),
-dt_criacao DATE,
-dt_alteracao DATE,
-dt_exclusao DATE,
+	id_tipo_voluntario INTEGER NOT NULL AUTO_INCREMENT,
+	nm_tipo_voluntario VARCHAR(30),
+	dt_criacao DATE,
+	dt_alteracao DATE,
+	dt_exclusao DATE,
 
-CONSTRAINT pk_tb_tipos_voluntarios_id_tipo_voluntario PRIMARY KEY(id_tipo_voluntario)
+	CONSTRAINT pk_tb_tipos_voluntarios_id_tipo_voluntario PRIMARY KEY(id_tipo_voluntario)
 );
 
 CREATE TABLE tb_tipos_doacoes (
-id_tipo_doacao INTEGER NOT NULL AUTO_INCREMENT,
-nm_tipo_doacao VARCHAR(30),
-dt_criacao DATE,
-dt_alteracao DATE,
-dt_exclusao DATE,
+	id_tipo_doacao INTEGER NOT NULL AUTO_INCREMENT,
+	nm_tipo_doacao VARCHAR(30),
+	dt_criacao DATE,
+	dt_alteracao DATE,
+	dt_exclusao DATE,
 
-CONSTRAINT pk_tb_tipos_doacoes_id_tipo_doacao PRIMARY KEY(id_tipo_doacao)
+	CONSTRAINT pk_tb_tipos_doacoes_id_tipo_doacao PRIMARY KEY(id_tipo_doacao)
 );
 
 CREATE TABLE tb_voluntarios (
-id_voluntario INTEGER NOT NULL AUTO_INCREMENT,
-id_usuario INTEGER,
-id_tipo_voluntario INTEGER,
-cargo_desejado VARCHAR(100),
-sobre_voce VARCHAR(240),
-hobby VARCHAR(150),
-intencao VARCHAR(200),
-dt_criacao DATE,
-dt_alteracao DATE,
-dt_exclusao DATE,
+	id_voluntario INTEGER NOT NULL AUTO_INCREMENT,
+	id_usuario INTEGER,
+	id_tipo_voluntario INTEGER,
+	cargo_desejado VARCHAR(100),
+	sobre_voce VARCHAR(240),
+	hobby VARCHAR(150),
+	intencao VARCHAR(200),
+	dt_criacao DATE,
+	dt_alteracao DATE,
+	dt_exclusao DATE,
 
-CONSTRAINT pk_tb_voluntarios_id_voluntario PRIMARY KEY(id_voluntario),
-CONSTRAINT fk_tb_voluntarios_id_tipo_voluntario FOREIGN KEY(id_tipo_voluntario) REFERENCES tb_tipos_voluntarios(id_tipo_voluntario),
-CONSTRAINT fk_tb_voluntarios_id_usuario FOREIGN KEY(id_usuario) REFERENCES tb_usuarios(id_usuario)
+	CONSTRAINT pk_tb_voluntarios_id_voluntario PRIMARY KEY(id_voluntario),
+	CONSTRAINT fk_tb_voluntarios_id_tipo_voluntario FOREIGN KEY(id_tipo_voluntario) REFERENCES tb_tipos_voluntarios(id_tipo_voluntario),
+	CONSTRAINT fk_tb_voluntarios_id_usuario FOREIGN KEY(id_usuario) REFERENCES tb_usuarios(id_usuario)
 );
 
 CREATE TABLE tb_doacoes (
-id_doacao INTEGER NOT NULL AUTO_INCREMENT,
-id_tipo_doacao INTEGER,
-dt_criacao DATE,
-dt_alteracao DATE,
-dt_exclusao DATE,
+	id_doacao INTEGER NOT NULL AUTO_INCREMENT,
+	id_tipo_doacao INTEGER,
+	dt_criacao DATE,
+	dt_alteracao DATE,
+	dt_exclusao DATE,
 
-CONSTRAINT pk_tb_doacoes_id_doacao PRIMARY KEY(id_doacao),
-CONSTRAINT fk_tb_doacoes_id_tipo_doacao FOREIGN KEY(id_tipo_doacao) REFERENCES tb_tipos_doacoes(id_tipo_doacao)
+	CONSTRAINT pk_tb_doacoes_id_doacao PRIMARY KEY(id_doacao),
+	CONSTRAINT fk_tb_doacoes_id_tipo_doacao FOREIGN KEY(id_tipo_doacao) REFERENCES tb_tipos_doacoes(id_tipo_doacao)
 );
 
 CREATE TABLE tb_doacoes_voluntarios (
-id_doacao INTEGER,
-id_voluntario INTEGER,
-dt_criacao DATE,
-dt_alteracao DATE,
-dt_exclusao DATE,
+	id_doacao INTEGER,
+	id_voluntario INTEGER,
+	dt_criacao DATE,
+	dt_alteracao DATE,
+	dt_exclusao DATE,
 
-CONSTRAINT pk_tb_doacoes_voluntarios_id_doacao_id_voluntario PRIMARY KEY(id_doacao, id_voluntario),
-CONSTRAINT fk_tb_doacoes_id_doacao FOREIGN KEY(id_doacao)REFERENCES tb_doacoes(id_doacao),
-CONSTRAINT fk_tb_doacoes_id_voluntario FOREIGN KEY(id_voluntario)REFERENCES tb_voluntarios(id_voluntario)
+	CONSTRAINT pk_tb_doacoes_voluntarios_id_doacao_id_voluntario PRIMARY KEY(id_doacao, id_voluntario),
+	CONSTRAINT fk_tb_doacoes_id_doacao FOREIGN KEY(id_doacao)REFERENCES tb_doacoes(id_doacao),
+	CONSTRAINT fk_tb_doacoes_id_voluntario FOREIGN KEY(id_voluntario)REFERENCES tb_voluntarios(id_voluntario)
 );
 
 CREATE TABLE tb_visitas_voluntarios (
-id_visita INTEGER,
-id_voluntario INTEGER,
-dt_criacao DATE,
-dt_alteracao DATE,
-dt_exclusao DATE,
+	id_visita INTEGER,
+	id_voluntario INTEGER,
+	dt_criacao DATE,
+	dt_alteracao DATE,
+	dt_exclusao DATE,
 
-CONSTRAINT pk_tb_visitas_voluntarios_id_visita_id_voluntario PRIMARY KEY(id_visita, id_voluntario),
-CONSTRAINT fk_tb_visitas_id_visita FOREIGN KEY(id_visita) REFERENCES tb_visitas(id_visita),
-CONSTRAINT fk_tb_visitas_id_voluntario FOREIGN KEY(id_voluntario) REFERENCES tb_voluntarios(id_voluntario)
+	CONSTRAINT pk_tb_visitas_voluntarios_id_visita_id_voluntario PRIMARY KEY(id_visita, id_voluntario),
+	CONSTRAINT fk_tb_visitas_id_visita FOREIGN KEY(id_visita) REFERENCES tb_visitas(id_visita),
+	CONSTRAINT fk_tb_visitas_id_voluntario FOREIGN KEY(id_voluntario) REFERENCES tb_voluntarios(id_voluntario)
 );
 
 CREATE TABLE tb_materiais (
     id_material INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    nm_material VARCHAR(50),
+    id_doacao INT,
+    nm_material VARCHAR(255),
     quantidade INTEGER,
-    ds_material VARCHAR(70),
+    ds_material VARCHAR(255),
+    preco DECIMAL(10, 2),
+    origem VARCHAR(255),
     dt_criacao DATE,
     dt_alteracao DATE,
-    dt_exclusao DATE
-);
+    dt_exclusao DATE,
 
-
-CREATE TABLE tb_materiais_doados (
-id_material INTEGER,
-id_doacao INTEGER,
-dt_criacao DATE,
-dt_alteracao DATE,
-dt_exclusao DATE,
-
-PRIMARY KEY (id_material, id_doacao),
-FOREIGN KEY (id_material) REFERENCES tb_materiais(id_material),
-FOREIGN KEY (id_doacao) REFERENCES tb_doacoes(id_doacao)
-);
-
-CREATE TABLE tb_materiais_comprados (
-id_compra INT NOT NULL AUTO_INCREMENT,
-id_material INTEGER,
-quantidade INTEGER,
-vlr_pago DECIMAL(7,2),
-dt_criacao DATE,
-dt_alteracao DATE,
-dt_exclusao DATE,
-
-PRIMARY KEY (id_compra),
-FOREIGN KEY (id_material) REFERENCES tb_materiais(id_material)
+    FOREIGN KEY (id_doacao) REFERENCES tb_doacoes(id_doacao)
 );
 
 CREATE TABLE tb_obras(
-id_obra INTEGER,
-id_endereco INTEGER,
-dt_inicio DATE,
-dt_termino DATE,
-situacao_contrucao VARCHAR(20),
-custo_estimado DECIMAL(8,2),
-custo_total DECIMAL(8,2),
-dt_criacao DATE,
-dt_alteracao DATE,
-dt_exclusao DATE,
+	id_obra INTEGER,
+	id_endereco INTEGER,
+	dt_inicio DATE,
+	dt_termino DATE,
+	situacao_contrucao VARCHAR(20),
+	custo_estimado DECIMAL(8,2),
+	custo_total DECIMAL(8,2),
+	dt_criacao DATE,
+	dt_alteracao DATE,
+	dt_exclusao DATE,
 
-CONSTRAINT pk_tb_obras_id_obra PRIMARY KEY(id_obra)
+	CONSTRAINT pk_tb_obras_id_obra PRIMARY KEY(id_obra),
+	FOREIGN KEY (id_endereco) REFERENCES tb_enderecos(id_endereco)
 );
 
 CREATE TABLE tb_materiais_em_uso (
-id_material_em_uso INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-id_material INTEGER,
-id_obra INTEGER,
-quantidade INTEGER,
-dt_criacao DATE,
-dt_alteracao DATE,
-dt_exclusao DATE,
+	id_material_em_uso INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	id_material INTEGER,
+	id_obra INTEGER,
+	quantidade INTEGER,
+	dt_criacao DATE,
+	dt_alteracao DATE,
+	dt_exclusao DATE,
 
-FOREIGN KEY (id_material) REFERENCES tb_materiais(id_material),
-FOREIGN KEY (id_obra) REFERENCES tb_obras(id_obra)
+	FOREIGN KEY (id_material) REFERENCES tb_materiais(id_material),
+	FOREIGN KEY (id_obra) REFERENCES tb_obras(id_obra)
 );
 
 CREATE TABLE tb_produtos_outlet (
-id_prod_outlet INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-id_doacao VARCHAR(5),
-ds_prod_outlet VARCHAR(100),
-nm_produto_outlet VARCHAR(60),
-status VARCHAR(20),
-dt_criacao DATE,
-dt_alteracao DATE,
-dt_exclusao DATE
-);
+	id_prod_outlet INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	id_doacao INT,
+	ds_prod_outlet VARCHAR(100),
+	nm_produto_outlet VARCHAR(60),
+	status VARCHAR(20),
+	preco DECIMAL(10, 2),
+	dt_criacao DATE,
+	dt_alteracao DATE,
+	dt_exclusao DATE,
 
-CREATE TABLE tb_trocas (
-id_troca INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-id_prod_outlet INTEGER,
-ds_troca VARCHAR(100),
-dt_criacao DATE,
-dt_alteracao DATE,
-dt_exclusao DATE,
-
-FOREIGN KEY (id_prod_outlet) REFERENCES tb_produtos_outlet(id_prod_outlet)
-);
-
-CREATE TABLE tb_materiais_trocados (
-id_material INTEGER,
-id_troca INTEGER,
-dt_criacao DATE,
-dt_alteracao DATE,
-dt_exclusao DATE,
-
-PRIMARY KEY (id_material, id_troca),
-FOREIGN KEY (id_material) REFERENCES tb_materiais(id_material),
-FOREIGN KEY (id_troca) REFERENCES tb_trocas(id_troca)
-);
-
-CREATE TABLE tb_vendas (
-id_venda INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-id_prod_outlet INTEGER,
-valor_venda DECIMAL(7,2),
-ds_venda VARCHAR(100),
-dt_criacao DATE,
-dt_alteracao DATE,
-dt_exclusao DATE,
-
-FOREIGN KEY (id_prod_outlet) REFERENCES tb_produtos_outlet(id_prod_outlet)
-);
-
-CREATE TABLE tb_abatimentos (
-    id_abatimento INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    id_troca INTEGER,
-    ds_abatimento VARCHAR(100),
-    valor_abatido DECIMAL(7,2),
-    FOREIGN KEY (id_troca) REFERENCES tb_trocas(id_troca)
+	FOREIGN KEY (id_doacao) REFERENCES tb_doacoes(id_doacao)
 );
 
 CREATE TABLE tb_receitas(
 	id_receita INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	id_doacao INTEGER,
-	id_venda INTEGER,
-	id_abatimento INTEGER,
 	dt_recebimento DATE,
 	dt_vencimento DATE,
 	dt_criacao DATE,
 	dt_alteracao DATE,
 	dt_exclusao DATE,
-	FOREIGN KEY (id_doacao) REFERENCES tb_doacoes(id_doacao),
-	FOREIGN KEY (id_venda) REFERENCES tb_vendas(id_venda),
-	FOREIGN KEY (id_abatimento) REFERENCES tb_abatimentos(id_abatimento)
+	FOREIGN KEY (id_doacao) REFERENCES tb_doacoes(id_doacao)
 );
 
 CREATE TABLE tb_despesas(
 	id_despesa INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-	id_compra INTEGER,
+	id_material INTEGER,
 	id_obra INTEGER,
 	dt_recebimento DATE,
 	dt_vencimento DATE,
@@ -339,8 +270,8 @@ CREATE TABLE tb_despesas(
 	dt_alteracao DATE,
 	dt_exclusao DATE,
 
-	FOREIGN KEY (id_compra) REFERENCES tb_materiais_comprados(id_compra),
-	FOREIGN KEY (id_obra) REFERENCES tb_obras(id_obra)
+	FOREIGN KEY (id_obra) REFERENCES tb_obras(id_obra),
+	FOREIGN KEY (id_material) REFERENCES tb_materiais(id_material)
 );
 
 CREATE TABLE tb_movimentacoes (
