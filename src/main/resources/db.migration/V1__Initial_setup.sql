@@ -1,3 +1,9 @@
+DROP DATABASE ijb;
+
+CREATE DATABASE ijb;
+
+USE ijb;
+
 CREATE TABLE tb_usuarios (
     id_usuario INTEGER NOT NULL AUTO_INCREMENT,
     email VARCHAR(100),
@@ -212,7 +218,8 @@ CREATE TABLE tb_obras(
 	dt_alteracao DATE,
 	dt_exclusao DATE,
 
-	CONSTRAINT pk_tb_obras_id_obra PRIMARY KEY(id_obra)
+	CONSTRAINT pk_tb_obras_id_obra PRIMARY KEY(id_obra),
+	FOREIGN KEY (id_endereco) REFERENCES tb_enderecos(id_endereco)
 );
 
 CREATE TABLE tb_materiais_em_uso (
