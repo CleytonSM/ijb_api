@@ -1,16 +1,19 @@
 package br.com.unifacef.ijb.models.dtos;
 
 import br.com.unifacef.ijb.models.enums.MaterialOrigin;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
 
 @Data
-public class MaterialCreateDTO implements Serializable {
+@AllArgsConstructor
+@NoArgsConstructor
+public class MaterialUpdateDTO {
     private String name;
     private Integer quantity;
-    private String description;
     private BigDecimal price;
+    private String description;
     private MaterialOrigin origin;
 }
