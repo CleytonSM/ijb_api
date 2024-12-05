@@ -8,7 +8,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Lob;
-import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -32,22 +31,27 @@ public class Visit {
     private Beneficiary beneficiary;
     @Column(name = "dt_visita")
     private LocalDateTime visitDate;
-    @Column(name = "relatorio", length = 200)
-    private String report;
-    @Column(name = "imagem1")
+    @Column(name = "relatorio_visita", length = 500)
+    private String visitReport;
+    @Column(name = "foto1")
     @Lob
-    private byte[] firstImage;
-    @Column(name = "imagem2")
+    private byte[] photo1;
+    @Column(name = "foto2")
     @Lob
-    private byte[] secondImage;
-    @Column(name = "imagem3")
+    private byte[] photo2;
+    @Column(name = "foto3")
     @Lob
-    private byte[] thirdImage;
-    @Column(name = "imagem4")
+    private byte[] photo3;
+    @Column(name = "foto4")
     @Lob
-    private byte[] fourthImage;
-    @Column(name = "imagem5")
+    private byte[] photo4;
+    @Column(name = "foto5")
     @Lob
-    private byte[] fifthImage;
-
+    private byte[] photo5;
+    @Column(name = "dt_criacao")
+    private LocalDateTime createdAt;
+    @Column(name = "dt_alteracao")
+    private LocalDateTime updatedAt;
+    @Column(name = "dt_exclusao")
+    private LocalDateTime deletedAt;
 }
