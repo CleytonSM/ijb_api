@@ -11,4 +11,5 @@ public class EventDTO {
     private String date;
     private String state;
     private String code;
+
 }
