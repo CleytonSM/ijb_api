@@ -17,6 +17,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Filter;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Data
@@ -33,13 +34,15 @@ public class OutletProduct {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_doacao")
     private Donation donation;
-    @Column(name = "nm_prod_outlet", length = 60)
-    private String outletProductName;
-    @Column(name = "ds_prod_outlet", length = 100)
-    private String outletProductDescription;
+    @Column(name = "nm_produto_outlet", length = 60)
+    private String name;
+    @Column(name = "ds_prod_outlet")
+    private String description;
     @Column(name = "status", length = 20)
     @Enumerated(EnumType.STRING)
     private OutletProductStatus status;
+    @Column(name = "preco")
+    private BigDecimal price;
     @Column(name = "dt_criacao")
     private LocalDateTime createdAt;
     @Column(name = "dt_alteracao")
@@ -47,11 +50,11 @@ public class OutletProduct {
     @Column(name = "dt_exclusao")
     private LocalDateTime deletedAt;
 
-    public OutletProduct(Donation donation, String outletProductName, String outletProductDescription,
-                         OutletProductStatus status) {
-        this.donation = donation;
-        this.outletProductName = outletProductName;
-        this.outletProductDescription = outletProductDescription;
+    public OutletProduct(String name, String description, OutletProductStatus status, BigDecimal price, LocalDateTime createdAt) {
+        this.name = name;
+        this.description = description;
         this.status = status;
+        this.price = price;
+        this.createdAt = createdAt;
     }
 }

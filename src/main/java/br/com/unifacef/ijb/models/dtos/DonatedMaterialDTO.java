@@ -14,5 +14,11 @@ public class DonatedMaterialDTO {
     private Integer id;
     private DonationDTO donation;
     private String materialName;
-    private String materialQuantity;
+    private Integer materialQuantity;
+
+    public DonatedMaterialDTO(Integer id, String materialName, Integer materialQuantity) {
+        this.id = id;
+        this.materialName = materialName;
+        this.materialQuantity = materialQuantity;
+    }
 }

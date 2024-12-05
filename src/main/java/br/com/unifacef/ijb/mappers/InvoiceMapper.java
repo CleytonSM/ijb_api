@@ -25,9 +25,9 @@ public class InvoiceMapper {
 
     public static List<InvoicesDTO> convertListOfInvoiceIntoListOfInvoiceDTO(List<Invoice> invoices) {
         List<InvoicesDTO> invoiceDTOs = new ArrayList<>();
-        for (Invoice invoice : invoices) {
-            invoiceDTOs.add(convertInvoiceEntityToDTO(invoice));
-        }
+
+        invoices.forEach(invoice -> invoiceDTOs.add(convertInvoiceEntityToDTO(invoice)));
+
         return invoiceDTOs;
     }
 

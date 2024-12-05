@@ -4,15 +4,17 @@ import br.com.unifacef.ijb.helpers.OptionalHelper;
 import br.com.unifacef.ijb.mappers.OutletProductMapper;
 import br.com.unifacef.ijb.models.dtos.OutletProductCreateDTO;
 import br.com.unifacef.ijb.models.dtos.OutletProductDTO;
+import br.com.unifacef.ijb.models.dtos.OutletProductUpdateDTO;
 import br.com.unifacef.ijb.models.entities.OutletProduct;
 import br.com.unifacef.ijb.models.enums.OutletProductStatus;
 import br.com.unifacef.ijb.repositories.OutletProductRepository;
-import jakarta.persistence.EntityNotFoundException;
-import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class OutletProductService {
@@ -27,54 +29,40 @@ public class OutletProductService {
         return OptionalHelper.getOptionalEntity(repository.findById(id));
     }
 
-    @Transactional
-    public OutletProductDTO createOutletProduct(OutletProductCreateDTO outletProductCreate) {
-        OutletProduct outletProduct = OutletProductMapper
-                .convertOutletProductCreateDTOIntoOutletProduct(outletProductCreate);
 
-        return OutletProductMapper.convertOutletProductIntoOutletProductDTO(save(outletProduct));
+    public void createOutletProduct(OutletProductCreateDTO outletProductCreate) {
+        OutletProduct outletProduct = new OutletProduct(outletProductCreate.getName(),
+                outletProductCreate.getDescription(), outletProductCreate.getStatus(),
+                outletProductCreate.getPrice(), LocalDateTime.now());
+
+
+        save(outletProduct);
     }
 
-    public List<OutletProductDTO> getAllOutletProducts() {
-        return OutletProductMapper.convertListOfOutletProductIntoListOfOutletProductDTO(repository.findAll());
-    }
+    public List<OutletProductDTO> findByFilter() {
+        List<OutletProduct> outletProducts = repository.findAll();
 
-    public List<OutletProductDTO> getAllOutletProductsByFilter(String nameOrDescription) {
-        List<OutletProduct> outletProducts = repository.findAllByOutletProductName(nameOrDescription);
-        if (!outletProducts.isEmpty()) {
-            return OutletProductMapper.convertListOfOutletProductIntoListOfOutletProductDTO(outletProducts);
+        if(outletProducts.isEmpty()){
+            return new ArrayList<>();
         }
 
-        outletProducts = repository.findAllByOutletProductDescription(nameOrDescription);
-        if(!outletProducts.isEmpty()) {
-            return OutletProductMapper.convertListOfOutletProductIntoListOfOutletProductDTO(outletProducts);
-        }
-
-        throw new EntityNotFoundException("There aren't products with this name/description");
+        return OutletProductMapper.convertListOfOutletProductIntoListOfOutletProductDTO(outletProducts);
     }
 
-    @Transactional
-    public OutletProductDTO updateOutletProduct(OutletProductDTO outletProductUpdate) {
-        OutletProduct outletProduct = getById(outletProductUpdate.getId());
-        updateRetrievedEntity(outletProductUpdate, outletProduct);
-
-        return OutletProductMapper.convertOutletProductIntoOutletProductDTO(save(outletProduct));
-    }
-
-    @Transactional
     public void deleteOutletProduct(Integer id) {
+        repository.delete(getById(id));
+    }
+
+    public void updateOutletProduct(Integer id, OutletProductUpdateDTO outletProductUpdate) {
         OutletProduct outletProduct = getById(id);
-        save(changeOutletProductStatus(OutletProductStatus.INACTIVE, outletProduct));
-    }
 
-    private void updateRetrievedEntity(OutletProductDTO outletProductUpdate, OutletProduct outletProduct) {
-        OutletProductMapper.updateOutletProduct(outletProductUpdate, outletProduct);
-    }
+        outletProduct.setName(outletProductUpdate.getName());
+        outletProduct.setDescription(outletProductUpdate.getDescription());
+        outletProduct.setPrice(outletProductUpdate.getPrice());
+        outletProduct.setStatus(outletProductUpdate.getStatus());
+        outletProduct.setUpdatedAt(LocalDateTime.now());
 
-    private OutletProduct changeOutletProductStatus(OutletProductStatus status, OutletProduct outletProduct) {
-        outletProduct.setStatus(status);
-
-        return outletProduct;
+        save(outletProduct);
     }
 
 }

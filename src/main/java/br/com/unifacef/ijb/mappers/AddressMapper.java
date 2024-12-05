@@ -2,10 +2,7 @@ package br.com.unifacef.ijb.mappers;
 
 import br.com.unifacef.ijb.models.dtos.AddressCreateDTO;
 import br.com.unifacef.ijb.models.dtos.AddressDTO;
-import br.com.unifacef.ijb.models.dtos.PurchasedMaterialCreateDTO;
-import br.com.unifacef.ijb.models.dtos.PurchasedMaterialDTO;
 import br.com.unifacef.ijb.models.entities.Address;
-import br.com.unifacef.ijb.models.entities.PurchasedMaterial;
 
 import java.util.ArrayList;
 import java.util.List;

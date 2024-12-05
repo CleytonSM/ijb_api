@@ -11,8 +11,8 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class ExpenseDTO {
     private Integer id;
-    private PurchasedMaterialDTO purchasedMaterialDTO;
-    private ConstructionDTO constructionDTO;
+    private MaterialDTO material;
+    private ConstructionDTO construction;
     private LocalDateTime receiptDate;
     private LocalDateTime expiryDate;
 }

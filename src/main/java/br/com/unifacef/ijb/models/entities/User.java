@@ -37,9 +37,10 @@ public class User {
     @Column(name = "dt_exclusao")
     private LocalDateTime deletedAt;
 
-    public User(String email, String cpf, String password) {
+    public User(String email, String cpf, String password, LocalDateTime createdAt) {
         this.email = email;
         this.cpf = cpf;
         this.password = password;
+        this.createdAt = createdAt;
     }
 }
