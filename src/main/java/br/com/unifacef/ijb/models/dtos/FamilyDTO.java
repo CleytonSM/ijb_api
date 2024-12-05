@@ -1,6 +1,6 @@
 package br.com.unifacef.ijb.models.dtos;
 
-
+import br.com.unifacef.ijb.models.entities.Beneficiary;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,14 +11,14 @@ import java.sql.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class FamiliarDTO {
+public class FamilyDTO {
     private Integer id;
-    private BeneficiaryDTO beneficiaryDTO;
+    private Beneficiary beneficiary;
     private String familiarName;
     private String cpf;
     private String kinship;
-    private String scholarity;
     private Date birthDate;
+    private String scholarity;
     private BigDecimal income;
     private String incomeDescription;
     private String healthyProblems;
