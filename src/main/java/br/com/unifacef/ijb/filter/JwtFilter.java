@@ -40,6 +40,7 @@ public class JwtFilter extends OncePerRequestFilter {
         return request.getRequestURI().equals("/api/ijb/register/volunteer") ||
                 request.getRequestURI().equals("/api/ijb/login") ||
                 request.getRequestURI().equals("/api/ijb/register/supporter") ||
-                request.getRequestURI().equals("/api/ijb/register/beneficiary");
+                request.getRequestURI().equals("/api/ijb/register/beneficiary") ||
+                request.getRequestURI().equals("/api/ijb/register/volunteer_supporter");
     }
 }

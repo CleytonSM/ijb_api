@@ -47,6 +47,10 @@ public class LoginService {
         beneficiaryService.createBeneficiary(beneficiaryRegister);
     }
 
+    public void volunteerSupporterRegister(VolunteerRegisterDTO volunteerRegister) {
+        volunteerService.createVolunteer(volunteerRegister, "VOLUNTARIO_APOIADOR");
+    }
+
     private Authentication setUpAuthenticationByLoginDTO(LoginDTO login) {
         return userAuthenticationProvider
                 .authenticate(new UsernamePasswordAuthenticationToken(login.getEmailOrCpf(), login.getPassword(), null));

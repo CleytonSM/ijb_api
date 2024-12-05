@@ -33,6 +33,13 @@ public class LoginController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    @PostMapping("/register/volunteer_supporter")
+    public ResponseEntity<Void> volunteerSupporterRegister(@RequestBody VolunteerRegisterDTO volunteerRegister) {
+        service.volunteerSupporterRegister(volunteerRegister);
+
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+    
     @PostMapping("/register/beneficiary")
     public ResponseEntity<Void> beneficiaryRegister(@RequestBody BeneficiaryRegisterDTO beneficiaryRegister) {
         service.beneficiaryRegister(beneficiaryRegister);
