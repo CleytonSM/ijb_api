@@ -64,4 +64,5 @@ public class OutletProductService {
 
         save(outletProduct);
     }
+
 }
