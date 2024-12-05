@@ -81,10 +81,6 @@ public class BeneficiaryService {
         return benficiaryPlusFamiliarsDTO;
     }
 
-    public UserPlusUserInfoDTO sendUserAndUserInfoByBeneficiaryId(Integer id){
-        Beneficiary beneficiary = getById(id);
-
-    }
 
 
     @Transactional
