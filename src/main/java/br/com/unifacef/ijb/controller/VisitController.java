@@ -4,6 +4,8 @@ import br.com.unifacef.ijb.mappers.VisitMapper;
 import br.com.unifacef.ijb.models.dtos.VisitDTO;
 import br.com.unifacef.ijb.services.VisitService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,22 +17,24 @@ public class VisitController {
     VisitService service;
 
     @PostMapping
-    public VisitDTO createVisit(@RequestBody VisitDTO visitDTO) {
-        return service.createVisit(visitDTO);
+    public ResponseEntity<VisitDTO> createVisit(@RequestBody VisitDTO visitDTO) {
+        return new ResponseEntity<>(service.createVisit(visitDTO), HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")
-    public VisitDTO getVisitById(@PathVariable Integer id) {
-        return VisitMapper.convertVisitIntoVisitDTO(service.getById(id));
+    public ResponseEntity<VisitDTO> getVisitById(@PathVariable Integer id) {
+        return new ResponseEntity<>(VisitMapper.convertVisitIntoVisitDTO(service.getById(id)), HttpStatus.OK);
     }
 
     @GetMapping("/visitas/{benefId}")
-    public List<VisitDTO> getVisitsByBenefId(@PathVariable Integer benefId) {
-        return service.getVisitsByBeneficiaryId(benefId);
+    public ResponseEntity<List<VisitDTO>> getVisitsByBenefId(@PathVariable Integer benefId) {
+        return new ResponseEntity<>(service.getVisitsByBeneficiaryId(benefId), HttpStatus.OK);
     }
 
     @PutMapping
-    public VisitDTO updateVisit(VisitDTO visitDTO) {
-        return service.updateVisit(visitDTO);
+    public ResponseEntity<VisitDTO> updateVisit(VisitDTO visitDTO) {
+        return new ResponseEntity<>(service.updateVisit(visitDTO), HttpStatus.OK);
     }
+
+
 }

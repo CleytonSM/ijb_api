@@ -61,4 +61,8 @@ public class FamiliarService {
 
         return FamiliarMapper.convertFamiliarIntoFamiliarDTO(save(familiar));
     }
+
+    public void deleteFamiliar (Integer id){
+        repository.deleteById(id);
+    }
 }
