@@ -31,8 +31,9 @@ public class LoginService {
         Authentication authentication = setUpAuthenticationByLoginDTO(login);
 
         String token = jwtProvider.createToken(authentication);
+        UserInfo userInfo = (UserInfo) authentication.getPrincipal();
 
-        return new LoginResponseDTO(token);
+        return new LoginResponseDTO(token, userInfo.getName(), userInfo.getAuthority().getRole());
     }
 
     public void volunteerRegister(VolunteerRegisterDTO volunteerRegister) {

@@ -2,6 +2,7 @@ package br.com.unifacef.ijb.controller;
 
 import br.com.unifacef.ijb.models.dtos.OutletProductCreateDTO;
 import br.com.unifacef.ijb.models.dtos.OutletProductDTO;
+import br.com.unifacef.ijb.models.dtos.OutletProductResponseDTO;
 import br.com.unifacef.ijb.models.dtos.OutletProductUpdateDTO;
 import br.com.unifacef.ijb.models.enums.OutletProductStatus;
 import br.com.unifacef.ijb.services.OutletProductService;
@@ -34,7 +35,7 @@ public class OutletProductController {
     }
 
     @GetMapping()
-    public ResponseEntity<List<OutletProductDTO>> findAllOutletProduct() {
+    public ResponseEntity<List<OutletProductResponseDTO>> findAllOutletProduct() {
         return new ResponseEntity<>(service.findByFilter(), HttpStatus.OK);
     }
 

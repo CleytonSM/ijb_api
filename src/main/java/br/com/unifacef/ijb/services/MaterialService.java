@@ -4,6 +4,7 @@ import br.com.unifacef.ijb.helpers.OptionalHelper;
 import br.com.unifacef.ijb.mappers.MaterialMapper;
 import br.com.unifacef.ijb.models.dtos.MaterialCreateDTO;
 import br.com.unifacef.ijb.models.dtos.MaterialDTO;
+import br.com.unifacef.ijb.models.dtos.MaterialResponseDTO;
 import br.com.unifacef.ijb.models.dtos.MaterialUpdateDTO;
 import br.com.unifacef.ijb.models.entities.Material;
 import br.com.unifacef.ijb.repositories.MaterialRepository;
@@ -36,14 +37,14 @@ public class MaterialService {
         save(material);
     }
 
-    public List<MaterialDTO> findAllMaterials() {
+    public List<MaterialResponseDTO> findAllMaterials() {
         List<Material> materials = repository.findAll();
 
         if (materials.isEmpty()) {
             return new ArrayList<>();
         }
 
-        return MaterialMapper.convertListOfMaterialIntoListOfMaterialDTO(materials);
+        return MaterialMapper.convertListOfMaterialIntoListOfMaterialResponseDTO(materials);
     }
 
     public void deleteById(Integer id) {
