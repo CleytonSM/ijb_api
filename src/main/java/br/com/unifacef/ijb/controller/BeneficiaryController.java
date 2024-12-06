@@ -1,12 +1,10 @@
 package br.com.unifacef.ijb.controller;
 
 import java.util.List;
-import java.util.Optional;
 
 import br.com.unifacef.ijb.mappers.BeneficiaryMapper;
 import br.com.unifacef.ijb.models.dtos.BenficiaryPlusFamiliarsDTO;
 import br.com.unifacef.ijb.models.dtos.UserPlusUserInfoDTO;
-import br.com.unifacef.ijb.models.entities.Beneficiary;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

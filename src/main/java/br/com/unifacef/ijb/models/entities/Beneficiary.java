@@ -46,4 +46,10 @@ public class Beneficiary {
     private String houseStatus; // TODO VERIFICAR ENUM DISSO
     @Column(name = "decisao_triagem", length = 200)
     private String decisionTriage; // TODO VERIFICAR ENUM DISSO
+    @Column(name = "dt_criacao")
+    private LocalDateTime createdAt;
+    @Column(name = "dt_alteracao")
+    private LocalDateTime updatedAt;
+    @Column(name = "dt_exclusao")
+    private LocalDateTime deletedAt;
 }

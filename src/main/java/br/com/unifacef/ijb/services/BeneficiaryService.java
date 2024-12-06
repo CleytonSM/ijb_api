@@ -8,12 +8,16 @@ import br.com.unifacef.ijb.models.dtos.UserInfoCreateDTO;
 import br.com.unifacef.ijb.models.entities.UserInfo;
 import br.com.unifacef.ijb.models.enums.Role;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.query.Meta;
 import org.springframework.stereotype.Service;
 
 import br.com.unifacef.ijb.models.entities.Beneficiary;
 import br.com.unifacef.ijb.repositories.BeneficiaryRepository;
 
 import java.time.LocalDateTime;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class BeneficiaryService {
@@ -26,6 +30,10 @@ public class BeneficiaryService {
 
     private Beneficiary save(Beneficiary beneficiary){
         return repository.save(beneficiary);
+    }
+
+    public Beneficiary getById(Integer id){
+        return OptionalHelper.getOptionalEntity(repository.findById(id));
     }
 
     public Beneficiary createBeneficiary(BeneficiaryRegisterDTO beneficiaryRegister) {
@@ -50,6 +58,22 @@ public class BeneficiaryService {
 
         return beneficiary;
     }
+
+    public BenficiaryPlusFamiliarsDTO sendAllBeneficiaryWithAllStatus(Integer id){
+        List<FamiliarDTO> familiars = new ArrayList<FamiliarDTO>();
+        Beneficiary beneficiary = getById(id);
+        BeneficiaryDTO beneficiaryDTO = BeneficiaryMapper.convertBeneficiaryIntoBeneficiaryDTO(beneficiary);
+        BenficiaryPlusFamiliarsDTO benficiaryPlusFamiliarsDTO = new BenficiaryPlusFamiliarsDTO();
+
+
+        familiars = familiarService.getAllFamiliarsByBeneficiaryID(beneficiary.getId());
+        benficiaryPlusFamiliarsDTO = BeneficiaryPlusFamiliarsMapper.createBenefPlusFamil(beneficiaryDTO, familiars);
+
+        return benficiaryPlusFamiliarsDTO;
+    }
+
+
+
 
     @Transactional
     public void deleteBeneficiary(Integer id){
