@@ -24,7 +24,7 @@ public class BeneficiaryService {
     @Autowired
     private UserInfoService userInfoService;
 
-    private Beneficiary save(Beneficiary beneficiary) {
+    private Beneficiary save(Beneficiary beneficiary){
         return repository.save(beneficiary);
     }
 
@@ -45,16 +45,16 @@ public class BeneficiaryService {
         return save(beneficiary);
     }
 
+    private Beneficiary changeBeneficiaryStatus(BeneficiaryStatus status, Beneficiary beneficiary){
+        beneficiary.setStatus(status);
 
-//    public BeneficiaryDTO InsertBeneficiary(BeneficiaryDTO beneficiaryDTO){
-//        Beneficiary entity = BeneficiaryMapper.convertBeneficiaryDTOIntoBeneficiary(beneficiaryDTO);
-//        Beneficiary savedEntity = repository.save(entity);
-//        return BeneficiaryMapper.convertBeneficiaryIntoBeneficiaryDTO(savedEntity);
-//    }
-//
-//    public List<BeneficiaryDTO> findAllBeneficiaries(){
-//        List<Beneficiary> beneficiary = repository.findAll();
-//        return beneficiary.stream().map(convertBeneficiaryDTOIntoBeneficiary).collect(Collectors.toList());
-//    }
+        return beneficiary;
+    }
+
+    @Transactional
+    public void deleteBeneficiary(Integer id){
+        Beneficiary beneficiary = getById(id);
+        save(changeBeneficiaryStatus(BeneficiaryStatus.INACTIVE, beneficiary));
+    }
 
 }
