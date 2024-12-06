@@ -3,6 +3,7 @@ package br.com.unifacef.ijb.configs;
 //import br.com.unifacef.ijb.filter.JwtFilter;
 import br.com.unifacef.ijb.filter.JwtFilter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -25,9 +26,10 @@ import java.util.List;
 
 @Configuration
 public class SecurityConfig {
-
     @Autowired
     ApplicationContext applicationContext;
+    @Value("${host}")
+    private String host;
 
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -35,7 +37,7 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .cors(cors -> cors.configurationSource(request -> {
                     CorsConfiguration config = new CorsConfiguration();
-                    config.setAllowedOrigins(List.of("http://localhost:5173"));
+                    config.setAllowedOrigins(List.of(host));
                     config.setAllowedMethods(Collections.singletonList("*"));
                     config.setAllowCredentials(true);
                     config.setAllowedHeaders(Collections.singletonList("*"));
@@ -48,14 +50,14 @@ public class SecurityConfig {
                 .authorizeHttpRequests(request -> request
                         .requestMatchers("/api/ijb/register/**").permitAll()
                         .requestMatchers("/api/ijb/login").permitAll()
-                        .requestMatchers("/api/ijb/material/register").permitAll()
-                        .requestMatchers("/api/ijb/material").permitAll()
-                        .requestMatchers("/api/ijb/material/delete/**").permitAll()
-                        .requestMatchers("/api/ijb/material/update/**").permitAll()
-                        .requestMatchers("/api/ijb/outletProduct/register").permitAll()
-                        .requestMatchers("/api/ijb/outletProduct/update/**").permitAll()
-                        .requestMatchers("/api/ijb/outletProduct/delete/**").permitAll()
-                        .requestMatchers("/api/ijb/outletProduct").permitAll())
+                        .requestMatchers("/api/ijb/material/register").hasRole("ADMIN")
+                        .requestMatchers("/api/ijb/material").hasRole("ADMIN")
+                        .requestMatchers("/api/ijb/material/delete/**").hasRole("ADMIN")
+                        .requestMatchers("/api/ijb/material/update/**").hasRole("ADMIN")
+                        .requestMatchers("/api/ijb/outletProduct/register").hasRole("ADMIN")
+                        .requestMatchers("/api/ijb/outletProduct/update/**").hasRole("ADMIN")
+                        .requestMatchers("/api/ijb/outletProduct/delete/**").hasRole("ADMIN")
+                        .requestMatchers("/api/ijb/outletProduct").hasRole("ADMIN"))
                 .formLogin(AbstractHttpConfigurer::disable)
                 .httpBasic(Customizer.withDefaults());
 
