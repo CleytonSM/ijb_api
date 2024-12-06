@@ -2,6 +2,7 @@ package br.com.unifacef.ijb.mappers;
 
 import br.com.unifacef.ijb.models.dtos.OutletProductCreateDTO;
 import br.com.unifacef.ijb.models.dtos.OutletProductDTO;
+import br.com.unifacef.ijb.models.dtos.OutletProductResponseDTO;
 import br.com.unifacef.ijb.models.entities.OutletProduct;
 
 import java.time.LocalDateTime;
@@ -31,6 +32,19 @@ public class OutletProductMapper {
     private static OutletProductDTO convertOutletProductIntoOutletProductDTO(OutletProduct outletProduct) {
         return new OutletProductDTO(outletProduct.getId(), outletProduct.getName(), outletProduct.getDescription(),
                 outletProduct.getPrice(), outletProduct.getStatus());
+    }
+
+    public static List<OutletProductResponseDTO> convertListOfOutletProductIntoListOfOutletProductResponseDTO(List<OutletProduct> outletProducts) {
+        List<OutletProductResponseDTO> outletProductResponseDTOs = new ArrayList<>();
+
+        outletProducts.forEach(outletProduct -> outletProductResponseDTOs.add(convertOutletProductIntoOutletProductResponseDTO(outletProduct)));
+
+        return outletProductResponseDTOs;
+    }
+
+    private static OutletProductResponseDTO convertOutletProductIntoOutletProductResponseDTO(OutletProduct outletProduct) {
+        return new OutletProductResponseDTO(outletProduct.getId(), outletProduct.getName(),
+                outletProduct.getDescription(), outletProduct.getPrice(), outletProduct.getStatus().getValue());
     }
 //
 //    public static void updateOutletProduct(OutletProductDTO outletProductUpdate, OutletProduct outletProduct) {

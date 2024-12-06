@@ -4,6 +4,7 @@ import br.com.unifacef.ijb.helpers.OptionalHelper;
 import br.com.unifacef.ijb.mappers.OutletProductMapper;
 import br.com.unifacef.ijb.models.dtos.OutletProductCreateDTO;
 import br.com.unifacef.ijb.models.dtos.OutletProductDTO;
+import br.com.unifacef.ijb.models.dtos.OutletProductResponseDTO;
 import br.com.unifacef.ijb.models.dtos.OutletProductUpdateDTO;
 import br.com.unifacef.ijb.models.entities.OutletProduct;
 import br.com.unifacef.ijb.models.enums.OutletProductStatus;
@@ -39,14 +40,14 @@ public class OutletProductService {
         save(outletProduct);
     }
 
-    public List<OutletProductDTO> findByFilter() {
+    public List<OutletProductResponseDTO> findByFilter() {
         List<OutletProduct> outletProducts = repository.findAll();
 
         if(outletProducts.isEmpty()){
             return new ArrayList<>();
         }
 
-        return OutletProductMapper.convertListOfOutletProductIntoListOfOutletProductDTO(outletProducts);
+        return OutletProductMapper.convertListOfOutletProductIntoListOfOutletProductResponseDTO(outletProducts);
     }
 
     public void deleteOutletProduct(Integer id) {

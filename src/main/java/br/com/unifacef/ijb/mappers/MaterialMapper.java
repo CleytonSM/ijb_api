@@ -1,6 +1,7 @@
 package br.com.unifacef.ijb.mappers;
 
 import br.com.unifacef.ijb.models.dtos.MaterialDTO;
+import br.com.unifacef.ijb.models.dtos.MaterialResponseDTO;
 import br.com.unifacef.ijb.models.dtos.MaterialUpdateDTO;
 import br.com.unifacef.ijb.models.entities.Material;
 
@@ -27,5 +28,19 @@ public class MaterialMapper {
 
     public static Material convertMaterialDTOIntoMaterial(MaterialDTO material) {
         return new Material(material.getName(), material.getQuantity(), material.getDescription(), material.getPrice(), material.getOrigin());
+    }
+
+    public static List<MaterialResponseDTO> convertListOfMaterialIntoListOfMaterialResponseDTO(
+            List<Material> materials) {
+        List<MaterialResponseDTO> materialResponseDTOS = new ArrayList<>();
+
+        materials.forEach(material -> materialResponseDTOS.add(convertMaterialIntomaterialResponseDTO(material)));
+
+        return materialResponseDTOS;
+    }
+
+    private static MaterialResponseDTO convertMaterialIntomaterialResponseDTO(Material material) {
+        return new MaterialResponseDTO(material.getId(), material.getName(), material.getQuantity(),
+                material.getPrice(), material.getDescription(), material.getOrigin().getValue());
     }
 }

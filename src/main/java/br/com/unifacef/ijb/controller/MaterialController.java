@@ -2,6 +2,7 @@ package br.com.unifacef.ijb.controller;
 
 import br.com.unifacef.ijb.models.dtos.MaterialCreateDTO;
 import br.com.unifacef.ijb.models.dtos.MaterialDTO;
+import br.com.unifacef.ijb.models.dtos.MaterialResponseDTO;
 import br.com.unifacef.ijb.models.dtos.MaterialUpdateDTO;
 import br.com.unifacef.ijb.services.MaterialService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +34,7 @@ public class MaterialController {
     }
 
     @GetMapping()
-    public ResponseEntity<List<MaterialDTO>> findAllMaterials() {
+    public ResponseEntity<List<MaterialResponseDTO>> findAllMaterials() {
         return new ResponseEntity<>(service.findAllMaterials(), HttpStatus.OK);
     }
 
