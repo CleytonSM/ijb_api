@@ -4,8 +4,18 @@ import lombok.Getter;
 
 @Getter
 public enum OutletProductStatus {
-    FOR_SALE,
-    EXCHANGED,
-    REBATED,
-    SOLD;
+    FOR_SALE("À venda"),
+    EXCHANGED("Trocado"),
+    REBATED("Abatido"),
+    SOLD("Vendido");
+
+    private final String value;
+
+    OutletProductStatus(String value) {
+        this.value = value;
+    }
+
+    public String getValue() {
+        return value;
+    }
 }
