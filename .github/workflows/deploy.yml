@@ -1,0 +1,35 @@
+name: Build and Deploy
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: self-hosted
+
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v3
+
+      - name: Configurar Java 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Copiar Código para o Diretório de Deploy
+        run: |
+          rsync -av --delete $GITHUB_WORKSPACE/ ~/docker/ijb/ijb_api/
+        shell: bash
+
+      - name: Build com Maven
+        run: ./mvnw clean package
+        working-directory: ~/docker/ijb/ijb_api
+
+      - name: Build e Deploy com Docker Compose
+        run: |
+          docker-compose down
+          docker-compose up -d --build
+        working-directory: ~/docker/ijb/ijb_api
