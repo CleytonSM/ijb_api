@@ -2,21 +2,31 @@ package br.com.unifacef.ijb.services;
 
 import br.com.unifacef.ijb.helpers.OptionalHelper;
 import br.com.unifacef.ijb.mappers.ConstructionMapper;
+import br.com.unifacef.ijb.models.dtos.AddressUpdateDTO;
 import br.com.unifacef.ijb.models.dtos.ConstructionCreateDTO;
 import br.com.unifacef.ijb.models.dtos.ConstructionDTO;
+import br.com.unifacef.ijb.models.dtos.ConstructionUpdateDTO;
+import br.com.unifacef.ijb.models.entities.Address;
 import br.com.unifacef.ijb.models.entities.Construction;
+import br.com.unifacef.ijb.models.entities.OutletProduct;
+import br.com.unifacef.ijb.repositories.AddressRepository;
 import br.com.unifacef.ijb.repositories.ConstructionRepository;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class ConstructionService {
     @Autowired
     private ConstructionRepository repository;
+    @Autowired
+    private AddressService addressService;
 
     public Construction save(Construction construction) {
         return repository.save(construction);
@@ -26,45 +36,56 @@ public class ConstructionService {
         return OptionalHelper.getOptionalEntity(repository.findById(id));
     }
 
-    @Transactional
-    public ConstructionDTO createConstruction(ConstructionCreateDTO constructionCreate) {
-        Construction construction = ConstructionMapper
-                .convertConstructionCreateDTOIntoConstruction(constructionCreate);
+    public void createConstruction(ConstructionCreateDTO constructionCreate) {
+        Address address = addressService.createAddress(constructionCreate.getAddress());
 
-        return ConstructionMapper.convertConstructionIntoConstructionDTO(save(construction));
+        Construction construction = new Construction(address,
+                constructionCreate.getDescription(), constructionCreate.getStartDate(),
+                constructionCreate.getEndDate(), constructionCreate.getConstructionStatus(), constructionCreate.getEstimatedCost(),
+                constructionCreate.getTotalCost());
+
+
+        save(construction);
     }
 
-    public List<ConstructionDTO> getAllConstructions() {
-        return ConstructionMapper.convertListOfConstructionIntoListOfConstructionDTO(repository.findAll());
-    }
+    public List<ConstructionDTO> findByFilter() {
+        List<Construction> constructions = repository.findAll();
 
-    public List<ConstructionDTO> getAllConstructionsByFilter(String description) {
-        List<Construction> constructions = repository.findAllByDescription(description);
-
-
-        if (!constructions.isEmpty()) {
-            return ConstructionMapper.convertListOfConstructionIntoListOfConstructionDTO(constructions);
+        if(constructions.isEmpty()){
+            return new ArrayList<>();
         }
 
-        throw new EntityNotFoundException("There aren't Contrusctions with this description");
-    }
-
-    @Transactional
-    public ConstructionDTO updateConstruction(ConstructionDTO constructionUpdate) {
-        Construction construction = getById(constructionUpdate.getId());
-        updateRetrievedEntity(constructionUpdate, construction);
-
-        return ConstructionMapper.convertConstructionIntoConstructionDTO(save(construction));
+        return ConstructionMapper.convertListOfConstructionIntoListOfConstructionDTO(constructions);
     }
 
     @Transactional
     public void deleteConstruction(Integer id) {
+        repository.delete(getById(id));
+    }
+
+    public void updateConstruction(Integer id, ConstructionUpdateDTO constructionUpdate) {
         Construction construction = getById(id);
-        repository.delete(construction);
-    }
 
-    private void updateRetrievedEntity(ConstructionDTO constructionUpdate, Construction construction) {
-        ConstructionMapper.updateConstruction(constructionUpdate, construction);
-    }
+        Address updatedAddress = addressService.updateAddress(
+                constructionUpdate.getAddress().getId(),
+                new AddressUpdateDTO(
+                        constructionUpdate.getAddress().getCep(),
+                        constructionUpdate.getAddress().getStreet(),
+                        constructionUpdate.getAddress().getNumber(),
+                        constructionUpdate.getAddress().getNeighborhood(),
+                        constructionUpdate.getAddress().getComplement()
+                )
+        );
 
+        construction.setAddress(updatedAddress);
+        construction.setDescription(constructionUpdate.getDescription());
+        construction.setStartDate(constructionUpdate.getStartDate());
+        construction.setEndDate(constructionUpdate.getEndDate());
+        construction.setConstructionStatus(constructionUpdate.getConstructionStatus());
+        construction.setEstimatedCost(constructionUpdate.getEstimatedCost());
+        construction.setTotalCost(constructionUpdate.getTotalCost());
+        construction.setUpdatedAt(LocalDateTime.now());
+
+        save(construction);
+    }
 }

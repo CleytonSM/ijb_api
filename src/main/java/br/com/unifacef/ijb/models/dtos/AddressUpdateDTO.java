@@ -5,11 +5,12 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-public class AddressCreateDTO {
+@AllArgsConstructor
+@NoArgsConstructor
+public class AddressUpdateDTO {
     private String cep;
     private String street;
     private String number;
     private String neighborhood;
     private String complement;
-
 }
