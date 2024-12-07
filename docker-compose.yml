@@ -9,7 +9,7 @@ services:
       DATABASE_URL: jdbc:mysql://db:3306/ijb
       DATABASE_USER: dba
       DATABASE_PASS: 123456
-      JWT-SECRET-KEY: sua_chave_secreta
+      JWT-SECRET-KEY: 1nSt1Tut0J0@4oD3B@rr0Un1F4c3fC0mp
       HOST: localhost
     depends_on:
       - db
