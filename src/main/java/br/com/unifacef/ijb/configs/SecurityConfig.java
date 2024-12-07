@@ -46,7 +46,7 @@ public class SecurityConfig {
 
                     return config;
                 }))
-//                .addFilterBefore(applicationContext.getBean(JwtFilter.class), UsernamePasswordAuthenticationFilter.class)
+                .addFilterBefore(applicationContext.getBean(JwtFilter.class), UsernamePasswordAuthenticationFilter.class)
                 .authorizeHttpRequests(request -> request
                         .requestMatchers("/api/ijb/register/**").permitAll()
                         .requestMatchers("/api/ijb/login").permitAll()
