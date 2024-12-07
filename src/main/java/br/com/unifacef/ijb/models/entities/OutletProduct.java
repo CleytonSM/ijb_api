@@ -25,7 +25,6 @@ import java.time.LocalDateTime;
 @Table(name = "tb_produtos_outlet")
 @AllArgsConstructor
 @NoArgsConstructor
-@Filter(name = "statusFilter", condition = "status != INACTIVE")
 public class OutletProduct {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
