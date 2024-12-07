@@ -57,7 +57,10 @@ public class SecurityConfig {
                         .requestMatchers("/api/ijb/outletProduct/register").hasRole("ADMIN")
                         .requestMatchers("/api/ijb/outletProduct/update/**").hasRole("ADMIN")
                         .requestMatchers("/api/ijb/outletProduct/delete/**").hasRole("ADMIN")
-                        .requestMatchers("/api/ijb/outletProduct").hasRole("ADMIN"))
+                        .requestMatchers("/api/ijb/outletProduct").hasRole("ADMIN")
+                        .requestMatchers("/api/ijb/news/**").permitAll()
+                        .requestMatchers("/api/ijb/email/**").permitAll()
+                )
                 .formLogin(AbstractHttpConfigurer::disable)
                 .httpBasic(Customizer.withDefaults());
 

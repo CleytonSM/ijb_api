@@ -36,7 +36,7 @@ public class News {
     private Boolean viewStatus;
     @Column(name = "autor_noticia", length = 30)
     private String newsAuthor;
-    @Column(name = "url_image", length = 800)
+    @Column(name = "url_imagem", length = 800)
     private String imageURL;
     @Column(name = "descricao_noticia")
     private String newsDescription;
