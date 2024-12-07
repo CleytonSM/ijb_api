@@ -10,7 +10,7 @@ jobs:
     runs-on: self-hosted
 
     steps:
-      - name: Checkout do código
+      - name: Checkout do Código
         uses: actions/checkout@v3
 
       - name: Configurar Java 17
@@ -21,15 +21,15 @@ jobs:
 
       - name: Copiar Código para o Diretório de Deploy
         run: |
-          rsync -av --delete $GITHUB_WORKSPACE/ ~/docker/ijb/ijb_api/
+          rsync -av --delete $GITHUB_WORKSPACE/ /home/administrador/docker/ijb/ijb_api/
         shell: bash
 
       - name: Build com Maven
         run: ./mvnw clean package
-        working-directory: ~/docker/ijb/ijb_api
+        working-directory: /home/administrador/docker/ijb/ijb_api
 
       - name: Build e Deploy com Docker Compose
         run: |
           docker-compose down
           docker-compose up -d --build
-        working-directory: ~/docker/ijb/ijb_api
+        working-directory: /home/administrador/docker/ijb/ijb_api
