@@ -24,6 +24,11 @@ jobs:
           rsync -av --delete $GITHUB_WORKSPACE/ /home/administrador/docker/ijb/ijb_api/
         shell: bash
 
+      - name: Definir Permissões de Execução para mvnw
+        run: |
+          chmod +x /home/administrador/docker/ijb/ijb_api/mvnw
+        shell: bash
+
       - name: Build com Maven
         run: ./mvnw clean package
         working-directory: /home/administrador/docker/ijb/ijb_api
