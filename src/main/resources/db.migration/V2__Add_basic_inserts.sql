@@ -14,7 +14,7 @@ INSERT INTO tb_funcao (nm_funcao, ds_funcao, modulo, dt_criacao, dt_alteracao, d
 VALUES ("ROLE_VOLUNTARIO_OURO", "VOLUNTARIO", "VOLUNTARIO", NOW(), NOW(), NULL);
 
 INSERT INTO tb_funcao (nm_funcao, ds_funcao, modulo, dt_criacao, dt_alteracao, dt_exclusao)
-VALUES ("ROLE_BENEFICIARIO", "BENEFICIARIO", "BENEFICIARIO", NOW(), NOW(), NULL);
+VALUES ('ROLE_BENEFICIARIO', 'BENEFICIARIO', 'BENEFICIARIO', NOW(), NOW(), NULL);
 
 INSERT INTO tb_tipos_voluntarios(nm_tipo_voluntario, dt_criacao, dt_alteracao, dt_exclusao)
-VALUES ("VOLUNTARIO", NOW(), NOW(), NULL);
+VALUES ('VOLUNTARIO', NOW(), NOW(), NULL);
