@@ -35,6 +35,6 @@ jobs:
 
       - name: Build e Deploy com Docker Compose
         run: |
-          docker-compose down
-          docker-compose up -d --build
+          docker compose down
+          docker compose up -d --build
         working-directory: /home/administrador/docker/ijb/ijb_api
