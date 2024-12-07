@@ -107,9 +107,9 @@
 				<artifactId>flyway-maven-plugin</artifactId>
 				<version>9.22.3</version>
 				<configuration>
-					<url>jdbc:mysql://localhost:3310/ijb</url>
-					<user>dba</user>
-					<password>123456</password>
+					<url>${DATABASE_URL}</url>
+					<user>${DATABASE_USER}</user>
+					<password>${DATABASE_PASS}</password>
 					<locations>classpath:db/migration</locations>
 				</configuration>
 			</plugin>
