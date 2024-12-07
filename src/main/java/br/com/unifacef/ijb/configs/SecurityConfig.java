@@ -46,18 +46,12 @@ public class SecurityConfig {
 
                     return config;
                 }))
-                .addFilterBefore(applicationContext.getBean(JwtFilter.class), UsernamePasswordAuthenticationFilter.class)
+//                .addFilterBefore(applicationContext.getBean(JwtFilter.class), UsernamePasswordAuthenticationFilter.class)
                 .authorizeHttpRequests(request -> request
                         .requestMatchers("/api/ijb/register/**").permitAll()
                         .requestMatchers("/api/ijb/login").permitAll()
-                        .requestMatchers("/api/ijb/material/register").hasRole("ADMIN")
-                        .requestMatchers("/api/ijb/material").hasRole("ADMIN")
-                        .requestMatchers("/api/ijb/material/delete/**").hasRole("ADMIN")
-                        .requestMatchers("/api/ijb/material/update/**").hasRole("ADMIN")
-                        .requestMatchers("/api/ijb/outletProduct/register").hasRole("ADMIN")
-                        .requestMatchers("/api/ijb/outletProduct/update/**").hasRole("ADMIN")
-                        .requestMatchers("/api/ijb/outletProduct/delete/**").hasRole("ADMIN")
-                        .requestMatchers("/api/ijb/outletProduct").hasRole("ADMIN"))
+                        .requestMatchers("/api/ijb/material/**").hasRole("ADMIN")
+                        .requestMatchers("/api/ijb/outletProduct/**").hasRole("ADMIN"))
                 .formLogin(AbstractHttpConfigurer::disable)
                 .httpBasic(Customizer.withDefaults());
 
