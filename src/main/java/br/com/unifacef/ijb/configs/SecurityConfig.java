@@ -50,7 +50,9 @@ public class SecurityConfig {
                         .requestMatchers("/api/ijb/register/**").permitAll()
                         .requestMatchers("/api/ijb/login").permitAll()
                         .requestMatchers("/api/ijb/material/**").permitAll()
-                        .requestMatchers("/api/ijb/outletProduct/**").permitAll())
+                        .requestMatchers("/api/ijb/outletProduct/**").permitAll()
+                        .requestMatchers("/api/ijb/news/**").permitAll()
+                        .requestMatchers("/api/ijb/email/**").permitAll())
                 .formLogin(AbstractHttpConfigurer::disable)
                 .httpBasic(Customizer.withDefaults());
 
