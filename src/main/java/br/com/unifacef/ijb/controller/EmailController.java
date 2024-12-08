@@ -54,11 +54,10 @@ public class EmailController {
             );
             return ResponseEntity.ok("Email enviado com sucesso!");
         } catch (MailException e) {
-            //return ResponseEntity.status(500).body("Erro ao enviar o e-mail: " + e.getMessage());
-            throw new RuntimeException(e.getMessage());
+            return ResponseEntity.status(500).body("Erro ao enviar o e-mail: " + e.getMessage());
+
         } catch (Exception e) {
-            //return ResponseEntity.status(500).body("Ocorreu um erro inesperado: " + e.getMessage());
-            throw new RuntimeException(e.getMessage());
+            return ResponseEntity.status(500).body("Ocorreu um erro inesperado: " + e.getMessage());
         }
     }
 }
