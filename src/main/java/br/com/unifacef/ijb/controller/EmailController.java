@@ -4,7 +4,10 @@ import br.com.unifacef.ijb.services.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mail.MailException;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/ijb/email")
@@ -44,7 +47,7 @@ public class EmailController {
     }
 
 
-    @PostMapping("/send-email")
+    @GetMapping("/send-email")
     public ResponseEntity<String> enviarEmail(@RequestBody EmailRequest emailRequest) {
         try {
             emailService.enviarEmail(
@@ -54,11 +57,9 @@ public class EmailController {
             );
             return ResponseEntity.ok("Email enviado com sucesso!");
         } catch (MailException e) {
-            //return ResponseEntity.status(500).body("Erro ao enviar o e-mail: " + e.getMessage());
-            throw new RuntimeException(e.getMessage());
+            return ResponseEntity.status(500).body("Erro ao enviar o e-mail: " + e.getMessage());
         } catch (Exception e) {
-            //return ResponseEntity.status(500).body("Ocorreu um erro inesperado: " + e.getMessage());
-            throw new RuntimeException(e.getMessage());
+            return ResponseEntity.status(500).body("Ocorreu um erro inesperado: " + e.getMessage());
         }
     }
 }
