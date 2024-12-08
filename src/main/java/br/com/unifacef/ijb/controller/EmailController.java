@@ -4,7 +4,7 @@ import br.com.unifacef.ijb.services.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mail.MailException;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -47,7 +47,7 @@ public class EmailController {
     }
 
 
-    @GetMapping("/send-email")
+    @PostMapping("/send-email")
     public ResponseEntity<String> enviarEmail(@RequestBody EmailRequest emailRequest) {
         try {
             emailService.enviarEmail(

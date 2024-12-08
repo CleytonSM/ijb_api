@@ -1,11 +1,14 @@
 package br.com.unifacef.ijb.controller;
 
 import br.com.unifacef.ijb.models.entities.News;
+import br.com.unifacef.ijb.models.entities.Volunteer;
 import br.com.unifacef.ijb.services.NewsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -29,10 +32,38 @@ public class NewsController {
     }
 
     @PostMapping
-    public ResponseEntity<News> create(@RequestBody News news) {
-        News createdNews = newsService.save(news);
-        return ResponseEntity.status(201).body(createdNews);
+    public ResponseEntity<News> create(
+            @RequestParam("tags") String tags,
+            @RequestParam("volunteerId") Integer volunteerId,
+            @RequestParam("localDateTime") String localDateTime,
+            @RequestParam("viewStatus") Boolean viewStatus,
+            @RequestParam("newsAuthor") String newsAuthor,
+            @RequestParam(value = "newsImage", required = false) MultipartFile newsImage,
+            @RequestParam("imageURL") String imageURL,
+            @RequestParam("newsDescription") String newsDescription
+    ) {
+        try {
+            News news = new News();
+            news.setTags(tags);
+            news.setVolunteer(new Volunteer());
+            news.getVolunteer().setId(volunteerId);
+            news.setLocalDateTime(LocalDateTime.parse(localDateTime));
+            news.setViewStatus(viewStatus);
+            news.setNewsAuthor(newsAuthor);
+            news.setImageURL(imageURL);
+            news.setNewsDescription(newsDescription);
+
+            if (newsImage != null && !newsImage.isEmpty()) {
+                news.setNewsImage(newsImage.getBytes());
+            }
+
+            News createdNews = newsService.save(news);
+            return ResponseEntity.status(201).body(createdNews);
+        } catch (Exception e) {
+            return ResponseEntity.status(500).build();
+        }
     }
+
 
     @PutMapping("/{id}")
     public ResponseEntity<News> update(@PathVariable Integer id, @RequestBody News news) {
