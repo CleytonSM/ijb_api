@@ -10,7 +10,7 @@ services:
       DATABASE_USER: dba
       DATABASE_PASS: 123456
       JWT-SECRET-KEY: 1nSt1Tut0J0@4oD3B@rr0Un1F4c3fC0mp
-      HOST: localhost
+      HOST: http://localhost:5173
     depends_on:
       - db
 
