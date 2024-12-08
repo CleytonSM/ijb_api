@@ -21,9 +21,8 @@ public class News {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_noticia")
     private Integer id;
-    @ManyToOne
-    @JoinColumn(name = "id_etiqueta")
-    private Tags tags;
+    @Column(name = "etiqueta")
+    private String tags;
     @ManyToOne
     @JoinColumn(name = "id_voluntario")
     private Volunteer volunteer;
