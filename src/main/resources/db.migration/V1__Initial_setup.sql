@@ -1,9 +1,3 @@
-DROP DATABASE ijb;
-
-CREATE DATABASE ijb;
-
-USE ijb;
-
 CREATE TABLE tb_usuarios (
     id_usuario INTEGER NOT NULL AUTO_INCREMENT,
     email VARCHAR(100),
@@ -207,11 +201,12 @@ CREATE TABLE tb_materiais (
 );
 
 CREATE TABLE tb_obras(
-	id_obra INTEGER,
+	id_obra INTEGER AUTO_INCREMENT,
 	id_endereco INTEGER,
+	descricao VARCHAR(100),
 	dt_inicio DATE,
 	dt_termino DATE,
-	situacao_contrucao VARCHAR(20),
+	situacao_construcao VARCHAR(20),
 	custo_estimado DECIMAL(8,2),
 	custo_total DECIMAL(8,2),
 	dt_criacao DATE,
@@ -308,7 +303,7 @@ CREATE TABLE tb_etiquetas(
 );
 
 CREATE TABLE tb_noticias(
-    id_noticia INTEGER,
+    id_noticia INTEGER AUTO_INCREMENT,
     id_etiqueta INTEGER,
     id_voluntario INTEGER,
     img_noticia LONGBLOB,
