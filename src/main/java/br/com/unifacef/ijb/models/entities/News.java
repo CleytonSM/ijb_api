@@ -21,9 +21,8 @@ public class News {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_noticia")
     private Integer id;
-    @ManyToOne
-    @JoinColumn(name = "id_etiqueta")
-    private Tags tags;
+    @Column(name = "etiquetas")
+    private String tags;
     @ManyToOne
     @JoinColumn(name = "id_voluntario")
     private Volunteer volunteer;
@@ -36,7 +35,7 @@ public class News {
     private Boolean viewStatus;
     @Column(name = "autor_noticia", length = 30)
     private String newsAuthor;
-    @Column(name = "url_image", length = 800)
+    @Column(name = "url_imagem", length = 800)
     private String imageURL;
     @Column(name = "descricao_noticia")
     private String newsDescription;
