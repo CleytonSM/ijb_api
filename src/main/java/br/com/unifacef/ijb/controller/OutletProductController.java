@@ -39,8 +39,8 @@ public class OutletProductController {
         return new ResponseEntity<>(service.findByFilter(), HttpStatus.OK);
     }
 
-    @DeleteMapping("/delete")
-    public ResponseEntity<Void> deleteOutletProductById(@RequestParam Integer id) {
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<Void> deleteOutletProductById(@PathVariable("id") Integer id) {
         service.deleteOutletProduct(id);
 
         return new ResponseEntity<>(HttpStatus.OK);
