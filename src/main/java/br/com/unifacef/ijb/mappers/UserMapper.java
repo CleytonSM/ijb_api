@@ -10,7 +10,12 @@ import java.time.LocalDateTime;
 
 public class UserMapper {
     public static UserDTO convertUserIntoUserDTO(User user) {
-        return new UserDTO(user.getId(), user.getEmail(), user.getCpf(), user.getPassword());
+        return new UserDTO(user.getId(), user.getEmail(), user.getCpf(), user.getPassword(), user.getCreatedAt(),
+                user.getUpdatedAt(), user.getDeletedAt());
+    }
+    public static User convertUserDTOIntoUser(UserDTO userDTO) {
+        return new User(userDTO.getId(), userDTO.getEmail(), userDTO.getCpf(), userDTO.getPassword(), userDTO.getCreatedAt(),
+                userDTO.getUpdatedAt(), userDTO.getDeletedAt());
     }
 
     public static User convertUserCreateDTOToUser(UserCreateDTO userCreateDTO) {

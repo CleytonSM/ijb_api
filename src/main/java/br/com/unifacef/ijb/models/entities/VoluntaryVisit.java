@@ -1,5 +1,7 @@
 package br.com.unifacef.ijb.models.entities;
 
+import java.time.LocalDateTime;
+
 import br.com.unifacef.ijb.models.idClasses.VoluntaryVisitId;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -19,7 +21,6 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Entity
 @Table(name = "tb_visitas_voluntarios")
-@NoArgsConstructor
 @IdClass(VoluntaryVisitId.class)
 public class VoluntaryVisit {
     @Id

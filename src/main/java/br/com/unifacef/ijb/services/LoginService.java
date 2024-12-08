@@ -4,9 +4,7 @@ import br.com.unifacef.ijb.configs.UserAuthenticationProvider;
 import br.com.unifacef.ijb.models.dtos.BeneficiaryRegisterDTO;
 import br.com.unifacef.ijb.models.dtos.LoginDTO;
 import br.com.unifacef.ijb.models.dtos.LoginResponseDTO;
-import br.com.unifacef.ijb.models.dtos.SupporterRegisterDTO;
 import br.com.unifacef.ijb.models.dtos.VolunteerRegisterDTO;
-import br.com.unifacef.ijb.models.entities.UserInfo;
 import br.com.unifacef.ijb.repositories.UserRepository;
 import br.com.unifacef.ijb.securities.JwtProvider;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,7 +43,7 @@ public class LoginService {
     }
 
     public void beneficiaryRegister(BeneficiaryRegisterDTO beneficiaryRegister) {
-        beneficiaryService.createBeneficiary(beneficiaryRegister);
+        beneficiaryService.registerBeneficiary(beneficiaryRegister);
     }
 
     private Authentication setUpAuthenticationByLoginDTO(LoginDTO login) {
