@@ -23,6 +23,10 @@ public class UserInfoService {
         return repository.save(userInfo);
     }
 
+    public UserInfo findByUser(User user) {
+        return OptionalHelper.getOptionalEntity(repository.findByUser(user));
+    }
+
     public UserInfoDTO getUserInfoDTOByEmail(String email) {
         UserInfo userInfo = getUserInfoByEmail(email);
 

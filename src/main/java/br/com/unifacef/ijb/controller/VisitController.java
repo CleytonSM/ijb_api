@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/visita")
+@RequestMapping("/api/ijb/visitas")
 public class VisitController {
     @Autowired
     VisitService service;
@@ -21,19 +21,25 @@ public class VisitController {
         return new ResponseEntity<>(service.createVisit(visitDTO), HttpStatus.CREATED);
     }
 
+    @GetMapping
+    public ResponseEntity<List<VisitDTO>> getAllVisits() {
+        return new ResponseEntity<>(service.getAllVisits(), HttpStatus.OK);
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<VisitDTO> getVisitById(@PathVariable Integer id) {
         return new ResponseEntity<>(VisitMapper.convertVisitIntoVisitDTO(service.getById(id)), HttpStatus.OK);
     }
 
-    @GetMapping("/visitas/{benefId}")
+    @GetMapping("/beneficiario/{benefId}")
     public ResponseEntity<List<VisitDTO>> getVisitsByBenefId(@PathVariable Integer benefId) {
         return new ResponseEntity<>(service.getVisitsByBeneficiaryId(benefId), HttpStatus.OK);
     }
 
-    @PutMapping
-    public ResponseEntity<VisitDTO> updateVisit(VisitDTO visitDTO) {
-        return new ResponseEntity<>(service.updateVisit(visitDTO), HttpStatus.OK);
+    @PutMapping("/update/{id}")
+    public ResponseEntity<Void> updateVisit(@PathVariable Integer id, @RequestBody VisitDTO visitDTO) {
+        service.updateVisit(visitDTO);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
 

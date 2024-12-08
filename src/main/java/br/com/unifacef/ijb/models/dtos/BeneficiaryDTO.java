@@ -1,6 +1,6 @@
 package br.com.unifacef.ijb.models.dtos;
 
-import br.com.unifacef.ijb.models.entities.User;
+import br.com.unifacef.ijb.models.enums.BeneficiaryStatus;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,9 +13,9 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class BeneficiaryDTO {
     private Integer id;
-    private User user;
+    private UserDTO user;
     private String name;
-    private String status;
+    private BeneficiaryStatus status;
     private String meetDescription;
     private String indicatorName;
     private String additionalInfo;
@@ -24,4 +24,7 @@ public class BeneficiaryDTO {
     private LocalDateTime indicationDate;
     private String houseStatus;
     private String decisionTriage;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
+    private LocalDateTime deletedAt;
 }

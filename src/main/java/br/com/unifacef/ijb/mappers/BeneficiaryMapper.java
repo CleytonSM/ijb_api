@@ -1,17 +1,16 @@
 package br.com.unifacef.ijb.mappers;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 import br.com.unifacef.ijb.models.dtos.BeneficiaryDTO;
-import br.com.unifacef.ijb.models.dtos.BeneficiaryRegisterDTO;
-import br.com.unifacef.ijb.models.dtos.UserCreateDTO;
 import br.com.unifacef.ijb.models.entities.Beneficiary;
 
 public class BeneficiaryMapper {
     public static Beneficiary convertBeneficiaryDTOIntoBeneficiary(BeneficiaryDTO beneficiaryDTO){
         return new Beneficiary(beneficiaryDTO.getId(),
-        beneficiaryDTO.getUser(), 
+        UserMapper.convertUserDTOIntoUser(beneficiaryDTO.getUser()),
         beneficiaryDTO.getName(), 
         beneficiaryDTO.getStatus(),
         beneficiaryDTO.getMeetDescription(), 
@@ -21,12 +20,15 @@ public class BeneficiaryMapper {
         beneficiaryDTO.getMonthlyIncome(), 
         beneficiaryDTO.getIndicationDate(), 
         beneficiaryDTO.getHouseStatus(), 
-        beneficiaryDTO.getDecisionTriage());
+        beneficiaryDTO.getDecisionTriage(),
+        beneficiaryDTO.getCreatedAt(),
+        beneficiaryDTO.getUpdatedAt(),
+        beneficiaryDTO.getDeletedAt());
     }
 
     public static BeneficiaryDTO convertBeneficiaryIntoBeneficiaryDTO(Beneficiary beneficiary){
         return new BeneficiaryDTO(beneficiary.getId(),
-        beneficiary.getUser(), 
+        UserMapper.convertUserIntoUserDTO(beneficiary.getUser()),
         beneficiary.getName(), 
         beneficiary.getStatus(),
         beneficiary.getMeetDescription(),
@@ -36,7 +38,10 @@ public class BeneficiaryMapper {
         beneficiary.getMonthlyIncome(), 
         beneficiary.getIndicationDate(), 
         beneficiary.getHouseStatus(), 
-        beneficiary.getDecisionTriage());
+        beneficiary.getDecisionTriage(),
+        beneficiary.getCreatedAt(),
+        beneficiary.getUpdatedAt(),
+        beneficiary.getUpdatedAt());
     }
 
     public static List<BeneficiaryDTO> convertListBeneficiaryIntoListBeneficiaryDTO(List<Beneficiary> beneficiaries){
@@ -59,5 +64,6 @@ public class BeneficiaryMapper {
         beneficiary.setIndicationDate(beneficiaryDTO.getIndicationDate());
         beneficiary.setHouseStatus(beneficiaryDTO.getHouseStatus());
         beneficiary.setDecisionTriage(beneficiaryDTO.getDecisionTriage());
+        beneficiary.setUpdatedAt(LocalDateTime.now());
     }
 }

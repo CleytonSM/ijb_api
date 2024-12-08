@@ -1,13 +1,7 @@
 package br.com.unifacef.ijb.models.entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import br.com.unifacef.ijb.models.enums.BeneficiaryStatus;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,6 +11,8 @@ import java.time.LocalDateTime;
 
 @Data
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "tb_beneficiarios")
 public class Beneficiary {
     @Id
@@ -29,7 +25,7 @@ public class Beneficiary {
     @Column(name = "nm_representante", length = 60, nullable = false)
     private String name;
     @Column(name = "status")
-    private String status; // TODO VERIFICAR ENUM DISSO
+    private BeneficiaryStatus status; // TODO VERIFICAR ENUM DISSO
     @Column(name = "como_conheceu", length = 200)
     private String meetDescription;
     @Column(name = "indicador", length = 60)

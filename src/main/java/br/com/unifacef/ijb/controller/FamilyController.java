@@ -1,42 +1,51 @@
 package br.com.unifacef.ijb.controller;
 
-import br.com.unifacef.ijb.mappers.FamiliarMapper;
-import br.com.unifacef.ijb.models.dtos.FamiliarDTO;
-import br.com.unifacef.ijb.services.FamiliarService;
+import br.com.unifacef.ijb.mappers.FamilyMapper;
+import br.com.unifacef.ijb.models.dtos.FamilyDTO;
+import br.com.unifacef.ijb.services.FamilyService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/familiar")
+@RequestMapping("/api/ijb/familia")
 public class FamilyController {
 
     @Autowired
-    FamiliarService service;
+    FamilyService service;
 
     @PostMapping
-    public FamiliarDTO createFamiliar(@RequestBody FamiliarDTO familiarDTO) {
-        return service.createFamiliar(familiarDTO);
+    public ResponseEntity<FamilyDTO> registerFamily(@RequestBody FamilyDTO familiarDTO) {
+        return new ResponseEntity<>(service.createFamily(familiarDTO), HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")
-    public FamiliarDTO getFamiliarById(@PathVariable Integer id) {
-        return FamiliarMapper.convertFamiliarIntoFamiliarDTO(service.getById(id));
+    public ResponseEntity<FamilyDTO> getFamiliarById(@PathVariable Integer id) {
+        return new ResponseEntity<>(FamilyMapper.convertFamiliarIntoFamiliarDTO(service.getById(id)), HttpStatus.OK);
     }
 
-    @GetMapping("/familiares/{benefId}")
-    public List<FamiliarDTO> getFamiliarsByBeneficiaryId(@PathVariable Integer benefId) {
-        return service.getAllFamiliarsByBeneficiaryID(benefId);
+    @GetMapping("/beneficiario/{benefId}")
+    public ResponseEntity<List<FamilyDTO>> getFamiliarsByBeneficiaryId(@PathVariable Integer benefId) {
+        return new ResponseEntity<>(service.getAllFamiliarsByBeneficiaryID(benefId), HttpStatus.OK);
     }
 
-    @GetMapping("/familiares")
-    public List<FamiliarDTO> getAllFamiliars(){
-        return service.getAllFamiliars();
+    @GetMapping
+    public ResponseEntity<List<FamilyDTO>> getAllFamiliars(){
+        return new ResponseEntity<>(service.getAllFamiliars(), HttpStatus.OK);
     }
 
-    @PutMapping("/{id}")
-    public FamiliarDTO deleteFamiliarById(@PathVariable Integer id, FamiliarDTO familiarDTO) {
-        return service.updateFamiliar(familiarDTO);
+    @PutMapping("/update/{id}")
+    public ResponseEntity<Void> updateFamiliarById(@PathVariable Integer id, FamilyDTO familiarDTO) {
+        service.updateFamily(familiarDTO);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<Void> deleteFamiliarById(@PathVariable Integer id) {
+        service.deleteFamiliar(id);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }
